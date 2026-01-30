@@ -7,9 +7,9 @@ class_name HealthHandler
 	set(newValue):
 		var delta = newValue - health
 		health = newValue
-		
+
 		health_changed.emit(delta)
-	
+
 		if can_die and health <= 0 and not dead:
 			dead = true
 			died.emit(delta)
@@ -28,7 +28,7 @@ signal health_changed
 func change_health(health_delta : float) -> void:
 	#health += health_delta
 	health = clampf(health + health_delta, 0, health_max)
-	
+
 	#health_changed.emit(health_delta)
 	#
 	#if health <= 0 and not dead:
@@ -43,7 +43,7 @@ func _process(_delta: float) -> void:
 	if health_per_second == 0: return
 	if (can_die and dead): return
 	if health >= health_max: return
-	
+
 	var cur_sec = floor(ScaledTime.CurrentTime)
 	if cur_sec > last_healed:
 		last_healed = cur_sec

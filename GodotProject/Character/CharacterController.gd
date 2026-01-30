@@ -37,6 +37,7 @@ var _jump_held_last_frame : bool = false
 @export var runningSlerp_LowSpeedMultiplier : float = 10
 
 @export_category("Jumping")
+@export var jump_enabled : bool = true
 ## If true, player will not jump until they release the jump button. Jump height
 ## is decided by how long they hold the jump key prior. If false, Jump hight is
 ## decided by how long the jump key is held after leaving the ground.
@@ -143,19 +144,19 @@ func get_move_speed():
 
 func jump(force : Vector3):
 	var tick : float = ScaledTime.CurrentTime
-	
+
 	#velocity.y = force
 	velocity = force
-	
+
 	jump_input_last_tick = -100
 	jump_input_released_last_tick = -100
 	jump_last_tick = tick
 	Jumped.emit()
-	
+
 	if particles_jumping:
 		particles_jumping.restart()
 		particles_jumping.emitting = true
-	
+
 	#if anim_player:
 		#anim_player.play("Jump")
 	#if anim_tree:
@@ -164,12 +165,12 @@ func jump(force : Vector3):
 
 func _physics_process(delta):
 	if not Enabled: return
-	
+
 	var tick : float = ScaledTime.CurrentTime # Time.get_unix_time_from_system()
 	var jump_just_pressed = jump_held and not _jump_held_last_frame
 	var jump_just_released = (not jump_held) and _jump_held_last_frame
-	
-	
+
+
 	# check if in water
 	var is_in_water : bool = false
 	if area_detect:
@@ -183,7 +184,7 @@ func _physics_process(delta):
 				"water", move_speed * waterAccelerationMultiplier)
 		else:
 			clear_registered_slowdown_source("water")
-	
+
 	var jump_force_calc : float = jump_force
 	var jump_off_wall_force_calc : float = jump_off_wall_force
 	var gravity_jumping_calc : float = gravity_jumping
@@ -197,25 +198,25 @@ func _physics_process(delta):
 		gravity_falling_calc = gravity_jumping_calc #*= waterAccelerationMultiplier
 		gravity_wall_running_calc *= waterAccelerationMultiplier
 		gravity_wall_running_falling_calc *= waterAccelerationMultiplier
-	
+
 	var physics_space : RID = PhysicsServer3D.body_get_space(self)
 	var gravity_vector : Vector3 = PhysicsServer3D.area_get_param(
 		physics_space, PhysicsServer3D.AREA_PARAM_GRAVITY_VECTOR)
 	up_direction = -gravity_vector.normalized()
-	
+
 	var wall_angle : float = get_wall_normal().angle_to(up_direction)
-	
+
 	is_wall_running = is_on_wall_only()\
 		and wall_angle < wall_run_angle_max\
 		and wall_angle > wall_run_angle_min\
 		and project_on_plane(velocity, Vector3.UP).length() > wall_run_min_speed\
 		and tick - last_is_on_floor_tick > wall_run_min_air_timeMS/1000 \
 		and wallrunning_enabled
-	
+
 	if is_on_floor(): last_is_on_floor_tick = tick
 	if is_wall_running: last_is_wallrunning_tick = tick
-	
-	
+
+
 	# gravity
 	if not is_on_floor():
 		var velocity_vertical_signed : float = velocity.project(up_direction).length() * velocity.project(up_direction).normalized().dot(up_direction) # velocity.y
@@ -224,25 +225,25 @@ func _physics_process(delta):
 				velocity += gravity_vector * gravity_wall_running_calc * delta
 			else:
 				velocity +=  gravity_vector * gravity_wall_running_falling_calc * delta
-			
+
 			# calculate normal max jump height
 			var maxJumpHeight = 0.5 * (jump_force_calc * jump_force_calc / gravity_jumping_calc)
-			
+
 			# clamp max vertical velocity to not exceed normal jump height
 			var maxVertVel = sqrt(2*gravity_wall_running_calc*maxJumpHeight)
-			
+
 			#velocity.y = clamp(velocity.y, -maxVertVel, maxVertVel)
 			# these 3 lines do the same thing as the single line above but indipendent of which way is down.
 			var projectedOnVector = velocity.project(gravity_vector.normalized())
 			var projectedOnPlane = project_on_plane(velocity, gravity_vector.normalized())
 			velocity = projectedOnPlane + projectedOnVector.limit_length(maxVertVel)
-			
+
 		elif velocity_vertical_signed >= 0 and (jump_precharge or jump_held):
 			velocity += gravity_vector * gravity_jumping_calc * delta
 		else:
 			velocity += gravity_vector * gravity_falling_calc * delta
-	
-	
+
+
 	# jumping
 	if jump_just_pressed:
 		jump_input_last_tick = tick
@@ -252,11 +253,11 @@ func _physics_process(delta):
 				"jump_precharge",
 				move_speed * move_speed_jump_precharge_multiplier
 			)
-	
+
 	if jump_just_released:
 		jump_input_released_last_tick = tick
 		if jump_precharge: clear_registered_slowdown_source("jump_precharge")
-	
+
 	var jump_requested_power_multiplier = 1
 	var jump_requested_last_tick : float = jump_input_last_tick
 	if jump_precharge:
@@ -268,13 +269,14 @@ func _physics_process(delta):
 			1,
 			min(blend, 1)
 		)
+
 		# not a good idea. Player might not learn that they need to release
 		# the key to jump.
 		#if Input.is_action_pressed("jump") and blend >= 1: Input.action_release("jump")
-	
-	if tick - jump_requested_last_tick < jump_bufferMS/1000 \
+
+	if jump_enabled and tick - jump_requested_last_tick < jump_bufferMS/1000 \
 	and tick - jump_last_tick > jump_cooldownMS/1000.0:
-		
+
 		if (is_wall_running and last_is_wallrunning):
 			jump((get_wall_normal() + up_direction).normalized() \
 				* jump_off_wall_force_calc * jump_requested_power_multiplier)
@@ -282,15 +284,15 @@ func _physics_process(delta):
 		or tick - last_is_on_floor_tick < jump_coyote_timingMS/1000.0:
 			# Make sure the player is on the floor for at least 2 frames or the
 			# floating disk won't reset.
-			
+
 			jump(project_on_plane(velocity, up_direction) \
 				+ up_direction * jump_force_calc * jump_requested_power_multiplier)
-	
+
 	if last_is_on_floor != is_on_floor():
 		last_is_on_floor = is_on_floor()
 		if is_on_floor(): Landed.emit()
-	
-	
+
+
 	# walking
 	#var input = input_vector
 	#var input_vector3 = Vector3(input.x, 0, input.y)
@@ -300,12 +302,12 @@ func _physics_process(delta):
 	#)
 	#if (camera.global_basis * up_direction).y < 0: input_vector3 *= -1
 	#move_vector = cameraFlattenedTransform * input_vector3
-	
+
 	if is_wall_running and \
 	project_on_plane(move_vector, get_wall_normal()).length() > 0.1:
 		move_vector = project_on_plane(move_vector, get_wall_normal()).normalized()\
 		* move_vector.length()
-	
+
 	var rateOfVelocityChange : float = deceleration
 	var accelerationMode : AccelerationType = AccelerationType.MoveTowards
 	var turnedVelocity : Vector3 = Vector3(velocity.x, 0, velocity.z)
@@ -318,7 +320,7 @@ func _physics_process(delta):
 	elif move_vector.length() > 0 and (velocity.length() <= 0 \
 	or move_vector.normalized().dot(velocity.normalized())>0):
 		rateOfVelocityChange = acceleration
-		
+
 		if not is_in_water and turnedVelocity.length() <= move_speed:
 			var inverseSpeedAlpha = 1-(turnedVelocity.length() / move_speed)
 			var blend = 1-pow(0.5, delta * runningSlerp_TurnRate * (1+inverseSpeedAlpha*runningSlerp_LowSpeedMultiplier))
@@ -326,10 +328,10 @@ func _physics_process(delta):
 	else: # deceleration
 		if ledge_detect and not ledge_detect.has_overlapping_bodies():
 			rateOfVelocityChange = deceleration_ledgeDetected
-	
+
 	if is_in_water:
 		rateOfVelocityChange *= waterAccelerationMultiplier
-	
+
 	#velocity = velocity.move_toward(velocity.project(up_direction) + move_vector * move_speed, rateOfVelocityChange * delta)
 	var vel_horizontal = turnedVelocity.move_toward(
 		move_vector * get_move_speed(),
@@ -339,30 +341,30 @@ func _physics_process(delta):
 		vel_horizontal = turnedVelocity \
 		+ move_vector * rateOfVelocityChange * delta
 	velocity = velocity.project(up_direction) + vel_horizontal
-	
-	
+
+
 	# drag
 	var v = velocity.length()
 	if is_in_water:
 		velocity = velocity.move_toward(Vector3.ZERO, waterDrag * (v * v * 0.7 * 0.5))
-	
-	
+
+
 	# wall running
 	if is_wall_running and tick - jump_last_tick > jump_cooldownMS/1000:
 		velocity = project_on_plane(velocity, get_wall_normal()) + -get_wall_normal() * wall_run_magnet_force
-	
+
 	if is_wall_running:
 		var wall_dot : float = (global_basis * Vector3.RIGHT).normalized().dot(get_wall_normal())
 		if model: model.basis = Basis.from_euler( Vector3(0,0,deg_to_rad(-20) * wall_dot) )
 	else:
 		if model: model.basis = Basis()
-	
+
 	if last_is_wallrunning != is_wall_running:
 		last_is_wallrunning = is_wall_running
-	
+
 	move_and_slide()
-	
-	
+
+
 	# rotate to face walking direction
 	if autoRotationMode == AutoRotationType.MOVEMENT:
 		var visualRotationBlend = 1-pow(0.5, delta * visualRotationLerpSpeed)
@@ -374,12 +376,12 @@ func _physics_process(delta):
 			global_basis = global_basis.slerp(Basis.looking_at(global_basis * Vector3.FORWARD, up_direction), visualRotationBlend)
 	elif autoRotationMode == AutoRotationType.LOOK:
 		global_basis = Basis.looking_at(project_on_plane(look_vector, up_direction), up_direction)
-	
+
 	# void out
 	#if global_position.y < -30:
 		#game_over()
-	
-	
+
+
 	# particles
 	if particles_running:
 		var collision_radius = 0.4
@@ -389,17 +391,17 @@ func _physics_process(delta):
 			collision_normal = get_floor_normal()
 		if is_wall_running:
 			collision_normal = get_wall_normal()
-		
+
 		var pivot_pos = global_transform * (Vector3.DOWN * (collision_height/2 - collision_radius))
 		var particle_pos = pivot_pos + -collision_normal * collision_radius
 		particles_running.global_position = particle_pos
-		
+
 		if is_on_floor() or last_is_wallrunning:
 			particles_running.amount_ratio = move_vector.limit_length(1).length()
 		else:
 			particles_running.amount_ratio = 0
-	
-	
+
+
 	# animation
 	#if anim_player:
 		#if (is_on_floor() and velocity.length() > 0) or is_wall_running: #if move_vector.length() > 0.1 and is_on_floor():
@@ -412,13 +414,13 @@ func _physics_process(delta):
 				#anim_player.play("Falling", .1);
 		#else:
 			#anim_player.play("Idle", .333, .5)
-	
+
 	if anim_tree:
 		anim_tree.set(ATV_grounded, (is_on_floor() or is_wall_running))
 		anim_tree.set(ATV_jump_held, jump_held)
 		anim_tree.set(ATV_move_blend, project_on_plane(velocity, up_direction).length() / move_speed)
 		anim_tree.set(ATV_move_alpha, project_on_plane(velocity, up_direction).length() / move_speed)
-	
+
 	_jump_held_last_frame = jump_held
 
 func game_over():

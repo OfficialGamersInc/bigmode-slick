@@ -20,21 +20,21 @@ class_name PlayerCharacter
 
 func set_control_enabled(control_enabled : bool):
 	#if _control_enabled == control_enabled: return
-	
+
 	_control_enabled = control_enabled
 	move_vector = Vector3()
 	#camera_rig.visible = control_enabled
 
 func _process(_delta: float) -> void:
 	if not _control_enabled: return
-	
+
 	#if is_wall_running:
 		#camera_rig.SubjectLeanDirection = get_wall_normal()
 	#else:
 		#camera_rig.SubjectLeanDirection = Vector3.ZERO
 	#
 	#look_vector = camera_rig.Pivot.global_basis * Vector3.FORWARD
-	
+
 	var input = Input.get_vector(\
 		"move_left", "move_right", "move_forward", "move_backward")
 	var input_vector3 = Vector3(input.x, 0, input.y)
@@ -44,5 +44,5 @@ func _process(_delta: float) -> void:
 	)
 	if (camera.global_basis * up_direction).y < 0: input_vector3 *= -1
 	move_vector = cameraFlattenedTransform * input_vector3
-	
+
 	jump_held = Input.is_action_pressed("jump")

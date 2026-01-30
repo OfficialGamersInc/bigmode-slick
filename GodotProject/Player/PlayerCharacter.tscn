@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dl2g3ks3fn2fa"]
 
 [ext_resource type="Script" uid="uid://dunip1f0c6d0p" path="res://Player/PlayerCharacter.gd" id="1_k87gr"]
+[ext_resource type="Script" uid="uid://bj4limi67x1lj" path="res://Player/Ability_DiveDodgeroll.gd" id="2_1gtpu"]
 [ext_resource type="Script" uid="uid://cwnau2ggxef6s" path="res://Player/CameraController_ThirdPerson.gd" id="2_k87gr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5cwa8"]
@@ -14,12 +15,24 @@ height = 1.8
 [node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("model", "camera")]
 script = ExtResource("1_k87gr")
 _control_enabled = true
+acceleration = 30.0
+deceleration = 60.0
+deceleration_ledgeDetected = 120.0
+airAcceleration = 20.0
+wallRunAcceleration = 20.0
 jump_precharge = false
 gravity_falling = 25.0
 gravity_wall_running_falling = 10.0
 model = NodePath("CollisionShape3D/MeshInstance3D")
 camera = NodePath("Camera3DOverhead")
 metadata/_custom_type_script = "uid://dunip1f0c6d0p"
+
+[node name="Ability_DiveDodgeroll" type="Node" parent="." unique_id=452556527]
+script = ExtResource("2_1gtpu")
+dive_force = 30.0
+dodgeroll_force = 20.0
+dodgeroll_duration = 0.25
+metadata/_custom_type_script = "uid://bj4limi67x1lj"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1976717246]
 shape = SubResource("CapsuleShape3D_5cwa8")
@@ -34,4 +47,8 @@ top_level = true
 current = true
 script = ExtResource("2_k87gr")
 CameraFocus = NodePath("..")
+FocusOffset = Vector3(0, 0, 0)
+Zoom = 10.0
+Angle_Pitch = 65.0
+Angle_Yaw = 45.0
 metadata/_custom_type_script = "uid://cwnau2ggxef6s"
