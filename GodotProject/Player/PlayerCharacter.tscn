@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dl2g3ks3fn2fa"]
+
+[ext_resource type="Script" uid="uid://dunip1f0c6d0p" path="res://Player/PlayerCharacter.gd" id="1_k87gr"]
+[ext_resource type="Script" uid="uid://cwnau2ggxef6s" path="res://Player/CameraController_ThirdPerson.gd" id="2_k87gr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5cwa8"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a5bt4"]
+radius = 0.4
+height = 1.8
+
+[node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("model", "camera")]
+script = ExtResource("1_k87gr")
+_control_enabled = true
+jump_precharge = false
+gravity_falling = 25.0
+gravity_wall_running_falling = 10.0
+model = NodePath("CollisionShape3D/MeshInstance3D")
+camera = NodePath("Camera3DOverhead")
+metadata/_custom_type_script = "uid://dunip1f0c6d0p"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1976717246]
+shape = SubResource("CapsuleShape3D_5cwa8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=431822314]
+mesh = SubResource("CapsuleMesh_a5bt4")
+
+[node name="Camera3DOverhead" type="Camera3D" parent="." unique_id=1628899838 node_paths=PackedStringArray("CameraFocus")]
+physics_interpolation_mode = 2
+transform = Transform3D(0.70710677, -0.5, 0.50000006, 0, 0.7071068, 0.70710677, -0.7071068, -0.49999997, 0.5, 1.4999999, 2.1213205, 1.5)
+top_level = true
+current = true
+script = ExtResource("2_k87gr")
+CameraFocus = NodePath("..")
+metadata/_custom_type_script = "uid://cwnau2ggxef6s"
