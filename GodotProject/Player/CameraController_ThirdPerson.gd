@@ -37,7 +37,7 @@ func _process(delta):
 
 	var lead_horizontal : Vector3 = project_on_plane(CameraFocus.velocity * CameraLeadTime_Horizontal, up_direction)
 	#var lead_vertical : Vector3 = (CameraFocus.velocity * CameraLeadTime_Vertical).project(up_direction)
-	var offset : Vector3 = Vector3.FORWARD.rotated(Vector3.UP,  deg_to_rad(Angle_Yaw)).rotated(gravity_basis * Vector3.LEFT, deg_to_rad(Angle_Pitch))
+	var offset : Vector3 = Vector3.FORWARD.rotated(gravity_basis * Vector3.LEFT, deg_to_rad(Angle_Pitch)).rotated(Vector3.UP,  deg_to_rad(Angle_Yaw))
 	var focusPos : Vector3 = CameraFocus.global_position + gravity_basis * FocusOffset + lead_horizontal #+ lead_vertical
 
 	var newPos : Vector3 = project_on_plane(currentPos, up_direction).lerp(project_on_plane(focusPos, up_direction), LerpSpeed_Horizontal * delta)
