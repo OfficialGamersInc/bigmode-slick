@@ -13,23 +13,275 @@ height = 1.8
 radius = 0.4
 height = 1.8
 
-[node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("model", "camera")]
+[sub_resource type="BoxMesh" id="BoxMesh_jdwmw"]
+size = Vector3(0.8, 0.25, 0.5)
+
+[sub_resource type="Animation" id="Animation_05ndu"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pill")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_pxyys"]
+resource_name = "dodgeroll"
+length = 0.8
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pill")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.17858297, 0, 0.10000001, 1, 0, 0, 0, 0.4, 1, 0, -0.17858297, 0, 0.5, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pill")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.10000001, 1, 0.70710677, 0, 0, 0.70710677, 0.19999999, 1, 1, 0, 0, -4.371139e-08, 0.3, 1, -0.70710665, 0, 0, 0.7071069, 0.4, 1, 0, 0, 0, 1, 0.5, 1, 0.70710677, 0, 0, 0.70710677, 0.59999996, 1, 1, 0, 0, -4.371139e-08, 0.7, 1, -0.70710665, 0, 0, 0.7071069, 0.8, 1, -2.9802322e-08, 0, 0, 1)
+tracks/2/type = "scale_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pill")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1.2262135, 0.7728788, 1.1725531, 0.10000001, 1, 0.78571755, 1.197145, 0.75208104, 0.19999999, 1, 1, 1, 1, 0.4, 1, 1.2262135, 0.7728788, 1.1725531, 0.5, 1, 0.78571755, 1.197145, 0.75208104, 0.59999996, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_gnsy3"]
+resource_name = "dodgeroll_recover"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pill")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.012981296, 0.06441715, 0.1, 1, 0, -0.14167124, 0.36900914, 0.5, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pill")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.13052613, 0, 0, 0.9914449, 0.1, 1, 0.38268343, 0, 0, 0.92387956, 0.5, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_nn7gb"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pill")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.04366298, 0, 0, 0.9990463, 0.5, 1, 0.0485447, 0, 0, 0.99882096)
+
+[sub_resource type="Animation" id="Animation_6f781"]
+resource_name = "jump"
+length = 0.4
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pill")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.06666667, 1, 0.5644654, 1.615779, 0.5718456, 0.4, 1, 1, 1, 1)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pill")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.5207978, 0, 0.4, 1, 0, 0, 0)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pill")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array()
+
+[sub_resource type="Animation" id="Animation_jdwmw"]
+resource_name = "land"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pill")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, -0.55312514, 0, 0.2, 1, 0, 0.32559502, 0, 0.33333334, 1, 0, 0, 0)
+tracks/1/type = "scale_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pill")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.13333333, 1, 1.61, 0.4421207, 1.61, 0.23333333, 1, 0.6510279, 1.3916173, 0.63484174, 0.36666667, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_ik8g8"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pill")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, -0.042956788, 0.9990769, 0.5, 1, 0, 0, 0.044412713, 0.99901325)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pill")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, -0.0018443142, 0.18109119, 0, 0.5, 1, 0, 0, 0, 0.7, 1, -0.0018443142, 0.18109119, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7hbx"]
+_data = {
+&"RESET": SubResource("Animation_05ndu"),
+&"dodgeroll": SubResource("Animation_pxyys"),
+&"dodgeroll_recover": SubResource("Animation_gnsy3"),
+&"idle": SubResource("Animation_nn7gb"),
+&"jump": SubResource("Animation_6f781"),
+&"land": SubResource("Animation_jdwmw"),
+&"walk": SubResource("Animation_ik8g8")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gnsy3"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6f781"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ik8g8"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x7hbx"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jdwmw"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8llf3"]
+graph_offset = Vector2(-588.8407, 73.17273)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_6f781")
+nodes/Animation/position = Vector2(-60, 160)
+nodes/WalkBlend/node = SubResource("AnimationNodeBlend2_ik8g8")
+nodes/WalkBlend/position = Vector2(120, 140)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_gnsy3")
+"nodes/Animation 2/position" = Vector2(-520, 380)
+nodes/WalkSpeed/node = SubResource("AnimationNodeTimeScale_x7hbx")
+nodes/WalkSpeed/position = Vector2(-60, 360)
+nodes/_/node = SubResource("AnimationNodeTimeScale_jdwmw")
+nodes/_/position = Vector2(-280, 380)
+node_connections = [&"output", 0, &"WalkBlend", &"WalkBlend", 0, &"Animation", &"WalkBlend", 1, &"WalkSpeed", &"WalkSpeed", 0, &"_", &"_", 0, &"Animation 2"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jdwmw"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_05ndu"]
+animation = &"dodgeroll"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pxyys"]
+animation = &"dodgeroll_recover"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nn7gb"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ik8g8"]
+animation = &"land"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_827r0"]
+advance_mode = 2
+advance_condition = &"Dodgeroll"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mv8iy"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Grounded"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_grsr8"]
+advance_mode = 2
+advance_expression = "not get(\"parameters/conditions/Grounded\")"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ykgn"]
+advance_mode = 2
+advance_expression = "not get(\"parameters/conditions/Grounded\")"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3tt8b"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gjyvj"]
+advance_mode = 2
+advance_expression = "not get(\"parameters/conditions/Grounded\")"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8v6cl"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Grounded"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jdwmw"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_05ndu"]
+advance_mode = 2
+advance_condition = &"Dodgeroll"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ypln"]
+advance_mode = 2
+advance_expression = "get(\"parameters/conditions/Grounded\") and not get(\"parameters/conditions/Dodgeroll\")"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x7hbx"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Grounded"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8llf3"]
+advance_mode = 2
+advance_expression = "not get(\"parameters/conditions/Grounded\")"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8v6cl"]
+states/GroundedMovement/node = SubResource("AnimationNodeBlendTree_8llf3")
+states/GroundedMovement/position = Vector2(428, 40)
+states/RESET/node = SubResource("AnimationNodeAnimation_jdwmw")
+states/RESET/position = Vector2(608, 174)
+states/dodgeroll/node = SubResource("AnimationNodeAnimation_05ndu")
+states/dodgeroll/position = Vector2(766, 40)
+states/dodgeroll_recover/node = SubResource("AnimationNodeAnimation_pxyys")
+states/dodgeroll_recover/position = Vector2(766, 174)
+states/jump/node = SubResource("AnimationNodeAnimation_nn7gb")
+states/jump/position = Vector2(608, 40)
+states/land/node = SubResource("AnimationNodeAnimation_ik8g8")
+states/land/position = Vector2(428, 174)
+transitions = ["RESET", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_827r0"), "dodgeroll", "dodgeroll_recover", SubResource("AnimationNodeStateMachineTransition_mv8iy"), "dodgeroll", "jump", SubResource("AnimationNodeStateMachineTransition_grsr8"), "dodgeroll_recover", "jump", SubResource("AnimationNodeStateMachineTransition_0ykgn"), "Start", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_3tt8b"), "GroundedMovement", "jump", SubResource("AnimationNodeStateMachineTransition_gjyvj"), "dodgeroll_recover", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_8v6cl"), "jump", "RESET", SubResource("AnimationNodeStateMachineTransition_jdwmw"), "jump", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_05ndu"), "RESET", "land", SubResource("AnimationNodeStateMachineTransition_3ypln"), "land", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_x7hbx"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_8llf3")]
+graph_offset = Vector2(-44, -25)
+
+[node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("model", "camera", "anim_tree")]
 script = ExtResource("1_k87gr")
 _control_enabled = true
 move_speed = 10.0
 acceleration = 100.0
 deceleration = 100.0
 deceleration_ledgeDetected = 120.0
-airAcceleration = 100.0
+running_slerp_airborne = true
+runningSlerp_TurnRate = 8.0
 jump_variable_enabled = false
 jump_precharge = false
 jump_force = 25.0
 gravity_jumping = 70.0
-gravity_falling = 7.5
+gravity_falling = 20.0
 gravity_wall_running = 15.0
 gravity_wall_running_falling = 15.0
-model = NodePath("CollisionShape3D/MeshInstance3D")
+ATV_grounded = "parameters/conditions/Grounded"
+ATV_jump_held = "parameters/conditions/Jump"
+ATV_move_blend = "parameters/GroundedMovement/WalkBlend/blend_amount"
+ATV_move_alpha = "parameters/GroundedMovement/WalkSpeed/scale"
+model = NodePath("Visual/Pill")
 camera = NodePath("Camera3DOverhead")
+anim_tree = NodePath("Visual/AnimationTree")
 metadata/_custom_type_script = "uid://dunip1f0c6d0p"
 
 [node name="HealthHandler" type="Node" parent="." unique_id=1691669062]
@@ -41,15 +293,10 @@ metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
 [node name="Ability_DiveDodgeroll" type="Node" parent="." unique_id=452556527]
 script = ExtResource("2_1gtpu")
 dive_force = 30.0
-dodgeroll_force = 25.0
-dodgeroll_duration = 0.25
+dodgeroll_force = 22.5
+dodgeroll_duration = 0.5
+dodgeroll_recovery_duration = 0.5
 metadata/_custom_type_script = "uid://bj4limi67x1lj"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1976717246]
-shape = SubResource("CapsuleShape3D_5cwa8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=431822314]
-mesh = SubResource("CapsuleMesh_a5bt4")
 
 [node name="Camera3DOverhead" type="Camera3D" parent="." unique_id=1628899838 node_paths=PackedStringArray("CameraFocus")]
 physics_interpolation_mode = 2
@@ -63,5 +310,27 @@ Zoom = 10.0
 Angle_Pitch = 65.0
 Angle_Yaw = 45.0
 metadata/_custom_type_script = "uid://cwnau2ggxef6s"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1976717246]
+shape = SubResource("CapsuleShape3D_5cwa8")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1942729588]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Pill" type="MeshInstance3D" parent="Visual" unique_id=431822314]
+mesh = SubResource("CapsuleMesh_a5bt4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual/Pill" unique_id=180806981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442267, 0.14918077)
+mesh = SubResource("BoxMesh_jdwmw")
+
+[node name="AnimationTree" type="AnimationTree" parent="Visual" unique_id=1041739086]
+libraries/ = SubResource("AnimationLibrary_x7hbx")
+tree_root = SubResource("AnimationNodeStateMachine_8v6cl")
+parameters/conditions/Dodgeroll = true
+parameters/conditions/Grounded = true
+parameters/GroundedMovement/WalkBlend/blend_amount = 0.0
+parameters/GroundedMovement/WalkSpeed/scale = 1.0
+parameters/GroundedMovement/_/scale = 2.0
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]

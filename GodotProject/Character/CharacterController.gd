@@ -31,6 +31,11 @@ var _jump_held_last_frame : bool = false
 @export var wallRunAcceleration : float = 10
 @export var waterAccelerationMultiplier : float = 0.4
 @export var waterDrag : float = 0
+## Does runningSlerp_TurnRate apply while in the air. Default = false
+@export var running_slerp_airborne : bool = false
+## Does runningSlerp_TurnRate apply while decelerating (trying to move in the
+## opposite direction of current travel or trying to stop). Default = false
+@export var running_slerp_deceleration : bool = false
 ## Low acceleration values make moving feel slippery. This property helps with
 ## that. The player can redirect their velocity at this rate without slowing.
 @export var runningSlerp_TurnRate : float = 4
@@ -114,7 +119,7 @@ var is_wall_running : bool = false
 #@onready var camera : Camera3D = get_viewport().get_camera_3d() # doesn't work right in multiplayer.
 @export var camera : Camera3D #= $Visual/FPSCameraRig/Pivot/Camera
 @onready var anim_player : AnimationPlayer = find_child("AnimationPlayer", true, true)
-@export var anim_tree : Node3D = find_child("AnimationTree", true, true)
+@export var anim_tree : Node = find_child("AnimationTree", true, true)
 ## an area3D that detects when the player is about to walk off a ledge to help stop them.
 @onready var ledge_detect : Area3D = find_child("LedgeDetect", false, true)
 @onready var area_detect : Area3D = find_child("AreaDetect", false, true)
@@ -170,6 +175,13 @@ func jump(force : Vector3):
 	#if anim_tree:
 		#var state_machine = anim_tree.get("parameters/playback")
 		#state_machine.travel("Jump")
+
+func _apply_running_slerp(curVelocity : Vector3, deltaTime : float) -> Vector3:
+	#if curVelocity.length() <= move_speed:
+	var inverseSpeedAlpha = 1-clampf(curVelocity.length() / move_speed, 0, 1)
+	var blend = 1-pow(0.5, deltaTime * runningSlerp_TurnRate * (1+inverseSpeedAlpha*runningSlerp_LowSpeedMultiplier))
+	curVelocity = curVelocity.slerp(move_vector.normalized() * curVelocity.length(), clampf(blend, 0, 1))
+	return curVelocity
 
 func _physics_process(delta):
 	if not Enabled: return
@@ -316,7 +328,11 @@ func _physics_process(delta):
 	project_on_plane(move_vector, get_wall_normal()).length() > 0.1:
 		move_vector = project_on_plane(move_vector, get_wall_normal()).normalized()\
 		* move_vector.length()
-
+	
+	var isDecelerating : bool = move_vector.length() <= 0 \
+	or (velocity.length() > 0 \
+	and move_vector.normalized().dot(velocity.normalized()) < 0)
+	
 	var rateOfVelocityChange : float = deceleration
 	var accelerationMode : AccelerationType = AccelerationType.MoveTowards
 	var turnedVelocity : Vector3 = Vector3(velocity.x, 0, velocity.z)
@@ -326,17 +342,20 @@ func _physics_process(delta):
 		else:
 			accelerationMode = airAccelerationMode
 			rateOfVelocityChange = airAcceleration
-	elif move_vector.length() > 0 and (velocity.length() <= 0 \
-	or move_vector.normalized().dot(velocity.normalized())>0):
-		rateOfVelocityChange = acceleration
-
-		if not is_in_water and turnedVelocity.length() <= move_speed:
-			var inverseSpeedAlpha = 1-(turnedVelocity.length() / move_speed)
-			var blend = 1-pow(0.5, delta * runningSlerp_TurnRate * (1+inverseSpeedAlpha*runningSlerp_LowSpeedMultiplier))
-			turnedVelocity = turnedVelocity.slerp(move_vector.normalized() * turnedVelocity.length(), blend)
-	else: # deceleration
+			if running_slerp_airborne:
+				turnedVelocity = _apply_running_slerp(turnedVelocity, delta)
+	elif isDecelerating:
+		rateOfVelocityChange = deceleration
 		if ledge_detect and not ledge_detect.has_overlapping_bodies():
 			rateOfVelocityChange = deceleration_ledgeDetected
+		
+		if running_slerp_deceleration and not is_in_water:
+			turnedVelocity = _apply_running_slerp(turnedVelocity, delta)
+	else: # accelerating
+		rateOfVelocityChange = acceleration
+
+		if not is_in_water:
+			turnedVelocity = _apply_running_slerp(turnedVelocity, delta)
 
 	if is_in_water:
 		rateOfVelocityChange *= waterAccelerationMultiplier
