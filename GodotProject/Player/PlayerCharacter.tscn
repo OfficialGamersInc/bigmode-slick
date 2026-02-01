@@ -41,7 +41,7 @@ metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
 [node name="Ability_DiveDodgeroll" type="Node" parent="." unique_id=452556527]
 script = ExtResource("2_1gtpu")
 dive_force = 30.0
-dodgeroll_force = 20.0
+dodgeroll_force = 25.0
 dodgeroll_duration = 0.25
 metadata/_custom_type_script = "uid://bj4limi67x1lj"
 
