@@ -38,6 +38,9 @@ var _jump_held_last_frame : bool = false
 
 @export_category("Jumping")
 @export var jump_enabled : bool = true
+## Can the character's jump height vary depending on how long they hold jump for?
+## Jump height is varried by switching from gravity_jumping to gravity_falling early.
+@export var jump_variable_enabled : bool = true
 ## If true, player will not jump until they release the jump button. Jump height
 ## is decided by how long they hold the jump key prior. If false, Jump hight is
 ## decided by how long the jump key is held after leaving the ground.
@@ -68,9 +71,11 @@ var _jump_held_last_frame : bool = false
 @export var wall_run_angle_min : float = deg_to_rad(65)
 
 @export_category("Gravity")
+## Gravity applied before the character reaches the apex of their jump.
 @export var gravity_jumping : float = 25
 ## Character experiences more (or less) gravity after the apex of their jump, or
-## after releasing the jump button if jump_precharge is false.
+## after releasing the jump button if jump_precharge is false
+## and jump_variable_enabled is true.
 @export var gravity_falling : float = 50
 @export var gravity_wall_running : float = 10
 ## Character experiences more gravity after the apex of their jump.
@@ -120,6 +125,9 @@ signal Landed
 
 func set_enabled(enabled : bool):
 	Enabled = enabled
+
+func shove(force : Vector3):
+	velocity += force
 
 func _refreshEnabled():
 	model.visible = Enabled
@@ -238,7 +246,8 @@ func _physics_process(delta):
 			var projectedOnPlane = project_on_plane(velocity, gravity_vector.normalized())
 			velocity = projectedOnPlane + projectedOnVector.limit_length(maxVertVel)
 
-		elif velocity_vertical_signed >= 0 and (jump_precharge or jump_held):
+		elif velocity_vertical_signed >= 0 and\
+		((not jump_variable_enabled) or jump_precharge or jump_held):
 			velocity += gravity_vector * gravity_jumping_calc * delta
 		else:
 			velocity += gravity_vector * gravity_falling_calc * delta

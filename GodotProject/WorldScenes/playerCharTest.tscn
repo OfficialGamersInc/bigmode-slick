@@ -2,6 +2,7 @@
 
 [ext_resource type="Material" uid="uid://dwdc2phdcg8l7" path="res://addons/kenney_prototype-textures/PNG/blocking_shader.tres" id="1_enmvo"]
 [ext_resource type="PackedScene" uid="uid://dl2g3ks3fn2fa" path="res://Player/PlayerCharacter.tscn" id="1_lfyu1"]
+[ext_resource type="PackedScene" uid="uid://cvj7r8j7t4hj7" path="res://Objects/Test/test_sword_swing.tscn" id="3_blf3q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfyu1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -33,3 +34,15 @@ size = Vector3(100, 1, 100)
 
 [node name="CharacterController" parent="." unique_id=844904675 instance=ExtResource("1_lfyu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="TestSwordSwing" parent="." unique_id=120650105 instance=ExtResource("3_blf3q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010138512, 0.49999905, -13.903869)
+
+[node name="TestSwordSwing2" parent="." unique_id=619500649 instance=ExtResource("3_blf3q")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.010138512, 0.49999905, 13.596131)
+
+[node name="TestSwordSwing3" parent="." unique_id=1981147647 instance=ExtResource("3_blf3q")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.649164, 0.4999981, 5.7570057)
+
+[node name="TestSwordSwing4" parent="." unique_id=85872550 instance=ExtResource("3_blf3q")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -18.398375, 0.49999905, -8.688917)

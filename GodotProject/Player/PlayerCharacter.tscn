@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dunip1f0c6d0p" path="res://Player/PlayerCharacter.gd" id="1_k87gr"]
 [ext_resource type="Script" uid="uid://bj4limi67x1lj" path="res://Player/Ability_DiveDodgeroll.gd" id="2_1gtpu"]
+[ext_resource type="Script" uid="uid://bodf7ykpt3nvj" path="res://Character/HealthHandler.gd" id="2_jdwmw"]
 [ext_resource type="Script" uid="uid://cwnau2ggxef6s" path="res://Player/CameraController_ThirdPerson.gd" id="2_k87gr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5cwa8"]
@@ -16,19 +17,26 @@ height = 1.8
 script = ExtResource("1_k87gr")
 _control_enabled = true
 move_speed = 10.0
-acceleration = 60.0
-deceleration = 60.0
+acceleration = 100.0
+deceleration = 100.0
 deceleration_ledgeDetected = 120.0
-airAcceleration = 5.0
-wallRunAcceleration = 5.0
+airAcceleration = 100.0
+jump_variable_enabled = false
 jump_precharge = false
-jump_force = 15.0
-gravity_jumping = 30.0
+jump_force = 25.0
+gravity_jumping = 70.0
+gravity_falling = 7.5
 gravity_wall_running = 15.0
 gravity_wall_running_falling = 15.0
 model = NodePath("CollisionShape3D/MeshInstance3D")
 camera = NodePath("Camera3DOverhead")
 metadata/_custom_type_script = "uid://dunip1f0c6d0p"
+
+[node name="HealthHandler" type="Node" parent="." unique_id=1691669062]
+script = ExtResource("2_jdwmw")
+destroy_on_death = false
+can_die = false
+metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
 
 [node name="Ability_DiveDodgeroll" type="Node" parent="." unique_id=452556527]
 script = ExtResource("2_1gtpu")
@@ -55,3 +63,5 @@ Zoom = 10.0
 Angle_Pitch = 65.0
 Angle_Yaw = 45.0
 metadata/_custom_type_script = "uid://cwnau2ggxef6s"
+
+[connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]

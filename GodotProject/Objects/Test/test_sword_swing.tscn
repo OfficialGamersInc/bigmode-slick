@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cvj7r8j7t4hj7"]
+
+[ext_resource type="Script" uid="uid://ucioub12ym0q" path="res://Objects/Test/Hitbox.gd" id="1_jtqvr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbmuu"]
+size = Vector3(5, 1, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jtqvr"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.47843137)
+
+[sub_resource type="BoxMesh" id="BoxMesh_djo1v"]
+material = SubResource("StandardMaterial3D_jtqvr")
+size = Vector3(2, 1, 8)
+
+[sub_resource type="Animation" id="Animation_r65eo"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.9238795, 0, -0.3826834)
+
+[sub_resource type="Animation" id="Animation_cpwei"]
+resource_name = "test_sword_Swing"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.7071067, 0, 0.70710677, 0.70000005, 1, 0, -0.7071067, 0, 0.70710677, 0.76666665, 1, 0, 8.742278e-08, 0, 0.99999994, 0.8333334, 1, 0, 0.70710677, 0, 0.7071067, 1.5, 1, 0, 0.70710677, 0, 0.7071067, 2.2, 1, 0, 0.70710677, 0, 0.7071067, 2.2666667, 1, 0, 8.742278e-08, 0, 0.99999994, 2.3333335, 1, 0, -0.7071067, 0, 0.70710677, 3, 1, 0, -0.7071067, 0, 0.70710677)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r25ls"]
+_data = {
+&"RESET": SubResource("Animation_r65eo"),
+&"test_sword_Swing": SubResource("Animation_cpwei")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djo1v"]
+transparency = 1
+albedo_color = Color(0.80784315, 0.57254905, 0, 0.24313726)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r65eo"]
+material = SubResource("StandardMaterial3D_djo1v")
+top_radius = 8.0
+bottom_radius = 8.0
+height = 1.0
+
+[node name="TestSwordSwing" type="Node3D" unique_id=120650105]
+script = ExtResource("1_jtqvr")
+Knockback = 30.0
+
+[node name="AnimatableBody3D" type="Area3D" parent="." unique_id=86520611]
+transform = Transform3D(-0.7071064, 0, -0.7071064, 0, 1, 0, 0.7071064, 0, -0.7071064, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=340702248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+shape = SubResource("BoxShape3D_jbmuu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D/CollisionShape3D" unique_id=1703722288]
+mesh = SubResource("BoxMesh_djo1v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=482909804]
+libraries/ = SubResource("AnimationLibrary_r25ls")
+autoplay = &"test_sword_Swing"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=409363475]
+mesh = SubResource("CylinderMesh_r65eo")
+
+[connection signal="body_entered" from="AnimatableBody3D" to="." method="BodyEntered"]
