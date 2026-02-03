@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dhw7opqdaglxr"]
+
+[ext_resource type="Script" uid="uid://mqqem2srvfc5" path="res://Enemies/groobler_behavior.gd" id="1_oq4j8"]
+[ext_resource type="Script" uid="uid://bodf7ykpt3nvj" path="res://Character/HealthHandler.gd" id="2_war3s"]
+[ext_resource type="Material" uid="uid://bgv8uao80nlst" path="res://Enemies/groobler_material.tres" id="3_63uqq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ypjq3"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_itwmt"]
+material = ExtResource("3_63uqq")
+
+[sub_resource type="BoxMesh" id="BoxMesh_oq4j8"]
+size = Vector3(0.6, 0.3, 0.5)
+
+[node name="Groobler" type="CharacterBody3D" unique_id=1413011739]
+script = ExtResource("1_oq4j8")
+
+[node name="HealthHandler" type="Node" parent="." unique_id=675727381]
+script = ExtResource("2_war3s")
+health_max = 5.0
+metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1847239138]
+shape = SubResource("SphereShape3D_ypjq3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1340701836]
+mesh = SubResource("SphereMesh_itwmt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1501729456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -0.29013413)
+mesh = SubResource("BoxMesh_oq4j8")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1325489360]
+debug_enabled = true

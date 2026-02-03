@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://5oyxampuvskg"]
+
+[ext_resource type="Script" uid="uid://dsi14qbgg3gds" path="res://Util/enable_debug.gd" id="1_40cp1"]
+[ext_resource type="Material" uid="uid://dwdc2phdcg8l7" path="res://addons/kenney_prototype-textures/PNG/blocking_shader.tres" id="1_ypjq3"]
+[ext_resource type="PackedScene" uid="uid://dl2g3ks3fn2fa" path="res://Player/PlayerCharacter.tscn" id="2_itwmt"]
+[ext_resource type="PackedScene" uid="uid://cvj7r8j7t4hj7" path="res://Objects/Test/test_sword_swing.tscn" id="3_40cp1"]
+[ext_resource type="PackedScene" uid="uid://dhw7opqdaglxr" path="res://Enemies/groobler.tscn" id="4_itwmt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfyu1"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_enmvo"]
+sky_material = SubResource("ProceduralSkyMaterial_lfyu1")
+
+[sub_resource type="Environment" id="Environment_blf3q"]
+background_mode = 2
+sky = SubResource("Sky_enmvo")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_itwmt"]
+vertices = PackedVector3Array(-49.5, 0.5, -49.5, -49.5, 0.5, 49.5, 49.5, 0.5, 49.5, 49.5, 0.5, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[node name="Node3D" type="Node3D" unique_id=2129391494]
+script = ExtResource("1_40cp1")
+enableDebug = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1629591452]
+environment = SubResource("Environment_blf3q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1165398884]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=702243189]
+navigation_mesh = SubResource("NavigationMesh_itwmt")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D" unique_id=19559664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("1_ypjq3")
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="CharacterController" parent="." unique_id=844904675 instance=ExtResource("2_itwmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="TestSwordSwing" parent="." unique_id=120650105 instance=ExtResource("3_40cp1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010138512, 0.49999905, -13.903869)
+
+[node name="TestSwordSwing2" parent="." unique_id=619500649 instance=ExtResource("3_40cp1")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.010138512, 0.49999905, 13.596131)
+
+[node name="TestSwordSwing3" parent="." unique_id=1981147647 instance=ExtResource("3_40cp1")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.649164, 0.4999981, 5.7570057)
+
+[node name="TestSwordSwing4" parent="." unique_id=85872550 instance=ExtResource("3_40cp1")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -18.398375, 0.49999905, -8.688917)
+
+[node name="Groobler" parent="." unique_id=1413011739 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1845717, 0.9829922, 2.3273878)
+movement_speed = 8.0
+debug_target = NodePath("../CharacterController")
+
+[node name="Groobler2" parent="." unique_id=1332379271 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31813, 0.98299193, 4.1875753)
+movement_speed = 8.0
+debug_target = NodePath("../CharacterController")
+
+[node name="Groobler3" parent="." unique_id=1558920682 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25426, 1.9659843, 2.4093668)
+movement_speed = 8.0
+debug_target = NodePath("../CharacterController")
+
+[node name="Groobler4" parent="." unique_id=770616411 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3878183, 1.9659841, 4.269554)
+movement_speed = 8.0
+debug_target = NodePath("../CharacterController")
