@@ -248,21 +248,25 @@ advance_condition = &"Grounded"
 advance_mode = 2
 advance_expression = "not get(\"parameters/conditions/Grounded\")"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gnsy3"]
+advance_mode = 2
+advance_condition = &"Dodgeroll"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8v6cl"]
 states/GroundedMovement/node = SubResource("AnimationNodeBlendTree_8llf3")
 states/GroundedMovement/position = Vector2(428, 40)
 states/RESET/node = SubResource("AnimationNodeAnimation_jdwmw")
 states/RESET/position = Vector2(608, 174)
 states/dodgeroll/node = SubResource("AnimationNodeAnimation_05ndu")
-states/dodgeroll/position = Vector2(766, 40)
+states/dodgeroll/position = Vector2(766, -34)
 states/dodgeroll_recover/node = SubResource("AnimationNodeAnimation_pxyys")
 states/dodgeroll_recover/position = Vector2(766, 174)
 states/jump/node = SubResource("AnimationNodeAnimation_nn7gb")
 states/jump/position = Vector2(608, 40)
 states/land/node = SubResource("AnimationNodeAnimation_ik8g8")
 states/land/position = Vector2(428, 174)
-transitions = ["RESET", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_827r0"), "dodgeroll", "dodgeroll_recover", SubResource("AnimationNodeStateMachineTransition_mv8iy"), "dodgeroll", "jump", SubResource("AnimationNodeStateMachineTransition_grsr8"), "dodgeroll_recover", "jump", SubResource("AnimationNodeStateMachineTransition_0ykgn"), "Start", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_3tt8b"), "GroundedMovement", "jump", SubResource("AnimationNodeStateMachineTransition_gjyvj"), "dodgeroll_recover", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_8v6cl"), "jump", "RESET", SubResource("AnimationNodeStateMachineTransition_jdwmw"), "jump", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_05ndu"), "RESET", "land", SubResource("AnimationNodeStateMachineTransition_3ypln"), "land", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_x7hbx"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_8llf3")]
-graph_offset = Vector2(-44, -25)
+transitions = ["RESET", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_827r0"), "dodgeroll", "dodgeroll_recover", SubResource("AnimationNodeStateMachineTransition_mv8iy"), "dodgeroll", "jump", SubResource("AnimationNodeStateMachineTransition_grsr8"), "dodgeroll_recover", "jump", SubResource("AnimationNodeStateMachineTransition_0ykgn"), "Start", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_3tt8b"), "GroundedMovement", "jump", SubResource("AnimationNodeStateMachineTransition_gjyvj"), "dodgeroll_recover", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_8v6cl"), "jump", "RESET", SubResource("AnimationNodeStateMachineTransition_jdwmw"), "jump", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_05ndu"), "RESET", "land", SubResource("AnimationNodeStateMachineTransition_3ypln"), "land", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_x7hbx"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_8llf3"), "GroundedMovement", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_gnsy3")]
+graph_offset = Vector2(-31, -95)
 
 [node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("model", "camera", "anim_tree")]
 script = ExtResource("1_k87gr")
@@ -348,7 +352,7 @@ mesh = SubResource("BoxMesh_jdwmw")
 [node name="AnimationTree" type="AnimationTree" parent="Visual" unique_id=1041739086]
 libraries/ = SubResource("AnimationLibrary_x7hbx")
 tree_root = SubResource("AnimationNodeStateMachine_8v6cl")
-parameters/conditions/Dodgeroll = true
+parameters/conditions/Dodgeroll = false
 parameters/conditions/Grounded = true
 parameters/GroundedMovement/WalkBlend/blend_amount = 0.0
 parameters/GroundedMovement/WalkSpeed/scale = 1.0
