@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dl2g3ks3fn2fa" path="res://Player/PlayerCharacter.tscn" id="2_itwmt"]
 [ext_resource type="PackedScene" uid="uid://cvj7r8j7t4hj7" path="res://Objects/Test/test_sword_swing.tscn" id="3_40cp1"]
 [ext_resource type="PackedScene" uid="uid://dhw7opqdaglxr" path="res://Enemies/groobler.tscn" id="4_itwmt"]
+[ext_resource type="PackedScene" uid="uid://dhclhttpddr08" path="res://Test Models/groobler animations.blend" id="6_yd1ix"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfyu1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -77,3 +78,6 @@ debug_target = NodePath("../CharacterController")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3878183, 1.9659841, 4.269554)
 movement_speed = 8.0
 debug_target = NodePath("../CharacterController")
+
+[node name="groobler animations" parent="." unique_id=1066918997 instance=ExtResource("6_yd1ix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17002, 0.6819011, 1.5690198)
