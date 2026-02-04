@@ -1,7 +1,7 @@
-extends Node3D
+extends Ability
 class_name Ability_Slash
 
-@onready var main_level: Node3D = $"../.."
+@onready var main_level: Node3D = char_control.get_parent() #$"../../.."
 
 @export var cam: Camera3D
 

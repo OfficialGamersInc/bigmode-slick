@@ -1,17 +1,17 @@
-extends Node
+extends Ability
 class_name Ability_DiveDodgeroll
 
-@export var dive_force : float = 50
-@export var dodgeroll_force : float = 50
-@export var dodgeroll_duration : float = 1
+@export var dive_force : float = 30
+@export var dodgeroll_force : float = 22.5
+@export var dodgeroll_duration : float = 0.5
 @export var dodgeroll_jump_timing : float = 0.1
-@export var dodgeroll_recovery_duration : float = 0.25
-@export var dodgeroll_direction_smoothing : float = 4
+@export var dodgeroll_recovery_duration : float = 0.5
+@export var dodgeroll_direction_smoothing : float = 4.0
 
 @export_group("AnimationTree Values", "ATV_")
 @export var ATV_dodgeroll : String = "parameters/conditions/Dodgeroll"
 
-@onready var char_control : CharacterController = get_parent()
+#@onready var char_control : CharacterController = get_parent()
 
 enum ABILITY_STATE { READY, DIVE, DODGEROLL, RECOVER }
 var _current_state : ABILITY_STATE = ABILITY_STATE.READY
