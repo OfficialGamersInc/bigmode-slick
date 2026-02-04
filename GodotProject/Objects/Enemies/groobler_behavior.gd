@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @export var movement_speed: float = 4.0
+@export var target_spacing : float = 0
 @onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
 
 @export var refresh_cooldown : float = 0.125
@@ -33,8 +34,13 @@ func _process(delta: float) -> void:
 		set_movement_target(debug_target.global_position) # TEMP get better reference to player
 
 func _physics_process(delta):
+	if debug_target.global_position.distance_to(global_position) <= target_spacing:
+		_on_velocity_computed(Vector3.ZERO)
+		navigation_agent.set_velocity(Vector3.ZERO)
+		return
+	
 	if debug_target != null :
-		look_vector = debug_target.global_position
+		look_vector = debug_target.global_position # I don't think look_vector is meant to be a position.
 	
 	# Do not query when the map has never synchronized and is empty.
 	if NavigationServer3D.map_get_iteration_id(navigation_agent.get_navigation_map()) == 0:
@@ -46,6 +52,7 @@ func _physics_process(delta):
 	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * movement_speed
 	if navigation_agent.avoidance_enabled:
 		navigation_agent.set_velocity(new_velocity)
+		#_on_velocity_computed(new_velocity)
 	else:
 		_on_velocity_computed(new_velocity)
 	

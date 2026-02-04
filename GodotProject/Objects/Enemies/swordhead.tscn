@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://48c0sgbwsp1x"]
+
+[ext_resource type="PackedScene" uid="uid://dhw7opqdaglxr" path="res://Objects/Enemies/groobler.tscn" id="1_vnp15"]
+[ext_resource type="PackedScene" uid="uid://cvj7r8j7t4hj7" path="res://Objects/Test/test_sword_swing.tscn" id="2_r0hyl"]
+
+[node name="Swordhead" unique_id=1413011739 instance=ExtResource("1_vnp15")]
+target_spacing = 4.0
+
+[node name="NavigationAgent3D" parent="." index="3" unique_id=1325489360]
+radius = 4.0
+
+[node name="TestSwordSwing" parent="." index="4" unique_id=120650105 node_paths=PackedStringArray("IgnoreParent") instance=ExtResource("2_r0hyl")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+IgnoreParent = NodePath("..")

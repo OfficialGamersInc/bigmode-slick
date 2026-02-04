@@ -31,4 +31,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -0.29013413)
 mesh = SubResource("BoxMesh_oq4j8")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1325489360]
+radius = 3.0
 debug_enabled = true

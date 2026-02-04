@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ci5k23ru40qob"]
+
+[ext_resource type="PackedScene" uid="uid://dhw7opqdaglxr" path="res://Objects/Enemies/groobler.tscn" id="1_6yreh"]
+[ext_resource type="PackedScene" uid="uid://c8jr8j4m5d6yu" path="res://Objects/Test/test_slam.tscn" id="2_14jcv"]
+
+[node name="Hammerhead" unique_id=1413011739 instance=ExtResource("1_6yreh")]
+target_spacing = 3.0
+
+[node name="NavigationAgent3D" parent="." index="3" unique_id=1325489360]
+avoidance_enabled = true
+
+[node name="TestSlam" parent="." index="4" unique_id=1657492939 node_paths=PackedStringArray("IgnoreParent") instance=ExtResource("2_14jcv")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+IgnoreParent = NodePath("..")
