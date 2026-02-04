@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dhw7opqdaglxr"]
 
-[ext_resource type="Script" uid="uid://mqqem2srvfc5" path="res://Enemies/groobler_behavior.gd" id="1_oq4j8"]
+[ext_resource type="Script" uid="uid://mqqem2srvfc5" path="res://Objects/Enemies/groobler_behavior.gd" id="1_oq4j8"]
 [ext_resource type="Script" uid="uid://bodf7ykpt3nvj" path="res://Character/HealthHandler.gd" id="2_war3s"]
-[ext_resource type="Material" uid="uid://bgv8uao80nlst" path="res://Enemies/groobler_material.tres" id="3_63uqq"]
+[ext_resource type="Material" uid="uid://bgv8uao80nlst" path="res://Objects/Enemies/groobler_material.tres" id="3_63uqq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ypjq3"]
 

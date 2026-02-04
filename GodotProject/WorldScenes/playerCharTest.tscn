@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://dwdc2phdcg8l7" path="res://addons/kenney_prototype-textures/PNG/blocking_shader.tres" id="1_enmvo"]
 [ext_resource type="PackedScene" uid="uid://dl2g3ks3fn2fa" path="res://Player/PlayerCharacter.tscn" id="1_lfyu1"]
-[ext_resource type="Script" uid="uid://dsi14qbgg3gds" path="res://Util/enable_debug.gd" id="1_p1h55"]
+[ext_resource type="Script" uid="uid://dsi14qbgg3gds" path="res://Libraries/Util/enable_debug.gd" id="1_p1h55"]
 [ext_resource type="PackedScene" uid="uid://cvj7r8j7t4hj7" path="res://Objects/Test/test_sword_swing.tscn" id="3_blf3q"]
 [ext_resource type="PackedScene" uid="uid://c8jr8j4m5d6yu" path="res://Objects/Test/test_slam.tscn" id="5_jtjbv"]
 

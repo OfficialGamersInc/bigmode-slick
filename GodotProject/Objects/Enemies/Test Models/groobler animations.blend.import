@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dhclhttpddr08"
-path="res://.godot/imported/groobler animations.blend-0f0021fe857031528d8e3b524ae02c71.scn"
+path="res://.godot/imported/groobler animations.blend-aac0eb4f87dadbcbe3364b8e1d117837.scn"
 
 [deps]
 
-source_file="res://Test Models/groobler animations.blend"
-dest_files=["res://.godot/imported/groobler animations.blend-0f0021fe857031528d8e3b524ae02c71.scn"]
+source_file="res://Objects/Enemies/Test Models/groobler animations.blend"
+dest_files=["res://.godot/imported/groobler animations.blend-aac0eb4f87dadbcbe3364b8e1d117837.scn"]
 
 [params]
 
