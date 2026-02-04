@@ -1,7 +1,7 @@
-extends Node3D
+extends Ability
 class_name Ability_Slash
 
-@onready var main_level: Node3D = $"../.."
+@onready var main_level: Node3D = char_control.get_parent() #$"../../.."
 
 @export var cam: Camera3D
 
@@ -27,6 +27,8 @@ var resetTimer : float = 0
 		#mouseWorldPos = get_mouse_world_pos()
 
 func _unhandled_input(_event) :
+	if not enabled: return
+	
 	if Input.is_action_just_pressed("attack") :
 		mouseWorldPos = get_mouse_world_pos()
 		mousePosSignal.emit(mouseWorldPos)
@@ -36,6 +38,8 @@ func _unhandled_input(_event) :
 
 
 func _process(delta: float) -> void:
+	if not enabled: return
+	
 	if (main_level.enableDebug) : DebugDraw.draw_line_relative_thick(mouseWorldPos, Vector3.UP, 2, Color.WHITE)
 	
 	

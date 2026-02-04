@@ -1,17 +1,17 @@
-extends Node
+extends Ability
 class_name Ability_DiveDodgeroll
 
-@export var dive_force : float = 50
-@export var dodgeroll_force : float = 50
-@export var dodgeroll_duration : float = 1
+@export var dive_force : float = 30
+@export var dodgeroll_force : float = 22.5
+@export var dodgeroll_duration : float = 0.5
 @export var dodgeroll_jump_timing : float = 0.1
-@export var dodgeroll_recovery_duration : float = 0.25
-@export var dodgeroll_direction_smoothing : float = 4
+@export var dodgeroll_recovery_duration : float = 0.5
+@export var dodgeroll_direction_smoothing : float = 4.0
 
 @export_group("AnimationTree Values", "ATV_")
 @export var ATV_dodgeroll : String = "parameters/conditions/Dodgeroll"
 
-@onready var char_control : CharacterController = get_parent()
+#@onready var char_control : CharacterController = get_parent()
 
 enum ABILITY_STATE { READY, DIVE, DODGEROLL, RECOVER }
 var _current_state : ABILITY_STATE = ABILITY_STATE.READY
@@ -30,6 +30,8 @@ func _ready() -> void:
 	assert(char_control, "Ability_DiveDodgeroll must be a direct child of a CharacterController.")
 
 func _physics_process(_delta: float) -> void:
+	if not enabled: return
+	
 	var moveVect = Math.project_on_plane(char_control.move_vector, char_control.up_direction)
 	if moveVect.length() > 0.1:
 		if moveVect.normalized().dot(_dodgeroll_direction) <= -1:
@@ -103,4 +105,10 @@ func _physics_process(_delta: float) -> void:
 
 
 
-# Man, I hate this.
+
+
+
+
+
+
+# Man, I hate this. Just let me scroll past the final line.
