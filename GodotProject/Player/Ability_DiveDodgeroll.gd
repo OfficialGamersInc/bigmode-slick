@@ -30,6 +30,8 @@ func _ready() -> void:
 	assert(char_control, "Ability_DiveDodgeroll must be a direct child of a CharacterController.")
 
 func _physics_process(_delta: float) -> void:
+	if not enabled: return
+	
 	var moveVect = Math.project_on_plane(char_control.move_vector, char_control.up_direction)
 	if moveVect.length() > 0.1:
 		if moveVect.normalized().dot(_dodgeroll_direction) <= -1:
@@ -103,4 +105,10 @@ func _physics_process(_delta: float) -> void:
 
 
 
-# Man, I hate this.
+
+
+
+
+
+
+# Man, I hate this. Just let me scroll past the final line.
