@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://dl2g3ks3fn2fa"]
 
 [ext_resource type="Script" uid="uid://dunip1f0c6d0p" path="res://Player/PlayerCharacter.gd" id="1_k87gr"]
-[ext_resource type="Script" uid="uid://bj4limi67x1lj" path="res://Player/Ability_DiveDodgeroll.gd" id="2_1gtpu"]
+[ext_resource type="Script" uid="uid://bj4limi67x1lj" path="res://Character/Abilities/Ability_DiveDodgeroll.gd" id="2_1gtpu"]
 [ext_resource type="Script" uid="uid://bodf7ykpt3nvj" path="res://Character/HealthHandler.gd" id="2_jdwmw"]
 [ext_resource type="Script" uid="uid://cwnau2ggxef6s" path="res://Player/CameraController_ThirdPerson.gd" id="2_k87gr"]
-[ext_resource type="Script" uid="uid://b88d4812atpa2" path="res://Player/AbilityHandler.gd" id="2_pxyys"]
-[ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Player/Ability_Slash.gd" id="4_05ndu"]
+[ext_resource type="Script" uid="uid://b88d4812atpa2" path="res://Character/Abilities/AbilityHandler.gd" id="2_pxyys"]
+[ext_resource type="Script" uid="uid://n0npfcrtb22q" path="res://Player/PlayerInput.gd" id="3_gnsy3"]
+[ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="4_05ndu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxyys"]
 
@@ -288,15 +289,25 @@ camera = NodePath("Camera3DOverhead")
 anim_tree = NodePath("Visual/AnimationTree")
 metadata/_custom_type_script = "uid://dunip1f0c6d0p"
 
-[node name="AbilityHandler" type="Node3D" parent="." unique_id=386582163]
+[node name="HealthHandler" type="Node" parent="." unique_id=1691669062]
+script = ExtResource("2_jdwmw")
+destroy_on_death = false
+can_die = false
+metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
+
+[node name="PlayerInput" type="Node" parent="." unique_id=1576840498]
+script = ExtResource("3_gnsy3")
+metadata/_custom_type_script = "uid://n0npfcrtb22q"
+
+[node name="AbilityHandler" type="Node3D" parent="." unique_id=742486873]
 script = ExtResource("2_pxyys")
 metadata/_custom_type_script = "uid://b88d4812atpa2"
 
-[node name="Ability_DiveDodgeroll" type="Node3D" parent="AbilityHandler" unique_id=1707916186]
+[node name="Ability_DiveDodgeroll" type="Node3D" parent="AbilityHandler" unique_id=823519099]
 script = ExtResource("2_1gtpu")
 metadata/_custom_type_script = "uid://bj4limi67x1lj"
 
-[node name="Ability_Slash" type="Node3D" parent="AbilityHandler" unique_id=1576809895 node_paths=PackedStringArray("cam", "slash_hit_box")]
+[node name="Ability_Slash" type="Node3D" parent="AbilityHandler" unique_id=220516847 node_paths=PackedStringArray("cam", "slash_hit_box")]
 script = ExtResource("4_05ndu")
 cam = NodePath("../../Camera3DOverhead")
 slash_hit_box = NodePath("Slash_Hitbox")
@@ -308,11 +319,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3407669)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AbilityHandler/Ability_Slash/Slash_Hitbox" unique_id=1659595002]
 shape = SubResource("CapsuleShape3D_pxyys")
 
-[node name="HealthHandler" type="Node" parent="." unique_id=1691669062]
-script = ExtResource("2_jdwmw")
-destroy_on_death = false
-can_die = false
-metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1976717246]
+shape = SubResource("CapsuleShape3D_5cwa8")
 
 [node name="Camera3DOverhead" type="Camera3D" parent="." unique_id=1628899838 node_paths=PackedStringArray("CameraFocus")]
 physics_interpolation_mode = 2
@@ -326,9 +334,6 @@ Zoom = 10.0
 Angle_Pitch = 65.0
 Angle_Yaw = 45.0
 metadata/_custom_type_script = "uid://cwnau2ggxef6s"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1976717246]
-shape = SubResource("CapsuleShape3D_5cwa8")
 
 [node name="Visual" type="Node3D" parent="." unique_id=1942729588]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
