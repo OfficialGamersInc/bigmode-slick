@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dl2g3ks3fn2fa" path="res://Player/PlayerCharacter.tscn" id="1_lfyu1"]
 [ext_resource type="Script" uid="uid://dsi14qbgg3gds" path="res://Util/enable_debug.gd" id="1_p1h55"]
 [ext_resource type="PackedScene" uid="uid://cvj7r8j7t4hj7" path="res://Objects/Test/test_sword_swing.tscn" id="3_blf3q"]
+[ext_resource type="PackedScene" uid="uid://c8jr8j4m5d6yu" path="res://Objects/Test/test_slam.tscn" id="5_jtjbv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfyu1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -48,3 +49,9 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -16.
 
 [node name="TestSwordSwing4" parent="." unique_id=85872550 instance=ExtResource("3_blf3q")]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -18.398375, 0.49999905, -8.688917)
+
+[node name="Node3D" parent="." unique_id=1657492939 instance=ExtResource("5_jtjbv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.970558, 0, 6.3020105)
+
+[node name="Node3D2" parent="." unique_id=246989728 instance=ExtResource("5_jtjbv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.039722, 0, -14.513212)

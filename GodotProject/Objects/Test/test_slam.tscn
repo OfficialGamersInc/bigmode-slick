@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://c8jr8j4m5d6yu"]
+
+[ext_resource type="Script" uid="uid://ucioub12ym0q" path="res://Objects/Test/Hitbox.gd" id="1_v22dp"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jam1q"]
+height = 4.0
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhyy8"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.47843137)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qlhav"]
+material = SubResource("StandardMaterial3D_rhyy8")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6gm3"]
+transparency = 1
+albedo_color = Color(1, 0.77254903, 0, 0.16862746)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3c23h"]
+material = SubResource("StandardMaterial3D_y6gm3")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 1.0
+
+[sub_resource type="Animation" id="Animation_vg74w"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_34fqw"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 3, 0, 0, 0.5, 1, 0, 7, 0, 1, 1, -3, -5.9604577e-08, 0, 1.4666667, 1, 0, 7, 0, 2, 1, 3, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.26666668, 1, 0, 0, 0.38268343, 0.92387956, 1, 1, 0, 0, 1, -4.371139e-08, 1.7, 1, 0, 0, 0.38268343, 0.92387956, 2, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sg7jd"]
+_data = {
+&"RESET": SubResource("Animation_vg74w"),
+&"new_animation": SubResource("Animation_34fqw")
+}
+
+[node name="TestSlam" type="Node3D" unique_id=1657492939]
+script = ExtResource("1_v22dp")
+Knockback = 30.0
+metadata/_custom_type_script = "uid://ucioub12ym0q"
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=613475022]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=2050045480]
+shape = SubResource("CylinderShape3D_jam1q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hitbox/CollisionShape3D" unique_id=1982675909]
+mesh = SubResource("CylinderMesh_qlhav")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1121593331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = SubResource("CylinderMesh_3c23h")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1645744141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+mesh = SubResource("CylinderMesh_3c23h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1009303483]
+libraries/ = SubResource("AnimationLibrary_sg7jd")
+autoplay = &"new_animation"
+
+[connection signal="body_entered" from="Hitbox" to="." method="BodyEntered"]
