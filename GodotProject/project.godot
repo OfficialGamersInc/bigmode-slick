@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ScaledTime="*uid://b85gnp1l0mwk"
 DebugDraw="*uid://be464h78ob8ya"
+NodeLib="*uid://c4rroiexo2xxs"
 
 [editor_plugins]
 

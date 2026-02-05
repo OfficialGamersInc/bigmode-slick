@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cvj7r8j7t4hj7"]
 
 [ext_resource type="Script" uid="uid://ucioub12ym0q" path="res://Objects/Test/Hitbox.gd" id="1_jtqvr"]
+[ext_resource type="Script" uid="uid://dmc6hynkj2yxh" path="res://Objects/Test/stamina_refill.gd" id="2_djo1v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jbmuu"]
 size = Vector3(5, 1, 8)
@@ -12,6 +13,9 @@ albedo_color = Color(1, 0, 0, 0.47843137)
 [sub_resource type="BoxMesh" id="BoxMesh_djo1v"]
 material = SubResource("StandardMaterial3D_jtqvr")
 size = Vector3(2, 1, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r65eo"]
+size = Vector3(5, 4, 8)
 
 [sub_resource type="Animation" id="Animation_r65eo"]
 length = 0.001
@@ -64,6 +68,15 @@ shape = SubResource("BoxShape3D_jbmuu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D/CollisionShape3D" unique_id=1703722288]
 mesh = SubResource("BoxMesh_djo1v")
+
+[node name="StaminaRefill" type="Area3D" parent="AnimatableBody3D" unique_id=1278995072]
+transform = Transform3D(-0.7071072, 0, 0.7071072, 0, 1, 0, -0.7071072, 0, -0.7071072, 0, 4, 0)
+script = ExtResource("2_djo1v")
+metadata/_custom_type_script = "uid://dmc6hynkj2yxh"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="AnimatableBody3D/StaminaRefill" unique_id=1794150948]
+transform = Transform3D(-0.7071064, 0, -0.7071064, 0, 1, 0, 0.7071064, 0, -0.7071064, -2.8284256, 0, -2.8284256)
+shape = SubResource("BoxShape3D_r65eo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=482909804]
 libraries/ = SubResource("AnimationLibrary_r25ls")

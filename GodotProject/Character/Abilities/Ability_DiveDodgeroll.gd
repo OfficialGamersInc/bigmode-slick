@@ -53,8 +53,11 @@ func _physics_process(_delta: float) -> void:
 	if _current_state == ABILITY_STATE.READY:
 		if not Input.is_action_just_pressed("dive"): return
 		if char_control.is_on_floor():
+			if moveVect.length() < 0.1: return
+			if not ability_handler.try_use_stamina_move(): return
 			set_state(ABILITY_STATE.DODGEROLL)
 		else:
+			if not ability_handler.try_use_stamina_move(): return
 			char_control.velocity += -char_control.up_direction * dive_force
 			#_dodgeroll_direction = moveVect.normalized()
 			set_state(ABILITY_STATE.DIVE)

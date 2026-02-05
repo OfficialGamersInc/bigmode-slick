@@ -7,6 +7,7 @@ class_name AbilityHandler
 ## set to -1 to set to stamina_attack_max when the game starts.
 @export var stamina_attack_cur : float = -1
 @export var stamina_attack_max : int = 3
+## how much stamina_move_cur and stamina_attack_cur regen in units per second.
 @export var stamina_regen : float = 0.1
 
 var abilities : Array[Ability]
@@ -42,6 +43,18 @@ func try_use_stamina_attack() -> bool:
 	stamina_attack_cur -= 1
 	return true
 
+## If you don't want a consumable to get used if the player is already full on
+## stamina, check if this method returns false before destroying it.
+func try_give_stamina_move() -> bool:
+	if stamina_move_cur > stamina_move_max - 1: return false
+	stamina_move_cur += 1
+	return true
+	
+func try_give_stamina_attack() -> bool:
+	if stamina_attack_cur > stamina_attack_max - 1: return false
+	stamina_attack_cur += 1
+	return true
+
 func _ready() -> void:
 	if stamina_move_cur < 0: stamina_move_cur = stamina_move_max
 	if stamina_attack_cur < 0: stamina_attack_cur = stamina_attack_max
@@ -51,8 +64,13 @@ func _ready() -> void:
 	abilities.assign(find_children("*", "Ability", false, true))
 
 func _process(delta: float) -> void:
-	stamina_attack_cur += stamina_regen * delta
-	stamina_move_cur += stamina_regen * delta
+	if stamina_attack_cur < stamina_attack_max:
+		stamina_attack_cur += stamina_regen * delta
+	if stamina_move_cur < stamina_move_max:
+		stamina_move_cur += stamina_regen * delta
+
+
+
 
 
 

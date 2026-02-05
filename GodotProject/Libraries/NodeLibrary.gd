@@ -19,31 +19,37 @@ func GetIsScriptOfTypeRecursive(script : Script, classRef : Object):
 	else:
 		return false
 
-func CompareScriptClass(node : Node, classRef : Object) -> bool:
+func GetIsType(node : Node, classRef : Object) -> bool:
 	var nodeScript : Script = node.get_script()
 	return GetIsScriptOfTypeRecursive(nodeScript, classRef) #nodeScript == classRef
 
-func FindParentScriptOfClass(child : Node, classRef : Object) -> Node:
+func FindParentOfCustomClass(child : Node, classRef : Object) -> Node:
 	var parent = child.get_parent()
 	if (not parent): return null
-	#print(Stringify(parent), ", ", Stringify(classRef), ": ", CompareScriptClass(parent, classRef))
-	if (CompareScriptClass(parent, classRef)): return parent
-	return FindParentScriptOfClass(parent, classRef)
+	#print(Stringify(parent), ", ", Stringify(classRef), ": ", GetIsType(parent, classRef))
+	if (GetIsType(parent, classRef)): return parent
+	return FindParentOfCustomClass(parent, classRef)
 
-func FindChildScriptOfClass(
+func FindChildOfCustomClass(
 		parent : Node,
 		classRef : Object,
-		includeInternal : bool = false
-		#recursive : bool = false,
+		includeInternal : bool = false,
+		recursive : bool = false,
 	) -> Node:
 	
 	for child in parent.get_children(includeInternal):
-		if CompareScriptClass(child, classRef): return child
+		if GetIsType(child, classRef): return child
+	
+	if not recursive: return null
+	
+	for child in parent.get_children(includeInternal):
+		var found = FindChildOfCustomClass(child, classRef, includeInternal, recursive)
+		if found: return found
 	
 	return null
 
 ## WARNING! this only works with internal classes. Script classes don't work with
-## Godot's is_class for some god-forsaken reason. Use FindParentScriptOfClass instead.
+## Godot's is_class for some god-forsaken reason. Use FindParentOfCustomClass instead.
 func FindParentOfClass(node : Node, className : String) -> Node:
 	var parent = node.get_parent()
 	if not parent: return null
