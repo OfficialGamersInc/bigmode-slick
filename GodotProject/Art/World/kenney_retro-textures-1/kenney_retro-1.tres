@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bad88eyo7boil"]
+
+[ext_resource type="Texture2D" uid="uid://c0webn26658dx" path="res://Art/World/kenney_retro-textures-1/kenney_retro-1.png" id="1_wisa4"]
+
+[resource]
+albedo_texture = ExtResource("1_wisa4")
