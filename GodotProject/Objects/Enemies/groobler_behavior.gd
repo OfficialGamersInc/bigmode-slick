@@ -40,7 +40,7 @@ func _physics_process(delta):
 		return
 	
 	if debug_target != null :
-		look_vector = debug_target.global_position # I don't think look_vector is meant to be a position.
+		look_vector = debug_target.global_position - global_position
 	
 	# Do not query when the map has never synchronized and is empty.
 	if NavigationServer3D.map_get_iteration_id(navigation_agent.get_navigation_map()) == 0:

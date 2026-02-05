@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dl2g3ks3fn2fa" path="res://Player/PlayerCharacter.tscn" id="2_itwmt"]
 [ext_resource type="PackedScene" uid="uid://cvj7r8j7t4hj7" path="res://Objects/Test/test_sword_swing.tscn" id="3_40cp1"]
 [ext_resource type="PackedScene" uid="uid://dhw7opqdaglxr" path="res://Objects/Enemies/groobler.tscn" id="4_itwmt"]
-[ext_resource type="PackedScene" uid="uid://dhclhttpddr08" path="res://Objects/Enemies/Test Models/groobler animations.blend" id="6_yd1ix"]
 [ext_resource type="PackedScene" uid="uid://48c0sgbwsp1x" path="res://Objects/Enemies/swordhead.tscn" id="7_jvjnx"]
 [ext_resource type="PackedScene" uid="uid://ci5k23ru40qob" path="res://Objects/Enemies/hammerhead.tscn" id="8_7eb72"]
+[ext_resource type="PackedScene" uid="uid://yxgxoyo4bms0" path="res://Objects/Enemies/Test Models/groobler_animations.tscn" id="8_com22"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfyu1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -65,37 +65,41 @@ transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -18.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1845717, 0.9829922, 2.3273878)
 movement_speed = 8.0
 debug_target = NodePath("../CharacterController")
+autoRotationMode = 2
 
-[node name="Groobler2" parent="." unique_id=1332379271 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
+[node name="Groobler2" parent="." unique_id=1312735617 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31813, 0.98299193, 4.1875753)
 movement_speed = 8.0
 debug_target = NodePath("../CharacterController")
+autoRotationMode = 2
 
-[node name="Groobler3" parent="." unique_id=1558920682 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
+[node name="Groobler3" parent="." unique_id=905311353 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25426, 1.9659843, 2.4093668)
 movement_speed = 8.0
 debug_target = NodePath("../CharacterController")
+autoRotationMode = 2
 
-[node name="Groobler4" parent="." unique_id=770616411 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
+[node name="Groobler4" parent="." unique_id=552594360 node_paths=PackedStringArray("debug_target") instance=ExtResource("4_itwmt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3878183, 1.9659841, 4.269554)
 movement_speed = 8.0
 debug_target = NodePath("../CharacterController")
+autoRotationMode = 2
 
-[node name="groobler animations" parent="." unique_id=41197050 instance=ExtResource("6_yd1ix")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17002, 0.6819011, 1.5690198)
-
-[node name="Swordhead" parent="." unique_id=117564752 node_paths=PackedStringArray("debug_target") instance=ExtResource("7_jvjnx")]
+[node name="Swordhead" parent="." unique_id=1474105217 node_paths=PackedStringArray("debug_target") instance=ExtResource("7_jvjnx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.87743, 0.49999905, -13.362258)
 debug_target = NodePath("../CharacterController")
 
-[node name="Swordhead2" parent="." unique_id=833688727 node_paths=PackedStringArray("debug_target") instance=ExtResource("7_jvjnx")]
+[node name="Swordhead2" parent="." unique_id=1119389169 node_paths=PackedStringArray("debug_target") instance=ExtResource("7_jvjnx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.482327, 0.5000038, 4.7178726)
 debug_target = NodePath("../CharacterController")
 
-[node name="Hammerhead" parent="." unique_id=781854816 node_paths=PackedStringArray("debug_target") instance=ExtResource("8_7eb72")]
+[node name="Hammerhead" parent="." unique_id=384494081 node_paths=PackedStringArray("debug_target") instance=ExtResource("8_7eb72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, -14.5)
 debug_target = NodePath("../CharacterController")
 
-[node name="Hammerhead2" parent="." unique_id=1553955258 node_paths=PackedStringArray("debug_target") instance=ExtResource("8_7eb72")]
+[node name="Hammerhead2" parent="." unique_id=1570852442 node_paths=PackedStringArray("debug_target") instance=ExtResource("8_7eb72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.109192, 0, 20.544254)
 debug_target = NodePath("../CharacterController")
+
+[node name="groobler animations" parent="." unique_id=439306091 instance=ExtResource("8_com22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)

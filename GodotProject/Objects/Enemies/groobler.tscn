@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://mqqem2srvfc5" path="res://Objects/Enemies/groobler_behavior.gd" id="1_oq4j8"]
 [ext_resource type="Script" uid="uid://bodf7ykpt3nvj" path="res://Character/HealthHandler.gd" id="2_war3s"]
 [ext_resource type="Material" uid="uid://bgv8uao80nlst" path="res://Objects/Enemies/groobler_material.tres" id="3_63uqq"]
+[ext_resource type="PackedScene" uid="uid://yxgxoyo4bms0" path="res://Objects/Enemies/Test Models/groobler_animations.tscn" id="4_x8w8x"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ypjq3"]
 
@@ -24,6 +25,7 @@ metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
 shape = SubResource("SphereShape3D_ypjq3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1340701836]
+visible = false
 mesh = SubResource("SphereMesh_itwmt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1501729456]
@@ -33,3 +35,6 @@ mesh = SubResource("BoxMesh_oq4j8")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1325489360]
 radius = 3.0
 debug_enabled = true
+
+[node name="groobler animations" parent="." unique_id=1494412213 instance=ExtResource("4_x8w8x")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.5, 0)

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://yxgxoyo4bms0"]
+
+[ext_resource type="PackedScene" uid="uid://dhclhttpddr08" path="res://Objects/Enemies/Test Models/groobler animations.blend" id="1_7docd"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7docd"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y23wg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3fmer"]
+states/Run/node = SubResource("AnimationNodeAnimation_7docd")
+states/Run/position = Vector2(562.80005, 52.800003)
+states/Start/position = Vector2(300, 99.520004)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_y23wg")]
+
+[node name="groobler animations" unique_id=439306091 instance=ExtResource("1_7docd")]
+
+[node name="Skeleton3D" parent="metarig" parent_id_path=PackedInt32Array(168305400) index="0" unique_id=362546807]
+bones/0/position = Vector3(-1.028772e-14, 0.67557395, -0.40611276)
+bones/0/rotation = Quaternion(0.5249143, 5.073253e-07, 3.1287183e-07, 0.8511551)
+bones/1/rotation = Quaternion(0.9675172, 1.5068329e-07, 5.766812e-07, -0.25280544)
+bones/6/rotation = Quaternion(0.104954764, -1.1855002e-07, 6.255754e-08, 0.99447703)
+bones/7/rotation = Quaternion(0.116726555, 4.735852e-07, 1.1131967e-07, 0.9931641)
+bones/8/rotation = Quaternion(0.10163407, -4.7437706e-07, 9.692616e-08, 0.99482185)
+bones/9/rotation = Quaternion(0.098785594, 1.6591171e-12, 4.710419e-08, 0.9951088)
+bones/14/rotation = Quaternion(-0.038658347, 0.93531865, 0.32677275, -0.13001598)
+bones/22/rotation = Quaternion(0.27886277, 0.84352547, -0.040987786, -0.45718744)
+bones/23/rotation = Quaternion(0.5580663, 0.05408053, -0.08705499, 0.82344323)
+bones/24/rotation = Quaternion(0.61407024, 0.119823284, 0.064596206, 0.77742374)
+bones/25/rotation = Quaternion(-0.80523854, -0.04420506, 0.009435675, 0.59122556)
+bones/26/rotation = Quaternion(0.0035801283, 0.99988246, 0.006936908, 0.013201372)
+bones/28/rotation = Quaternion(0.9241897, -0.09363653, 0.041660026, 0.36792696)
+bones/29/rotation = Quaternion(0.15264936, -0.059875928, -0.06316166, 0.98444086)
+bones/30/rotation = Quaternion(-0.14038838, 0.039643712, -0.053128935, 0.9878749)
+bones/31/rotation = Quaternion(0.0125140045, 0.6269758, -0.77880824, 0.014231045)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=37793531]
+tree_root = SubResource("AnimationNodeStateMachine_3fmer")
+anim_player = NodePath("../AnimationPlayer")
