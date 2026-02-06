@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cx2eo1b8m321u"]
+
+[ext_resource type="Shader" uid="uid://b0x1wd5kucgh" path="res://Art/Shaders/film_grain.gdshader" id="1_3geb2"]
+
+[resource]
+shader = ExtResource("1_3geb2")
+shader_parameter/grain_intensity = 0.2000000095
+shader_parameter/min_lum = 0.0
+shader_parameter/max_lum = 0.450000021375
+shader_parameter/time_scale = 0.5

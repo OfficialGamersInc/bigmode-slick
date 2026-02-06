@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b88d4812atpa2" path="res://Character/Abilities/AbilityHandler.gd" id="2_pxyys"]
 [ext_resource type="Script" uid="uid://n0npfcrtb22q" path="res://Player/PlayerInput.gd" id="3_gnsy3"]
 [ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="4_05ndu"]
+[ext_resource type="Material" uid="uid://cx2eo1b8m321u" path="res://Art/Shaders/film_grain_mat.tres" id="8_nn7gb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxyys"]
 
@@ -357,5 +358,15 @@ parameters/conditions/Grounded = true
 parameters/GroundedMovement/WalkBlend/blend_amount = 0.0
 parameters/GroundedMovement/WalkSpeed/scale = 1.0
 parameters/GroundedMovement/_/scale = 2.0
+
+[node name="PP" type="CanvasLayer" parent="." unique_id=886742788]
+
+[node name="FilmGrain" type="Panel" parent="PP" unique_id=857549796]
+material = ExtResource("8_nn7gb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]

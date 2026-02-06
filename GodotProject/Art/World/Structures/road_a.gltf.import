@@ -38,6 +38,13 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
+"materials": {
+"texture_kenney_retro-1": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Art/World/kenney_retro-textures-1/kenney_retro-1.tres",
+"use_external/path": "uid://bad88eyo7boil"
+}
+},
 "nodes": {
 "PATH:road_a": {
 "generate/physics": true,
