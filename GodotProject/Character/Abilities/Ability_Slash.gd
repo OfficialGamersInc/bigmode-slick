@@ -26,15 +26,20 @@ var resetTimer : float = 0
 	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT :
 		#mouseWorldPos = get_mouse_world_pos()
 
-func _unhandled_input(_event) :
-	if not enabled: return
-	
-	if Input.is_action_just_pressed("attack") :
-		mouseWorldPos = get_mouse_world_pos()
-		mousePosSignal.emit(mouseWorldPos)
-		
-		try_attack()
-	
+#func _unhandled_input(_event) :
+	#if not enabled: return
+	#
+	#if Input.is_action_just_pressed("attack") :
+		#
+		#print("CLICK")
+		#mouseWorldPos = get_mouse_world_pos()
+		#mousePosSignal.emit(mouseWorldPos)
+		#
+		#try_attack()
+	#
+
+func _ready() -> void:
+	ability_handler.attack_requested.connect(try_attack)
 
 
 func _process(delta: float) -> void:
@@ -79,7 +84,11 @@ func get_mouse_world_pos() -> Vector3 :
 
 func try_attack() :
 	if canAttack:
+		if not ability_handler.try_use_stamina_attack() :
+			return
+		
 		canAttack = false
+		
 		checkHit()
 		slash_effects()
 
