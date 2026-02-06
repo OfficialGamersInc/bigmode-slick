@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cepse2e65t5fv"]
+
+[ext_resource type="Script" uid="uid://dsi14qbgg3gds" path="res://Libraries/Util/enable_debug.gd" id="1_b8jbq"]
+[ext_resource type="Material" uid="uid://dwdc2phdcg8l7" path="res://addons/kenney_prototype-textures/PNG/blocking_shader.tres" id="2_ocjk7"]
+[ext_resource type="PackedScene" uid="uid://dl2g3ks3fn2fa" path="res://Player/PlayerCharacter.tscn" id="3_ebbgq"]
+[ext_resource type="PackedScene" uid="uid://bp8fgitlj21ja" path="res://UI/stamina_ui.tscn" id="4_oipjv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfyu1"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_enmvo"]
+sky_material = SubResource("ProceduralSkyMaterial_lfyu1")
+
+[sub_resource type="Environment" id="Environment_blf3q"]
+background_mode = 2
+sky = SubResource("Sky_enmvo")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D" unique_id=2129391494]
+script = ExtResource("1_b8jbq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1629591452]
+environment = SubResource("Environment_blf3q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1165398884]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=19559664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("2_ocjk7")
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="CharacterController" parent="." unique_id=844904675 instance=ExtResource("3_ebbgq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="StaminaUI" parent="." unique_id=1220137349 instance=ExtResource("4_oipjv")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 0.0
+grow_vertical = 0

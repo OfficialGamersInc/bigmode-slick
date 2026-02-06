@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://bp8fgitlj21ja"]
+
+[ext_resource type="Script" uid="uid://cq8nw0hbp1pii" path="res://UI/player_UI.gd" id="1_fifpo"]
+
+[node name="StaminaUI" type="Control" unique_id=1220137349]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 36.0
+offset_top = 516.0
+offset_right = 76.0
+offset_bottom = 556.0
+script = ExtResource("1_fifpo")
+
+[node name="AttackGroup" type="Control" parent="." unique_id=1814530325]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AttackStamLabel" type="Label" parent="AttackGroup" unique_id=740392323]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 23.0
+text = "Attack Stamina: 0"
+
+[node name="A-charge - 1" type="ColorRect" parent="AttackGroup" unique_id=490220068]
+layout_mode = 0
+offset_left = 147.0
+offset_right = 167.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="A - charge -2" type="ColorRect" parent="AttackGroup" unique_id=694702475]
+layout_mode = 0
+offset_left = 183.0
+offset_right = 203.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="A - charge - 3" type="ColorRect" parent="AttackGroup" unique_id=1587964103]
+layout_mode = 0
+offset_left = 219.0
+offset_right = 239.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="MovementGroup" type="Control" parent="." unique_id=595389790]
+anchors_preset = 0
+offset_top = 23.0
+offset_right = 40.0
+offset_bottom = 63.0
+
+[node name="MoveStamLabel" type="Label" parent="MovementGroup" unique_id=1681116942]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 169.0
+offset_bottom = 63.0
+text = "Movement Stamina: 0"
+
+[node name="M - charge - 1" type="ColorRect" parent="MovementGroup" unique_id=1638805723]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 40.0
+offset_right = 199.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
+
+[node name="M - charge - 2" type="ColorRect" parent="MovementGroup" unique_id=451635991]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 40.0
+offset_right = 235.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
+
+[node name="M -charge - 3" type="ColorRect" parent="MovementGroup" unique_id=811014003]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 40.0
+offset_right = 271.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
