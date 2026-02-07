@@ -77,12 +77,13 @@ shader_parameter/wave_height = 0.999999977648
 shader_parameter/tide_frequency = 1.0
 shader_parameter/tide_height = 0.6999999843536
 shader_parameter/alpha = 0.5
+shader_parameter/up_direction_world = Vector3(0, 1, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_p1vlp"]
 material = SubResource("ShaderMaterial_uhm2t")
-size = Vector2(16, 16)
-subdivide_width = 16
-subdivide_depth = 16
+size = Vector2(128, 128)
+subdivide_width = 128
+subdivide_depth = 128
 
 [node name="Node3D" type="Node3D" unique_id=1217763799]
 script = ExtResource("1_tbept")
@@ -186,5 +187,5 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.5
 transform = Transform3D(0.85983443, 0, -0.51057297, 0, 1, 0, 0.51057297, 0, 0.85983443, 1.6402519, 0.49999976, 1.8733201)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="map" unique_id=609272164]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, -0.43825746, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.438, 0)
 mesh = SubResource("PlaneMesh_p1vlp")

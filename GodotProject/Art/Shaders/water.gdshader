@@ -11,12 +11,15 @@ uniform float wave_height : hint_range(0.0, 1.0, 0.01) = 1;
 uniform float tide_frequency : hint_range(0.0, 10.0, 0.01) = 1;
 uniform float tide_height : hint_range(0.0, 1.0, 0.01) = 0.5;
 uniform float alpha : hint_range(0.0, 1.0, 0.01) = 0.5;
+uniform vec3 up_direction_world = vec3(0,1,0);
 
 varying vec3 frag_obj_pos;
 
 void vertex(){
 	frag_obj_pos = VERTEX;
 	vec2 sample_uv = frag_obj_pos.xz * wave_noise_scale;
+	vec3 up_dir_world_norm = normalize(up_direction_world);
+	vec3 up_dir = (vec4(up_dir_world_norm,1) * MODEL_MATRIX).xyz;
 	
 	float height = texture(wave_noise_texture, sample_uv + TIME * wave_speed).r;
 	
@@ -25,7 +28,7 @@ void vertex(){
 		//(sample_uv.y + TIME * wave_frequency_y)
 	//),0);
 	float wave = height * wave_height + sin(TIME * tide_frequency) * tide_height * 0.5;
-	VERTEX += vec3(sin(height * wave_height),wave,cos(height * wave_height));
+	VERTEX += vec3(sin(height * wave_height),0,cos(height * wave_height)) + up_dir * wave;
 }
 
 void fragment(){

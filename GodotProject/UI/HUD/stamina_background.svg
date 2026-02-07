@@ -27,8 +27,8 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
      inkscape:zoom="0.70710678"
-     inkscape:cx="550.12907"
-     inkscape:cy="253.85133"
+     inkscape:cx="459.61941"
+     inkscape:cy="306.17723"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
@@ -71,6 +71,49 @@
   </sodipodi:namedview>
   <defs
      id="defs1">
+    <inkscape:path-effect
+       effect="tiling"
+       id="path-effect70"
+       is_visible="true"
+       lpeversion="1"
+       unit="px"
+       seed="1;1"
+       lpesatellites=""
+       num_rows="3"
+       num_cols="1"
+       gapx="0"
+       gapy="0"
+       offset="0"
+       offset_type="false"
+       scale="0"
+       rotate="0"
+       mirrorrowsx="false"
+       mirrorrowsy="false"
+       mirrorcolsx="false"
+       mirrorcolsy="false"
+       mirrortrans="false"
+       shrink_interp="false"
+       split_items="false"
+       link_styles="false"
+       interpolate_scalex="false"
+       interpolate_scaley="true"
+       interpolate_rotatex="false"
+       interpolate_rotatey="true"
+       random_scale="false"
+       random_rotate="false"
+       random_gap_y="false"
+       random_gap_x="false"
+       transformorigin="translate(-2,-24)" />
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect69"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect69"
+       invert="false"
+       hide_mask="false"
+       background="true"
+       background_color="#ffffffff" />
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
@@ -223,6 +266,53 @@
          in2="SourceGraphic"
          id="feComposite58" />
     </filter>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect69">
+      <path
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:15;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+         d="M 108.5,355.5 66,456 l 21.5,8.5 39.5,-106 22.5,10.5 -41,108.5 19,5.5 41.5,-105"
+         id="path69"
+         inkscape:label="Cutout" />
+    </mask>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter90"
+       x="-0.38522434"
+       y="-0.43589889"
+       width="1.7727766"
+       height="1.8780374">
+      <feFlood
+         result="flood"
+         in="SourceGraphic"
+         flood-opacity="0.913725"
+         flood-color="rgb(34,34,34)"
+         id="feFlood89" />
+      <feGaussianBlur
+         result="blur"
+         in="SourceGraphic"
+         stdDeviation="17.629179"
+         id="feGaussianBlur89" />
+      <feOffset
+         result="offset"
+         in="blur"
+         dx="0.000000"
+         dy="0.000000"
+         id="feOffset89" />
+      <feComposite
+         result="comp1"
+         operator="out"
+         in="flood"
+         in2="offset"
+         id="feComposite89" />
+      <feComposite
+         result="comp2"
+         operator="atop"
+         in="comp1"
+         in2="SourceGraphic"
+         id="feComposite90" />
+    </filter>
   </defs>
   <g
      inkscape:label="Layer 1"
@@ -247,5 +337,9 @@
        d="M 883.17637,19.091883 997.72762,65.760934 1023.8906,487.01063 822.36519,424.26406 Z"
        id="path11"
        sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#484848;fill-opacity:1;stroke:#404040;stroke-width:15;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill;filter:url(#filter90)"
+       d="M 54.447222,56.568543 165.46299,77.074639 190.21173,175.36248 76.367532,147.78532 Z"
+       id="path73" />
   </g>
 </svg>
