@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://dethgpdfykudy"]
+
+[ext_resource type="Shader" uid="uid://cn3qo2c7mqo2f" path="res://Art/Shaders/slash_material.tres" id="1_wim1t"]
+[ext_resource type="Texture2D" uid="uid://dlq6nkb8qrdjo" path="res://Art/Models/EffectMesh/TexturesForSlash/Gradient01.png" id="2_lpmgc"]
+[ext_resource type="ArrayMesh" uid="uid://duu15fo4ao7ul" path="res://Art/Models/EffectMesh/slashEffectMesh.obj" id="3_5bwve"]
+[ext_resource type="Script" uid="uid://bhfk45ikfn58i" path="res://Art/Effects/slash_behavior.gd" id="4_go1nf"]
+[ext_resource type="Shader" uid="uid://cvgwo40ndt1sq" path="res://Art/Effects/slash_trail_VFX.tres" id="4_u8cxf"]
+[ext_resource type="Texture2D" uid="uid://cetano216kocm" path="res://Art/Models/EffectMesh/TexturesForSlash/Noise01.png" id="5_go1nf"]
+[ext_resource type="ArrayMesh" uid="uid://dbkyg38qsj6in" path="res://Art/Models/EffectMesh/slashEffectMesh1.obj" id="6_c6aaa"]
+[ext_resource type="Texture2D" uid="uid://bulk4xk0lhji1" path="res://Art/Models/EffectMesh/TexturesForSlash/Flare01.PNG" id="7_jitfl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jckr7"]
+render_priority = 0
+shader = ExtResource("1_wim1t")
+shader_parameter/Texture = ExtResource("2_lpmgc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u8cxf"]
+gravity = Vector3(0, 0, 0)
+color = Color(1.601913, 1.3323243, 1.247526, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksth4"]
+render_priority = 0
+shader = ExtResource("4_u8cxf")
+shader_parameter/TextureTiling = Vector2(1, 1)
+shader_parameter/TextureSpeed = Vector2(0, -3)
+shader_parameter/MainTexture = ExtResource("5_go1nf")
+shader_parameter/GradientTexture = ExtResource("2_lpmgc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0pg5c"]
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+color = Color(1.1966707, 0.96797675, 0.8532488, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fqoc"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("7_jitfl")
+
+[sub_resource type="Gradient" id="Gradient_1g14a"]
+offsets = PackedFloat32Array(0.01633987, 0.5261438)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kg8vm"]
+gradient = SubResource("Gradient_1g14a")
+
+[sub_resource type="Curve" id="Curve_7ikvj"]
+_data = [Vector2(0, 1), 0.0, -0.018913886, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_eu1jl"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2i76c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_h0y82"]
+curve_x = SubResource("Curve_7ikvj")
+curve_y = SubResource("Curve_eu1jl")
+curve_z = SubResource("Curve_2i76c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e3vbb"]
+particle_flag_align_y = true
+emission_shape = 3
+emission_box_extents = Vector3(1.5, 0.2, 1)
+direction = Vector3(0, 0, -1)
+spread = 30.0
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_curve = SubResource("CurveXYZTexture_h0y82")
+color = Color(1.7842782, 1.2449555, 1.0498252, 1)
+color_ramp = SubResource("GradientTexture1D_kg8vm")
+
+[sub_resource type="QuadMesh" id="QuadMesh_uvq7m"]
+
+[node name="SlashMesh" type="GPUParticles3D" unique_id=1277328631 node_paths=PackedStringArray("timer")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, -1.25)
+material_override = SubResource("ShaderMaterial_jckr7")
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_u8cxf")
+draw_pass_1 = ExtResource("3_5bwve")
+script = ExtResource("4_go1nf")
+timer = NodePath("Timer")
+
+[node name="SlashTrail" type="GPUParticles3D" parent="." unique_id=473599154]
+sorting_offset = -2.0
+material_override = SubResource("ShaderMaterial_ksth4")
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_0pg5c")
+draw_pass_1 = ExtResource("6_c6aaa")
+
+[node name="SlashTrail2" type="GPUParticles3D" parent="." unique_id=1823024170]
+sorting_offset = -2.0
+material_override = SubResource("ShaderMaterial_ksth4")
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_0pg5c")
+draw_pass_1 = ExtResource("6_c6aaa")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=991724612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.66759175)
+material_override = SubResource("StandardMaterial3D_4fqoc")
+emitting = false
+amount = 25
+lifetime = 0.25
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_e3vbb")
+draw_pass_1 = SubResource("QuadMesh_uvq7m")
+
+[node name="Timer" type="Timer" parent="." unique_id=48478075]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
