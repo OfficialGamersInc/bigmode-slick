@@ -9,6 +9,13 @@
 [ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="4_05ndu"]
 [ext_resource type="Material" uid="uid://cx2eo1b8m321u" path="res://Art/Shaders/film_grain_mat.tres" id="8_nn7gb"]
 [ext_resource type="PackedScene" uid="uid://b5jkvjlnigbkh" path="res://UI/player_ui.tscn" id="9_6f781"]
+[ext_resource type="Texture2D" uid="uid://otxunksev03c" path="res://UI/HUD/stamina_bar_icon_background.png" id="10_3tt8b"]
+[ext_resource type="Script" uid="uid://gpt43iqvuyvc" path="res://UI/player_UI.gd" id="10_gjyvj"]
+[ext_resource type="Shader" uid="uid://71dktl3vipck" path="res://UI/HUD/ui_flipbook.gdshader" id="10_x7hbx"]
+[ext_resource type="Texture2D" uid="uid://cgx2ceevxsbft" path="res://UI/HUD/stamina_background.png" id="11_8llf3"]
+[ext_resource type="Texture2D" uid="uid://btvqxy6trve2" path="res://Art/Sprites/boot.png" id="11_gjyvj"]
+[ext_resource type="Texture2D" uid="uid://b8u473vnyajit" path="res://UI/HUD/stamina_bar.png" id="12_8llf3"]
+[ext_resource type="Texture2D" uid="uid://c156q3xe2lary" path="res://Art/Sprites/sword.png" id="15_grsr8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxyys"]
 
@@ -270,6 +277,12 @@ states/land/position = Vector2(428, 174)
 transitions = ["RESET", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_827r0"), "dodgeroll", "dodgeroll_recover", SubResource("AnimationNodeStateMachineTransition_mv8iy"), "dodgeroll", "jump", SubResource("AnimationNodeStateMachineTransition_grsr8"), "dodgeroll_recover", "jump", SubResource("AnimationNodeStateMachineTransition_0ykgn"), "Start", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_3tt8b"), "GroundedMovement", "jump", SubResource("AnimationNodeStateMachineTransition_gjyvj"), "dodgeroll_recover", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_8v6cl"), "jump", "RESET", SubResource("AnimationNodeStateMachineTransition_jdwmw"), "jump", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_05ndu"), "RESET", "land", SubResource("AnimationNodeStateMachineTransition_3ypln"), "land", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_x7hbx"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_8llf3"), "GroundedMovement", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_gnsy3")]
 graph_offset = Vector2(-31, -95)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_827r0"]
+shader = ExtResource("10_x7hbx")
+shader_parameter/Texture = ExtResource("11_8llf3")
+shader_parameter/Tiles = Vector2i(4, 1)
+shader_parameter/FPS = 2.0
+
 [node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("model", "camera", "anim_tree") groups=["Player"]]
 script = ExtResource("1_k87gr")
 _control_enabled = true
@@ -372,12 +385,190 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UI" parent="." unique_id=387339461 instance=ExtResource("9_6f781")]
+visible = false
 
 [node name="AttackCooldown" parent="UI" index="0" unique_id=1866947207 node_paths=PackedStringArray("player")]
 player = NodePath("../..")
 
-[node name="StaminaUI" parent="UI" index="1" unique_id=302004289 node_paths=PackedStringArray("player")]
-player = NodePath("../..")
+[node name="UI2" type="CanvasLayer" parent="." unique_id=2033163491]
+
+[node name="UILogic" type="Node" parent="UI2" unique_id=1198643467 node_paths=PackedStringArray("stamina_bars_move", "stamina_bars_attack")]
+script = ExtResource("10_gjyvj")
+stamina_bars_move = [NodePath("../StaminaMove/BoxContainer/elem1"), NodePath("../StaminaMove/BoxContainer/elem2"), NodePath("../StaminaMove/BoxContainer/elem3")]
+stamina_bars_attack = [NodePath("../StaminaAttack/BoxContainer/elem1"), NodePath("../StaminaAttack/BoxContainer/elem2"), NodePath("../StaminaAttack/BoxContainer/elem3")]
+
+[node name="StaminaMove" type="Control" parent="UI2" unique_id=2115397687]
+layout_mode = 3
+anchor_left = 0.2
+anchor_top = 0.75
+anchor_right = 0.2
+anchor_bottom = 0.75
+offset_left = -64.0
+offset_top = -256.0
+offset_right = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.1308997
+pivot_offset_ratio = Vector2(0.5, 1)
+
+[node name="IconBackground" type="TextureRect" parent="UI2/StaminaMove" unique_id=425053680]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_bottom = 0.25
+offset_left = -96.0
+offset_top = -64.0
+offset_right = 32.0
+offset_bottom = 64.0
+grow_vertical = 2
+texture = ExtResource("10_3tt8b")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI2/StaminaMove/IconBackground" unique_id=463747397]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_gjyvj")
+expand_mode = 1
+
+[node name="Background" type="Panel" parent="UI2/StaminaMove" unique_id=1695273559]
+material = SubResource("ShaderMaterial_827r0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 1)
+
+[node name="BoxContainer" type="BoxContainer" parent="UI2/StaminaMove" unique_id=1574016316]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+vertical = true
+
+[node name="elem1" type="TextureRect" parent="UI2/StaminaMove/BoxContainer" unique_id=293828510]
+self_modulate = Color(2.3102762e-06, 0.6945397, 0.44764495, 1)
+custom_minimum_size = Vector2(0, 72.495)
+layout_mode = 2
+texture = ExtResource("12_8llf3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="elem2" type="TextureRect" parent="UI2/StaminaMove/BoxContainer" unique_id=6512545]
+self_modulate = Color(2.3102762e-06, 0.6945397, 0.44764495, 1)
+custom_minimum_size = Vector2(0, 72.495)
+layout_mode = 2
+texture = ExtResource("12_8llf3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="elem3" type="TextureRect" parent="UI2/StaminaMove/BoxContainer" unique_id=131308090]
+self_modulate = Color(2.3102762e-06, 0.6945397, 0.44764495, 1)
+custom_minimum_size = Vector2(0, 72.495)
+layout_mode = 2
+texture = ExtResource("12_8llf3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StaminaAttack" type="Control" parent="UI2" unique_id=547200266]
+layout_mode = 3
+anchor_left = 0.8
+anchor_top = 0.75
+anchor_right = 0.8
+anchor_bottom = 0.75
+offset_left = -64.0
+offset_top = -256.0
+offset_right = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.1308997
+pivot_offset_ratio = Vector2(0.5, 1)
+
+[node name="IconBackground" type="TextureRect" parent="UI2/StaminaAttack" unique_id=421181797]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.25
+offset_left = -32.0
+offset_top = -64.0
+offset_right = 96.0
+offset_bottom = 64.0
+grow_vertical = 2
+texture = ExtResource("10_3tt8b")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI2/StaminaAttack/IconBackground" unique_id=1321072945]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.20071286
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("15_grsr8")
+expand_mode = 1
+
+[node name="Background" type="Panel" parent="UI2/StaminaAttack" unique_id=1763135939]
+material = SubResource("ShaderMaterial_827r0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 1)
+
+[node name="BoxContainer" type="BoxContainer" parent="UI2/StaminaAttack" unique_id=387288709]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+vertical = true
+
+[node name="elem1" type="TextureRect" parent="UI2/StaminaAttack/BoxContainer" unique_id=262330263]
+self_modulate = Color(0.5921569, 0.48235294, 1, 1)
+custom_minimum_size = Vector2(0, 72.495)
+layout_mode = 2
+texture = ExtResource("12_8llf3")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="elem2" type="TextureRect" parent="UI2/StaminaAttack/BoxContainer" unique_id=411773239]
+self_modulate = Color(0.5921569, 0.48235294, 1, 1)
+custom_minimum_size = Vector2(0, 72.495)
+layout_mode = 2
+texture = ExtResource("12_8llf3")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="elem3" type="TextureRect" parent="UI2/StaminaAttack/BoxContainer" unique_id=1612151388]
+self_modulate = Color(0.5921569, 0.48235294, 1, 1)
+custom_minimum_size = Vector2(0, 72.495)
+layout_mode = 2
+texture = ExtResource("12_8llf3")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]
 

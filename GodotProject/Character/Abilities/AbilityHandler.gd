@@ -11,6 +11,8 @@ class_name AbilityHandler
 @export var stamina_regen : float = 0.1
 
 var abilities : Array[Ability]
+signal stamina_updated_move
+signal stamina_updated_attack
 
 # input
 var look_dir : Vector3
@@ -36,11 +38,13 @@ func request_attack():
 func try_use_stamina_move() -> bool:
 	if stamina_move_cur < 1: return false
 	stamina_move_cur -= 1
+	stamina_updated_move.emit()
 	return true
 
 func try_use_stamina_attack() -> bool:
 	if stamina_attack_cur < 1: return false
 	stamina_attack_cur -= 1
+	stamina_updated_attack.emit()
 	return true
 
 ## If you don't want a consumable to get used if the player is already full on
@@ -48,11 +52,13 @@ func try_use_stamina_attack() -> bool:
 func try_give_stamina_move() -> bool:
 	if stamina_move_cur > stamina_move_max - 1: return false
 	stamina_move_cur += 1
+	stamina_updated_move.emit()
 	return true
 	
 func try_give_stamina_attack() -> bool:
 	if stamina_attack_cur > stamina_attack_max - 1: return false
 	stamina_attack_cur += 1
+	stamina_updated_attack.emit()
 	return true
 
 func _ready() -> void:
@@ -64,10 +70,17 @@ func _ready() -> void:
 	abilities.assign(find_children("*", "Ability", false, true))
 
 func _process(delta: float) -> void:
+	var last_stamina_attack = stamina_attack_cur
 	if stamina_attack_cur < stamina_attack_max:
 		stamina_attack_cur += stamina_regen * delta
+		if floor(stamina_attack_cur) != floor(last_stamina_attack):
+			stamina_updated_attack.emit()
+	
+	var last_stamina_move = stamina_move_cur
 	if stamina_move_cur < stamina_move_max:
 		stamina_move_cur += stamina_regen * delta
+		if floor(stamina_move_cur) != floor(last_stamina_move):
+			stamina_updated_move.emit()
 
 
 
