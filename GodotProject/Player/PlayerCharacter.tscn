@@ -387,7 +387,12 @@ mesh = SubResource("BoxMesh_jdwmw")
 [node name="hoodguy" parent="Visual/Pill" unique_id=297930610 instance=ExtResource("8_3ypln")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
 
+<<<<<<< Updated upstream
 [node name="hoodguy_final" parent="Visual/Pill/hoodguy" index="0" unique_id=1334410832]
+=======
+[node name="hoodguy_final" parent="Visual/Pill/hoodguy" index="0" unique_id=723796246]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 0.9990104, -0.044478185, 0, 0.044478185, 0.9990104, 0, -1.4734727, -0.24209222)
+>>>>>>> Stashed changes
 material_override = ExtResource("9_ix2we")
 
 [node name="sorsha sword" parent="Visual/Pill/hoodguy/hoodguy_final" index="0" unique_id=1364233249 instance=ExtResource("22_in3ap")]
