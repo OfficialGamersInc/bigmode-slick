@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://x40eqxuw763m"]
+
+[ext_resource type="Shader" uid="uid://csl6mmdnidv26" path="res://Art/Models/Guy/hoodguy_shader.tres" id="1_cg7gq"]
+[ext_resource type="Texture2D" uid="uid://bv5ixokn2wxm8" path="res://Art/Models/Guy/hoodguy_bake_Recolor.png" id="2_cg7gq"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_cg7gq")
+shader_parameter/albedo = ExtResource("2_cg7gq")

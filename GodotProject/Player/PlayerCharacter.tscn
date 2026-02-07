@@ -7,21 +7,20 @@
 [ext_resource type="Script" uid="uid://b88d4812atpa2" path="res://Character/Abilities/AbilityHandler.gd" id="2_pxyys"]
 [ext_resource type="Script" uid="uid://n0npfcrtb22q" path="res://Player/PlayerInput.gd" id="3_gnsy3"]
 [ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="4_05ndu"]
-[ext_resource type="PackedScene" uid="uid://bwfs0wxb0xv08" path="res://Art/Models/Guy/hoodguy.glb" id="8_3ypln"]
+[ext_resource type="PackedScene" uid="uid://c6i8efdjgfyg2" path="res://Art/Models/Guy/hoodguy - animations.blend" id="8_ix2we"]
 [ext_resource type="Material" uid="uid://cx2eo1b8m321u" path="res://Art/Shaders/film_grain_mat.tres" id="8_nn7gb"]
 [ext_resource type="PackedScene" uid="uid://b5jkvjlnigbkh" path="res://UI/player_ui.tscn" id="9_6f781"]
-[ext_resource type="Material" uid="uid://se65ftxsawdy" path="res://Art/Models/Guy/hoodguy_mat.tres" id="9_ix2we"]
 [ext_resource type="Texture2D" uid="uid://otxunksev03c" path="res://UI/HUD/stamina_bar_icon_background.png" id="10_3tt8b"]
 [ext_resource type="Script" uid="uid://gpt43iqvuyvc" path="res://UI/player_UI.gd" id="10_gjyvj"]
 [ext_resource type="Shader" uid="uid://71dktl3vipck" path="res://UI/HUD/ui_flipbook.gdshader" id="10_x7hbx"]
 [ext_resource type="Texture2D" uid="uid://cgx2ceevxsbft" path="res://UI/HUD/stamina_background.png" id="11_8llf3"]
+[ext_resource type="Material" uid="uid://x40eqxuw763m" path="res://Art/Models/Guy/RECOLOR - hoodguy_mat.tres" id="11_bipy8"]
 [ext_resource type="Texture2D" uid="uid://btvqxy6trve2" path="res://Art/Sprites/boot.png" id="11_gjyvj"]
 [ext_resource type="Texture2D" uid="uid://b8u473vnyajit" path="res://UI/HUD/stamina_bar.png" id="12_8llf3"]
 [ext_resource type="Texture2D" uid="uid://c156q3xe2lary" path="res://Art/Sprites/sword.png" id="15_grsr8"]
 [ext_resource type="Shader" uid="uid://fhkklqam3ard" path="res://UI/HUD/ui_progress_linear.gdshader" id="17_0ykgn"]
 [ext_resource type="Texture2D" uid="uid://xno8nsn3k81b" path="res://UI/HUD/attack_cooldown.png" id="18_8v6cl"]
 [ext_resource type="Script" uid="uid://dqtuua2dud3id" path="res://UI/HUD/ui_attack_cooldown.gd" id="19_8v6cl"]
-[ext_resource type="PackedScene" uid="uid://doyg8ilq6hia7" path="res://Art/Models/Weapons/sorsha sword.blend" id="22_in3ap"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxyys"]
 
@@ -42,6 +41,25 @@ height = 1.8
 
 [sub_resource type="BoxMesh" id="BoxMesh_jdwmw"]
 size = Vector3(0.8, 0.25, 0.5)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_in3ap"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bipy8"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7n8pw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gepu4"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xw56l"]
+states/Idle/node = SubResource("AnimationNodeAnimation_in3ap")
+states/Idle/position = Vector2(408.4, 61.59999)
+states/Run/node = SubResource("AnimationNodeAnimation_bipy8")
+states/Run/position = Vector2(522.80005, 138.4)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7n8pw"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_gepu4")]
 
 [sub_resource type="Animation" id="Animation_05ndu"]
 length = 0.001
@@ -192,7 +210,7 @@ animation = &"idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jdwmw"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8llf3"]
-graph_offset = Vector2(-588.8407, 73.17273)
+graph_offset = Vector2(-374.09973, 56.58789)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_6f781")
 nodes/Animation/position = Vector2(-60, 160)
 nodes/WalkBlend/node = SubResource("AnimationNodeBlend2_ik8g8")
@@ -288,7 +306,7 @@ states/jump/position = Vector2(608, 40)
 states/land/node = SubResource("AnimationNodeAnimation_ik8g8")
 states/land/position = Vector2(428, 174)
 transitions = ["RESET", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_827r0"), "dodgeroll", "dodgeroll_recover", SubResource("AnimationNodeStateMachineTransition_mv8iy"), "dodgeroll", "jump", SubResource("AnimationNodeStateMachineTransition_grsr8"), "dodgeroll_recover", "jump", SubResource("AnimationNodeStateMachineTransition_0ykgn"), "Start", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_3tt8b"), "GroundedMovement", "jump", SubResource("AnimationNodeStateMachineTransition_gjyvj"), "dodgeroll_recover", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_8v6cl"), "jump", "RESET", SubResource("AnimationNodeStateMachineTransition_jdwmw"), "jump", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_05ndu"), "RESET", "land", SubResource("AnimationNodeStateMachineTransition_3ypln"), "land", "GroundedMovement", SubResource("AnimationNodeStateMachineTransition_x7hbx"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_8llf3"), "GroundedMovement", "dodgeroll", SubResource("AnimationNodeStateMachineTransition_gnsy3")]
-graph_offset = Vector2(-31, -95)
+graph_offset = Vector2(-40, -45)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_827r0"]
 shader = ExtResource("10_x7hbx")
@@ -384,14 +402,60 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442267, 0.14918077)
 visible = false
 mesh = SubResource("BoxMesh_jdwmw")
 
-[node name="hoodguy" parent="Visual/Pill" unique_id=297930610 instance=ExtResource("8_3ypln")]
-transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
+[node name="hoodguy - animations" parent="Visual/Pill" unique_id=1856789715 instance=ExtResource("8_ix2we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
 
-[node name="hoodguy_final" parent="Visual/Pill/hoodguy" index="0" unique_id=1334410832]
-material_override = ExtResource("9_ix2we")
+[node name="Skeleton3D" parent="Visual/Pill/hoodguy - animations/metarig" parent_id_path=PackedInt32Array(1856789715, 1544457254) index="0" unique_id=1731768894]
+bones/0/position = Vector3(-4.107697e-17, 0.85059506, 0.027791698)
+bones/1/rotation = Quaternion(-0.034907177, 1.1915294e-07, -3.9698214e-09, 0.99939066)
+bones/2/rotation = Quaternion(0.015035534, -8.656826e-12, 3.782739e-09, 0.99988705)
+bones/3/rotation = Quaternion(-0.0061759152, 2.2103217e-11, -1.237018e-09, 0.999981)
+bones/4/rotation = Quaternion(0.0966087, -7.9744024e-11, 2.3490255e-08, 0.9953225)
+bones/5/rotation = Quaternion(0.088616595, -1.1874029e-07, 1.0563926e-08, 0.99606586)
+bones/6/position = Vector3(0.03217963, 0.14363259, 0.058278643)
+bones/6/rotation = Quaternion(-0.55235034, -0.35398546, -0.33680826, 0.675399)
+bones/7/position = Vector3(0.009466916, 0.18765141, -0.0073535605)
+bones/7/rotation = Quaternion(-0.42827377, 0.77491635, -0.254769, 0.38881776)
+bones/8/rotation = Quaternion(0.2843454, 0.116333, -0.056610733, 0.9499525)
+bones/9/rotation = Quaternion(0.20707414, 0.060397282, -0.04186667, 0.97556126)
+bones/10/position = Vector3(-0.03217968, 0.14341496, 0.073987074)
+bones/10/rotation = Quaternion(-0.5315445, 0.46044734, 0.34411135, 0.6221222)
+bones/11/position = Vector3(-0.0026120748, 0.19109833, -0.031555258)
+bones/11/rotation = Quaternion(-0.1683453, -0.4279666, 0.6816667, 0.5690651)
+bones/12/rotation = Quaternion(0.2377334, -0.003884826, 0.08224661, 0.9678344)
+bones/13/rotation = Quaternion(0.052329406, 0.02179798, 0.04635435, 0.99731535)
+bones/16/position = Vector3(0.031032152, -0.063053474, 0.0486308)
+bones/16/rotation = Quaternion(0.11428372, 0.8297355, 0.2783111, -0.4701291)
+bones/17/position = Vector3(-0.030818278, -0.05097357, -0.019158188)
+bones/17/rotation = Quaternion(-0.04926454, 0.78620285, 0.38456392, 0.4812161)
+bones/18/position = Vector3(0.109356046, 0.0019867045, 0.02234021)
+bones/18/rotation = Quaternion(0.9012643, 0.07975849, -0.039986864, 0.4239838)
+bones/19/rotation = Quaternion(0.21729064, 0.04275176, 0.03435872, 0.9745648)
+bones/20/rotation = Quaternion(-0.54920405, -0.015490364, 0.026026733, 0.8351393)
+bones/21/rotation = Quaternion(0.045026585, 0.99857336, -0.028466316, 0.003695557)
+bones/22/position = Vector3(-0.10935605, 0.0032357455, 0.020020774)
+bones/22/rotation = Quaternion(0.97339576, -0.07607066, 0.010088952, -0.2158985)
+bones/23/rotation = Quaternion(0.3892546, -0.04890221, -0.042272817, 0.91885936)
+bones/24/rotation = Quaternion(-0.5754993, 0.021502387, -0.022265708, 0.8172163)
+bones/25/rotation = Quaternion(-0.048726574, 0.9908965, 0.1254908, 0.0013611212)
+bones/26/position = Vector3(0.09264982, -0.023433201, -0.032894794)
+bones/26/rotation = Quaternion(0.75279695, 0.42124122, -0.24928507, -0.44012448)
+bones/27/position = Vector3(-0.09264756, -0.038474806, -0.071413696)
+bones/27/rotation = Quaternion(0.5191908, -0.4863971, 0.0660106, -0.6996438)
+bones/28/position = Vector3(0.09658757, 0.00024003349, 0.143813)
+bones/28/rotation = Quaternion(0.58116007, 0.48332742, 0.11477111, 0.6445736)
+bones/29/position = Vector3(-0.09921206, -0.035520226, 0.040598758)
+bones/29/rotation = Quaternion(0.7463241, -0.42604864, -0.24953121, 0.44633725)
 
-[node name="sorsha sword" parent="Visual/Pill/hoodguy/hoodguy_final" index="0" unique_id=1364233249 instance=ExtResource("22_in3ap")]
-transform = Transform3D(0.10598385, 4.1095762e-09, 0.16960962, 0.16960962, -7.4138717e-09, -0.10598385, 4.1095762e-09, 0.2, -7.4138717e-09, -0.83, 1.401, -0.068)
+[node name="hand_R" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="0" unique_id=495241394]
+transform = Transform3D(-0.94622093, 0.0363574, 0.32147047, 0.2747925, -0.43411207, 0.85792494, 0.17074645, 0.9001246, 0.40077558, -0.37547526, 1.0325663, 0.5252751)
+
+[node name="hoodguy-rigged" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="1" unique_id=1164118795]
+material_override = ExtResource("11_bipy8")
+
+[node name="AnimationTree" type="AnimationTree" parent="Visual/Pill/hoodguy - animations" unique_id=1474174721]
+tree_root = SubResource("AnimationNodeStateMachine_xw56l")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationTree" type="AnimationTree" parent="Visual" unique_id=1041739086]
 libraries/ = SubResource("AnimationLibrary_x7hbx")
@@ -617,5 +681,5 @@ script = ExtResource("19_8v6cl")
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]
 
-[editable path="Visual/Pill/hoodguy"]
+[editable path="Visual/Pill/hoodguy - animations"]
 [editable path="UI"]
