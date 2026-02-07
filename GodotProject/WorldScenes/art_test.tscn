@@ -55,15 +55,15 @@ albedo_texture = ExtResource("5_c2jff")
 uv1_triplanar = true
 texture_filter = 2
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_cuk56"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_plpou"]
 noise_type = 2
 fractal_octaves = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gycd5"]
-noise = SubResource("FastNoiseLite_cuk56")
+noise = SubResource("FastNoiseLite_plpou")
 seamless = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhm2t"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuk56"]
 render_priority = 0
 shader = ExtResource("16_plpou")
 shader_parameter/surface_texture = ExtResource("16_gycd5")
@@ -80,7 +80,7 @@ shader_parameter/alpha = 0.5
 shader_parameter/up_direction_world = Vector3(0, 1, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_p1vlp"]
-material = SubResource("ShaderMaterial_uhm2t")
+material = SubResource("ShaderMaterial_cuk56")
 size = Vector2(128, 128)
 subdivide_width = 128
 subdivide_depth = 128
