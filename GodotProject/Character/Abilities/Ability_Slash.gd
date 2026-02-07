@@ -6,6 +6,8 @@ class_name Ability_Slash
 @export var cam: Camera3D
 
 @export var slash_hit_box: Area3D
+var slash_effect := preload("res://Art/Effects/slash_VFX.tscn")
+var slash_effect_instance : GPUParticles3D
 
 @export var attackCooldown : float = 0.5
 var attackTimer : float = 0
@@ -95,8 +97,9 @@ func try_attack() :
 
 
 func slash_effects() :
-	pass
-	# Slash particle effects
+	slash_effect_instance = slash_effect.instantiate()
+	add_child(slash_effect_instance)
+	slash_effect_instance.emitting = true
 
 func impact_effects() :
 	pass
