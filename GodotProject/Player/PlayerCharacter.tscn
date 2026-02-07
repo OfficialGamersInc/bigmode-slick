@@ -16,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://btvqxy6trve2" path="res://Art/Sprites/boot.png" id="11_gjyvj"]
 [ext_resource type="Texture2D" uid="uid://b8u473vnyajit" path="res://UI/HUD/stamina_bar.png" id="12_8llf3"]
 [ext_resource type="Texture2D" uid="uid://c156q3xe2lary" path="res://Art/Sprites/sword.png" id="15_grsr8"]
+[ext_resource type="Shader" uid="uid://fhkklqam3ard" path="res://UI/HUD/ui_progress_linear.gdshader" id="17_0ykgn"]
+[ext_resource type="Texture2D" uid="uid://xno8nsn3k81b" path="res://UI/HUD/attack_cooldown.png" id="18_8v6cl"]
+[ext_resource type="Script" uid="uid://dqtuua2dud3id" path="res://UI/HUD/ui_attack_cooldown.gd" id="19_8v6cl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxyys"]
 
@@ -282,6 +285,11 @@ shader = ExtResource("10_x7hbx")
 shader_parameter/Texture = ExtResource("11_8llf3")
 shader_parameter/Tiles = Vector2i(4, 1)
 shader_parameter/FPS = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ypln"]
+shader = ExtResource("17_0ykgn")
+shader_parameter/fill_alpha = 0.6170000293075
+shader_parameter/grayed_multiplier = 0.125
 
 [node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("model", "camera", "anim_tree") groups=["Player"]]
 script = ExtResource("1_k87gr")
@@ -569,6 +577,23 @@ texture = ExtResource("12_8llf3")
 expand_mode = 1
 stretch_mode = 5
 flip_h = true
+
+[node name="AttackCooldown" type="TextureRect" parent="UI2" unique_id=140004377]
+material = SubResource("ShaderMaterial_3ypln")
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 0.7
+offset_left = -128.0
+offset_top = -32.0
+offset_right = 128.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_8v6cl")
+expand_mode = 1
+script = ExtResource("19_8v6cl")
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]
 

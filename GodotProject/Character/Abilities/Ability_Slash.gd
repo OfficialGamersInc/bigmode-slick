@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 	
 	
 	if canAttack == false and attackTimer > attackCooldown :
-		attackTimer = 0
+		attackTimer = 1
 		canAttack = true
 	elif canAttack == false :
 		attackTimer += delta
@@ -87,6 +87,7 @@ func try_attack() :
 		if not ability_handler.try_use_stamina_attack() :
 			return
 		
+		attackTimer = 0
 		canAttack = false
 		
 		checkHit()
