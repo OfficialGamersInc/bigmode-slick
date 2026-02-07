@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c3dubc7koxedx" path="res://Art/World/Structures/ExportedModels/dock.gltf" id="14_plpou"]
 [ext_resource type="PackedScene" uid="uid://cxw8tmt1k282e" path="res://Art/World/Structures/ExportedModels/crate.gltf" id="15_cuk56"]
 [ext_resource type="Texture2D" uid="uid://bnwtw0gsx4nvg" path="res://Art/World/kenney_retro-textures-1/PNG/floor_ground_water.png" id="16_gycd5"]
+[ext_resource type="Shader" uid="uid://bacw15brq6jqr" path="res://Art/Shaders/water.gdshader" id="16_plpou"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_72ur0"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -54,15 +55,34 @@ albedo_texture = ExtResource("5_c2jff")
 uv1_triplanar = true
 texture_filter = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knd72"]
-albedo_texture = ExtResource("16_gycd5")
-uv1_scale = Vector3(0.5, 0.5, 0.5)
-uv1_triplanar = true
-texture_filter = 2
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cuk56"]
+noise_type = 2
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gycd5"]
+noise = SubResource("FastNoiseLite_cuk56")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhm2t"]
+render_priority = 0
+shader = ExtResource("16_plpou")
+shader_parameter/surface_texture = ExtResource("16_gycd5")
+shader_parameter/surface_texture_scale = 0.499999988824
+shader_parameter/wave_noise_texture = SubResource("NoiseTexture2D_gycd5")
+shader_parameter/wave_noise_scale = 0.0499999988824
+shader_parameter/wave_frequency_x = 0.90000001341108
+shader_parameter/wave_frequency_y = 0.5000000074506
+shader_parameter/wave_speed = 0.10000000149012
+shader_parameter/wave_height = 0.999999977648
+shader_parameter/tide_frequency = 1.0
+shader_parameter/tide_height = 0.6999999843536
+shader_parameter/alpha = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_p1vlp"]
-material = SubResource("StandardMaterial3D_knd72")
+material = SubResource("ShaderMaterial_uhm2t")
 size = Vector2(16, 16)
+subdivide_width = 16
+subdivide_depth = 16
 
 [node name="Node3D" type="Node3D" unique_id=1217763799]
 script = ExtResource("1_tbept")
@@ -97,15 +117,16 @@ use_collision = true
 size = Vector3(256, 1, 256)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="map" unique_id=2104643919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_uhm2t")
 use_collision = true
-size = Vector3(32, 1, 2)
+size = Vector3(32, 2, 2)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="map" unique_id=352297933]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.25, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.25, -0.5, 6)
 material_override = SubResource("StandardMaterial3D_uhm2t")
 use_collision = true
-size = Vector3(15.5, 1, 10)
+size = Vector3(15.5, 2, 10)
 
 [node name="road_a" parent="map" unique_id=424425989 instance=ExtResource("2_72ur0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5, 0)
@@ -165,5 +186,5 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.5
 transform = Transform3D(0.85983443, 0, -0.51057297, 0, 1, 0, 0.51057297, 0, 0.85983443, 1.6402519, 0.49999976, 1.8733201)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="map" unique_id=609272164]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, -0.43825746, 9)
 mesh = SubResource("PlaneMesh_p1vlp")
