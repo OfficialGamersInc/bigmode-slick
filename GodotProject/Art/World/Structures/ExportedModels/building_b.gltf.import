@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cjaftsnm8qp75"
-path="res://.godot/imported/road_a.gltf-c59575fe476efef9707436fcdf0c9b7f.scn"
+uid="uid://dmhlcl2ok0hm4"
+path="res://.godot/imported/building_b.gltf-e72a2937f9c3a0e75b17f51c9bc026a7.scn"
 
 [deps]
 
-source_file="res://Art/World/Structures/road_a.gltf"
-dest_files=["res://.godot/imported/road_a.gltf-c59575fe476efef9707436fcdf0c9b7f.scn"]
+source_file="res://Art/World/Structures/ExportedModels/building_b.gltf"
+dest_files=["res://.godot/imported/building_b.gltf-e72a2937f9c3a0e75b17f51c9bc026a7.scn"]
 
 [params]
 
 nodes/root_type=""
-nodes/root_name="road_a"
+nodes/root_name="building_b"
 nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -46,7 +46,7 @@ _subresources={
 }
 },
 "nodes": {
-"PATH:road_a": {
+"PATH:building_b": {
 "generate/physics": true,
 "physics/shape_type": 1
 }
