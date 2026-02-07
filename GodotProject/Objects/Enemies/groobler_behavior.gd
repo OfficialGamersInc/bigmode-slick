@@ -8,7 +8,7 @@ extends CharacterBody3D
 var _refresh_timer : float = 0
 
 var look_vector : Vector3 = Vector3.FORWARD
-@export var debug_target : CharacterController
+@export var target : CharacterController
 
 @export_category("Visual Rotation")
 enum AutoRotationType {NONE, MOVEMENT, LOOK}
@@ -16,7 +16,9 @@ enum AutoRotationType {NONE, MOVEMENT, LOOK}
 @export var visualRotationLerpSpeed : float = 16
 
 func _ready() -> void:
-	set_movement_target(debug_target.global_position) # TEMP get better reference to player
+	target = get_tree().get_nodes_in_group("Player")[0]
+	
+	print(target)
 	
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
@@ -27,20 +29,20 @@ func project_on_plane(point : Vector3, plane : Vector3):
 	return point - point.project(plane)
 
 func _process(delta: float) -> void:
-	if _refresh_timer < refresh_cooldown :
+	if target != null and _refresh_timer < refresh_cooldown :
 		_refresh_timer += delta
 	else :
 		_refresh_timer = 0
-		set_movement_target(debug_target.global_position) # TEMP get better reference to player
+		set_movement_target(target.global_position)
 
 func _physics_process(delta):
-	if debug_target.global_position.distance_to(global_position) <= target_spacing:
+	if target.global_position.distance_to(global_position) <= target_spacing:
 		_on_velocity_computed(Vector3.ZERO)
 		navigation_agent.set_velocity(Vector3.ZERO)
 		return
 	
-	if debug_target != null :
-		look_vector = debug_target.global_position - global_position
+	if target != null :
+		look_vector = target.global_position - global_position
 	
 	# Do not query when the map has never synchronized and is empty.
 	if NavigationServer3D.map_get_iteration_id(navigation_agent.get_navigation_map()) == 0:

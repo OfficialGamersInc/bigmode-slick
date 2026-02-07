@@ -3,7 +3,13 @@
 [ext_resource type="Script" uid="uid://mqqem2srvfc5" path="res://Objects/Enemies/groobler_behavior.gd" id="1_oq4j8"]
 [ext_resource type="Script" uid="uid://bodf7ykpt3nvj" path="res://Character/HealthHandler.gd" id="2_war3s"]
 [ext_resource type="Material" uid="uid://bgv8uao80nlst" path="res://Objects/Enemies/groobler_material.tres" id="3_63uqq"]
+[ext_resource type="Script" uid="uid://b88d4812atpa2" path="res://Character/Abilities/AbilityHandler.gd" id="3_n6g06"]
+[ext_resource type="Script" uid="uid://bj4limi67x1lj" path="res://Character/Abilities/Ability_DiveDodgeroll.gd" id="4_4x52u"]
 [ext_resource type="PackedScene" uid="uid://yxgxoyo4bms0" path="res://Objects/Enemies/Test Models/groobler_animations.tscn" id="4_x8w8x"]
+[ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="5_ivhvr"]
+[ext_resource type="PackedScene" uid="uid://dethgpdfykudy" path="res://Art/Effects/slash_VFX.tscn" id="8_4x52u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_intm1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ypjq3"]
 
@@ -20,6 +26,28 @@ script = ExtResource("1_oq4j8")
 script = ExtResource("2_war3s")
 health_max = 5.0
 metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
+
+[node name="AbilityHandler" type="Node3D" parent="." unique_id=1872612911]
+script = ExtResource("3_n6g06")
+stamina_regen = 0.5
+metadata/_custom_type_script = "uid://b88d4812atpa2"
+
+[node name="Ability_DiveDodgeroll" type="Node3D" parent="AbilityHandler" unique_id=772817119]
+script = ExtResource("4_4x52u")
+enabled = false
+metadata/_custom_type_script = "uid://bj4limi67x1lj"
+
+[node name="Ability_Slash" type="Node3D" parent="AbilityHandler" unique_id=2067279555 node_paths=PackedStringArray("cam", "slash_hit_box")]
+script = ExtResource("5_ivhvr")
+cam = NodePath("")
+slash_hit_box = NodePath("Slash_Hitbox")
+metadata/_custom_type_script = "uid://hmip4a5fhm63"
+
+[node name="Slash_Hitbox" type="Area3D" parent="AbilityHandler/Ability_Slash" unique_id=657120991]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3407669)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AbilityHandler/Ability_Slash/Slash_Hitbox" unique_id=1631335580]
+shape = SubResource("CapsuleShape3D_intm1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1847239138]
 shape = SubResource("SphereShape3D_ypjq3")
@@ -38,3 +66,7 @@ debug_enabled = true
 
 [node name="groobler animations" parent="." unique_id=1494412213 instance=ExtResource("4_x8w8x")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.5, 0)
+
+[node name="SlashMesh" parent="." unique_id=1277328631 instance=ExtResource("8_4x52u")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.9570744)
+visible = false
