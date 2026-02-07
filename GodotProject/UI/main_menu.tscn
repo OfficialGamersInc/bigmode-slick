@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://bxfjtumgk0jt0"]
+
+[ext_resource type="FontFile" uid="uid://bj2n8w6x4ht4l" path="res://Art/Font/Bellefair-Regular.ttf" id="1_p8ccj"]
+[ext_resource type="Script" uid="uid://bacrnn80hppy5" path="res://UI/main_menu.gd" id="1_tk8dj"]
+[ext_resource type="PackedScene" uid="uid://dexsefc0en2oa" path="res://WorldScenes/art_test.tscn" id="2_d8nwk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tk8dj"]
+font = ExtResource("1_p8ccj")
+font_size = 100
+font_color = Color(0.6444061, 0.42523676, 0, 1)
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 28
+shadow_color = Color(0, 0, 0, 0.55700004)
+
+[node name="MainMenu" type="CanvasLayer" unique_id=370728388]
+script = ExtResource("1_tk8dj")
+main_level_to_load = ExtResource("2_d8nwk")
+
+[node name="Control" type="Control" parent="." unique_id=942337477]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Control" unique_id=814298015]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 100.0
+offset_right = 300.0
+offset_bottom = 280.0
+grow_horizontal = 2
+text = "Hooded Guy..."
+label_settings = SubResource("LabelSettings_tk8dj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/Title" unique_id=63215171]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -412.5
+offset_top = 40.0
+offset_right = 416.5
+offset_bottom = 117.32016
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Control" unique_id=919110826]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -60.0
+offset_right = 150.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
