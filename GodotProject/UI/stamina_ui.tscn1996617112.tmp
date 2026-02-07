@@ -1,23 +1,15 @@
 [gd_scene format=3 uid="uid://bp8fgitlj21ja"]
 
-[ext_resource type="Script" uid="uid://cq8nw0hbp1pii" path="res://UI/stamina_charges_indicator.gd" id="1_fifpo"]
+[ext_resource type="Script" uid="uid://cq8nw0hbp1pii" path="res://UI/player_UI.gd" id="1_fifpo"]
 
 [node name="StaminaUI" type="Control" unique_id=1220137349]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 21.0
-offset_top = 747.0
-offset_right = 61.0
-offset_bottom = 787.0
+offset_left = 36.0
+offset_top = 516.0
+offset_right = 76.0
+offset_bottom = 556.0
 script = ExtResource("1_fifpo")
-
-[node name="Button" type="Button" parent="." unique_id=1534343104]
-layout_mode = 0
-offset_left = 423.0
-offset_top = 63.0
-offset_right = 594.0
-offset_bottom = 105.0
-text = "The button of testing"
 
 [node name="AttackGroup" type="Control" parent="." unique_id=1814530325]
 anchors_preset = 0
@@ -87,5 +79,13 @@ offset_top = 40.0
 offset_right = 271.0
 offset_bottom = 85.0
 color = Color(0.5411584, 0.782892, 0.5507824, 1)
+
+[node name="Button" type="Button" parent="." unique_id=1534343104]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 63.0
+offset_right = 594.0
+offset_bottom = 105.0
+text = "The button of testing"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

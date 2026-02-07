@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://n0npfcrtb22q" path="res://Player/PlayerInput.gd" id="3_gnsy3"]
 [ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="4_05ndu"]
 [ext_resource type="Material" uid="uid://cx2eo1b8m321u" path="res://Art/Shaders/film_grain_mat.tres" id="8_nn7gb"]
+[ext_resource type="Script" uid="uid://cq8nw0hbp1pii" path="res://UI/stamina_charges_indicator.gd" id="9_6f781"]
+[ext_resource type="Script" uid="uid://bjn6tdirhfee7" path="res://UI/attack_cooldown_indicator.gd" id="9_ik8g8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pxyys"]
 
@@ -306,6 +308,7 @@ metadata/_custom_type_script = "uid://n0npfcrtb22q"
 
 [node name="AbilityHandler" type="Node3D" parent="." unique_id=742486873]
 script = ExtResource("2_pxyys")
+stamina_regen = 0.5
 metadata/_custom_type_script = "uid://b88d4812atpa2"
 
 [node name="Ability_DiveDodgeroll" type="Node3D" parent="AbilityHandler" unique_id=823519099]
@@ -368,5 +371,118 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2074176202]
+
+[node name="AttackCooldown" type="Control" parent="UI" unique_id=364820496 node_paths=PackedStringArray("player", "attack_cooldown_bar")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 661.0
+offset_right = 61.0
+offset_bottom = 701.0
+script = ExtResource("9_ik8g8")
+player = NodePath("../..")
+attack_cooldown_bar = NodePath("AttackCooldownBar")
+
+[node name="AttackCooldownBar" type="ProgressBar" parent="UI/AttackCooldown" unique_id=396657192]
+layout_mode = 0
+offset_left = 147.0
+offset_top = -114.0
+offset_right = 187.0
+offset_bottom = 66.0
+max_value = 1.0
+value = 1.0
+fill_mode = 3
+
+[node name="AttackCooldownLabel" type="Label" parent="UI/AttackCooldown" unique_id=1173108399]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 136.0
+offset_bottom = 63.0
+text = "Attack Cooldown:"
+
+[node name="StaminaUI" type="Control" parent="UI" unique_id=1220137349 node_paths=PackedStringArray("player", "attack_stam_charges", "move_stam_charges", "attack_label", "move_label")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 747.0
+offset_right = 61.0
+offset_bottom = 787.0
+script = ExtResource("9_6f781")
+player = NodePath("../..")
+attack_stam_charges = [NodePath("AttackGroup/A - charge - 1"), NodePath("AttackGroup/A - charge -2"), NodePath("AttackGroup/A - charge - 3")]
+move_stam_charges = [NodePath("MovementGroup/M - charge - 1"), NodePath("MovementGroup/M - charge - 2"), NodePath("MovementGroup/M - charge - 3")]
+attack_label = NodePath("AttackGroup/AttackStamLabel")
+move_label = NodePath("MovementGroup/MoveStamLabel")
+
+[node name="AttackGroup" type="Control" parent="UI/StaminaUI" unique_id=1814530325]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AttackStamLabel" type="Label" parent="UI/StaminaUI/AttackGroup" unique_id=740392323]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 23.0
+text = "Attack Stamina: 0"
+
+[node name="A - charge - 1" type="ColorRect" parent="UI/StaminaUI/AttackGroup" unique_id=490220068]
+layout_mode = 0
+offset_left = 147.0
+offset_right = 167.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="A - charge -2" type="ColorRect" parent="UI/StaminaUI/AttackGroup" unique_id=694702475]
+layout_mode = 0
+offset_left = 183.0
+offset_right = 203.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="A - charge - 3" type="ColorRect" parent="UI/StaminaUI/AttackGroup" unique_id=1587964103]
+layout_mode = 0
+offset_left = 219.0
+offset_right = 239.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="MovementGroup" type="Control" parent="UI/StaminaUI" unique_id=595389790]
+anchors_preset = 0
+offset_top = 23.0
+offset_right = 40.0
+offset_bottom = 63.0
+
+[node name="MoveStamLabel" type="Label" parent="UI/StaminaUI/MovementGroup" unique_id=1681116942]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 169.0
+offset_bottom = 63.0
+text = "Movement Stamina: 0"
+
+[node name="M - charge - 1" type="ColorRect" parent="UI/StaminaUI/MovementGroup" unique_id=1638805723]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 40.0
+offset_right = 199.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
+
+[node name="M - charge - 2" type="ColorRect" parent="UI/StaminaUI/MovementGroup" unique_id=451635991]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 40.0
+offset_right = 235.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
+
+[node name="M - charge - 3" type="ColorRect" parent="UI/StaminaUI/MovementGroup" unique_id=811014003]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 40.0
+offset_right = 271.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]

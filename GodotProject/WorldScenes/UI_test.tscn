@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dsi14qbgg3gds" path="res://Libraries/Util/enable_debug.gd" id="1_b8jbq"]
 [ext_resource type="Material" uid="uid://dwdc2phdcg8l7" path="res://addons/kenney_prototype-textures/PNG/blocking_shader.tres" id="2_ocjk7"]
 [ext_resource type="PackedScene" uid="uid://dl2g3ks3fn2fa" path="res://Player/PlayerCharacter.tscn" id="3_ebbgq"]
-[ext_resource type="PackedScene" uid="uid://bp8fgitlj21ja" path="res://UI/stamina_ui.tscn" id="4_oipjv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfyu1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -36,13 +35,3 @@ size = Vector3(100, 1, 100)
 
 [node name="CharacterController" parent="." unique_id=844904675 instance=ExtResource("3_ebbgq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="StaminaUI" parent="." unique_id=1220137349 instance=ExtResource("4_oipjv")]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 0.0
-grow_vertical = 0
