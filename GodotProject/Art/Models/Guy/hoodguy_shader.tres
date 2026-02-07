@@ -1,0 +1,20 @@
+[gd_resource type="VisualShader" format=3 uid="uid://csl6mmdnidv26"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_qk5nb"]
+parameter_name = "albedo"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_5dylj"]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_qk5nb"]
+input_name = "uv"
+
+[resource]
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_qk5nb")
+nodes/fragment/2/position = Vector2(-280, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_5dylj")
+nodes/fragment/3/position = Vector2(80, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_qk5nb")
+nodes/fragment/4/position = Vector2(-260, 60)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 3, 0, 3, 0, 0, 0)

@@ -7,8 +7,10 @@
 [ext_resource type="Script" uid="uid://b88d4812atpa2" path="res://Character/Abilities/AbilityHandler.gd" id="2_pxyys"]
 [ext_resource type="Script" uid="uid://n0npfcrtb22q" path="res://Player/PlayerInput.gd" id="3_gnsy3"]
 [ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="4_05ndu"]
+[ext_resource type="PackedScene" uid="uid://bwfs0wxb0xv08" path="res://Art/Models/Guy/hoodguy.glb" id="8_3ypln"]
 [ext_resource type="Material" uid="uid://cx2eo1b8m321u" path="res://Art/Shaders/film_grain_mat.tres" id="8_nn7gb"]
 [ext_resource type="PackedScene" uid="uid://b5jkvjlnigbkh" path="res://UI/player_ui.tscn" id="9_6f781"]
+[ext_resource type="Material" uid="uid://se65ftxsawdy" path="res://Art/Models/Guy/hoodguy_mat.tres" id="9_ix2we"]
 [ext_resource type="Texture2D" uid="uid://otxunksev03c" path="res://UI/HUD/stamina_bar_icon_background.png" id="10_3tt8b"]
 [ext_resource type="Script" uid="uid://gpt43iqvuyvc" path="res://UI/player_UI.gd" id="10_gjyvj"]
 [ext_resource type="Shader" uid="uid://71dktl3vipck" path="res://UI/HUD/ui_flipbook.gdshader" id="10_x7hbx"]
@@ -26,7 +28,14 @@
 radius = 0.4
 height = 1.8
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ix2we"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a5bt4"]
+material = SubResource("StandardMaterial3D_ix2we")
 radius = 0.4
 height = 1.8
 
@@ -371,7 +380,14 @@ mesh = SubResource("CapsuleMesh_a5bt4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visual/Pill" unique_id=180806981]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442267, 0.14918077)
+visible = false
 mesh = SubResource("BoxMesh_jdwmw")
+
+[node name="hoodguy" parent="Visual/Pill" unique_id=297930610 instance=ExtResource("8_3ypln")]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
+
+[node name="hoodguy_final" parent="Visual/Pill/hoodguy" index="0" unique_id=723796246]
+material_override = ExtResource("9_ix2we")
 
 [node name="AnimationTree" type="AnimationTree" parent="Visual" unique_id=1041739086]
 libraries/ = SubResource("AnimationLibrary_x7hbx")
@@ -597,4 +613,5 @@ script = ExtResource("19_8v6cl")
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]
 
+[editable path="Visual/Pill/hoodguy"]
 [editable path="UI"]
