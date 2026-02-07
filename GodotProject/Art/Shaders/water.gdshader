@@ -45,7 +45,7 @@ void fragment(){
 	//ALBEDO = vec3(0,height * wave_height + sin(TIME * tide_frequency) * tide_height * 0.5,0).rgb;
 	//ALBEDO = vec3(height);
 	
-	ALBEDO = texture(surface_texture, sample_uv).rgb + foam * foam_strength + foam_alt;
+	ALBEDO = texture(surface_texture, sample_uv).rgb + foam * foam_strength + foam_alt * 0.5;
 	ALPHA = mix(ALBEDO.r, 1, alpha);
 }
 
