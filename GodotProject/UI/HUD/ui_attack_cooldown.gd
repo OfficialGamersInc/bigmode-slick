@@ -14,6 +14,6 @@ func _ready() -> void:
 	slash_ability = NodeLib.FindChildOfCustomClass(player, Ability_Slash, true, true)
 
 func _process(_delta: float) -> void:
-	print(slash_ability.attackTimer / slash_ability.attackCooldown)
+	
 	material.set("shader_parameter/fill_alpha", slash_ability.attackTimer / slash_ability.attackCooldown)
 	#set_instance_shader_parameter("shader_parameter/fill_alpha", slash_ability.attackTimer / slash_ability.attackCooldown)

@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bj4limi67x1lj" path="res://Character/Abilities/Ability_DiveDodgeroll.gd" id="4_4x52u"]
 [ext_resource type="PackedScene" uid="uid://yxgxoyo4bms0" path="res://Objects/Enemies/Test Models/groobler_animations.tscn" id="4_x8w8x"]
 [ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="5_ivhvr"]
-[ext_resource type="PackedScene" uid="uid://dethgpdfykudy" path="res://Art/Effects/slash_VFX.tscn" id="8_4x52u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_intm1"]
 
@@ -21,6 +20,8 @@ size = Vector3(0.6, 0.3, 0.5)
 
 [node name="Groobler" type="CharacterBody3D" unique_id=1413011739]
 script = ExtResource("1_oq4j8")
+attack_cooldown = 2.0
+attack_range = 5.0
 
 [node name="HealthHandler" type="Node" parent="." unique_id=675727381]
 script = ExtResource("2_war3s")
@@ -37,9 +38,8 @@ script = ExtResource("4_4x52u")
 enabled = false
 metadata/_custom_type_script = "uid://bj4limi67x1lj"
 
-[node name="Ability_Slash" type="Node3D" parent="AbilityHandler" unique_id=2067279555 node_paths=PackedStringArray("cam", "slash_hit_box")]
+[node name="Ability_Slash" type="Node3D" parent="AbilityHandler" unique_id=2067279555 node_paths=PackedStringArray("slash_hit_box")]
 script = ExtResource("5_ivhvr")
-cam = NodePath("")
 slash_hit_box = NodePath("Slash_Hitbox")
 metadata/_custom_type_script = "uid://hmip4a5fhm63"
 
@@ -66,7 +66,3 @@ debug_enabled = true
 
 [node name="groobler animations" parent="." unique_id=1494412213 instance=ExtResource("4_x8w8x")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.5, 0)
-
-[node name="SlashMesh" parent="." unique_id=1277328631 instance=ExtResource("8_4x52u")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.9570744)
-visible = false

@@ -8,7 +8,19 @@ extends CharacterBody3D
 var _refresh_timer : float = 0
 
 var look_vector : Vector3 = Vector3.FORWARD
-@export var target : CharacterController
+var target : CharacterController
+
+@export var attack_cooldown : float
+@export var _attack_timer : float
+@export var can_attack : bool
+
+@export var attack_range : float
+var distance_to_target : float
+
+var ability_handler : AbilityHandler
+var ability_slash : Ability_Slash
+
+enum BehaviorState {Idle, Aggro, Attacking}
 
 @export_category("Visual Rotation")
 enum AutoRotationType {NONE, MOVEMENT, LOOK}
@@ -18,9 +30,10 @@ enum AutoRotationType {NONE, MOVEMENT, LOOK}
 func _ready() -> void:
 	target = get_tree().get_nodes_in_group("Player")[0]
 	
-	print(target)
-	
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
+	
+	ability_handler = NodeLib.FindChildOfCustomClass(self, AbilityHandler, true, true)
+	ability_slash = NodeLib.FindChildOfCustomClass(self, Ability_Slash, true, true)
 
 func set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
@@ -29,11 +42,26 @@ func project_on_plane(point : Vector3, plane : Vector3):
 	return point - point.project(plane)
 
 func _process(delta: float) -> void:
+	
+	if can_attack == false and _attack_timer > attack_cooldown :
+		_attack_timer = 1
+		can_attack = true
+	elif can_attack == false :
+		_attack_timer += delta
+	
 	if target != null and _refresh_timer < refresh_cooldown :
 		_refresh_timer += delta
 	else :
 		_refresh_timer = 0
 		set_movement_target(target.global_position)
+	
+	if target != null :
+		distance_to_target = global_position.distance_to(target.global_position)
+		
+		
+		if can_attack and distance_to_target <= attack_range :
+			ability_slash.try_attack()
+	
 
 func _physics_process(delta):
 	if target.global_position.distance_to(global_position) <= target_spacing:

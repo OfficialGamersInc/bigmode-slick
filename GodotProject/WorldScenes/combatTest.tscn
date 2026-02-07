@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dhw7opqdaglxr" path="res://Objects/Enemies/groobler.tscn" id="4_itwmt"]
 [ext_resource type="PackedScene" uid="uid://48c0sgbwsp1x" path="res://Objects/Enemies/swordhead.tscn" id="7_jvjnx"]
 [ext_resource type="PackedScene" uid="uid://ci5k23ru40qob" path="res://Objects/Enemies/hammerhead.tscn" id="8_7eb72"]
-[ext_resource type="PackedScene" uid="uid://yxgxoyo4bms0" path="res://Objects/Enemies/Test Models/groobler_animations.tscn" id="8_com22"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lfyu1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -83,15 +82,20 @@ autoRotationMode = 2
 
 [node name="Swordhead" parent="." unique_id=1474105217 instance=ExtResource("7_jvjnx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.87743, 0.49999905, -13.362258)
+attack_cooldown = 0.0
+attack_range = 0.0
 
 [node name="Swordhead2" parent="." unique_id=1119389169 instance=ExtResource("7_jvjnx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.482327, 0.5000038, 4.7178726)
+attack_cooldown = 0.0
+attack_range = 0.0
 
 [node name="Hammerhead" parent="." unique_id=384494081 instance=ExtResource("8_7eb72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, -14.5)
+attack_cooldown = 0.0
+attack_range = 0.0
 
 [node name="Hammerhead2" parent="." unique_id=1570852442 instance=ExtResource("8_7eb72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.109192, 0, 20.544254)
-
-[node name="groobler animations" parent="." unique_id=439306091 instance=ExtResource("8_com22")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+attack_cooldown = 0.0
+attack_range = 0.0

@@ -391,7 +391,7 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
 material_override = ExtResource("9_ix2we")
 
 [node name="sorsha sword" parent="Visual/Pill/hoodguy/hoodguy_final" index="0" unique_id=1364233249 instance=ExtResource("22_in3ap")]
-transform = Transform3D(3.3437e-16, 7.6494935e-09, 0.175, 0.17500001, -7.6494935e-09, 0, 7.6494935e-09, 0.17500001, -7.649493e-09, -0.83, 1.401, -0.068)
+transform = Transform3D(0.10598385, 4.1095762e-09, 0.16960962, 0.16960962, -7.4138717e-09, -0.10598385, 4.1095762e-09, 0.2, -7.4138717e-09, -0.83, 1.401, -0.068)
 
 [node name="AnimationTree" type="AnimationTree" parent="Visual" unique_id=1041739086]
 libraries/ = SubResource("AnimationLibrary_x7hbx")
