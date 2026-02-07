@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://b5jkvjlnigbkh"]
+
+[ext_resource type="Script" uid="uid://bjn6tdirhfee7" path="res://UI/attack_cooldown_indicator.gd" id="1_nplvd"]
+[ext_resource type="Script" uid="uid://cq8nw0hbp1pii" path="res://UI/stamina_charges_indicator.gd" id="2_kwigr"]
+[ext_resource type="Texture2D" uid="uid://btvqxy6trve2" path="res://Art/Sprites/boot.png" id="3_b8q8m"]
+[ext_resource type="Texture2D" uid="uid://c156q3xe2lary" path="res://Art/Sprites/sword.png" id="4_ccqt3"]
+
+[node name="UI" type="CanvasLayer" unique_id=387339461]
+
+[node name="AttackCooldown" type="Control" parent="." unique_id=1866947207 node_paths=PackedStringArray("attack_cooldown_bar", "grayout")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 0.00030517578
+grow_vertical = 0
+script = ExtResource("1_nplvd")
+attack_cooldown_bar = NodePath("AttackCooldownBar")
+grayout = NodePath("Grayout")
+
+[node name="AttackCooldownBar" type="ProgressBar" parent="AttackCooldown" unique_id=247470371]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 141.0
+offset_right = 208.0
+offset_bottom = 321.0
+max_value = 1.0
+value = 1.0
+fill_mode = 3
+
+[node name="AttackCooldownLabel" type="Label" parent="AttackCooldown" unique_id=230175337]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 300.0
+offset_right = 157.0
+offset_bottom = 323.0
+text = "Attack Cooldown:"
+
+[node name="Grayout" type="ColorRect" parent="AttackCooldown" unique_id=698557071]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 128.0
+offset_right = 219.0
+offset_bottom = 328.0
+color = Color(0, 0, 0, 0.41568628)
+
+[node name="StaminaUI" type="Control" parent="." unique_id=302004289 node_paths=PackedStringArray("attack_stam_charges", "move_stam_charges", "attack_label", "move_label")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -500.0
+offset_right = 500.0
+grow_vertical = 0
+script = ExtResource("2_kwigr")
+attack_stam_charges = [NodePath("AttackGroup/A - charge - 1"), NodePath("AttackGroup/A - charge -2"), NodePath("AttackGroup/A - charge - 3")]
+move_stam_charges = [NodePath("MovementGroup/M - charge - 1"), NodePath("MovementGroup/M - charge - 2"), NodePath("MovementGroup/M - charge - 3")]
+attack_label = NodePath("AttackGroup/AttackStamLabel")
+move_label = NodePath("MovementGroup/MoveStamLabel")
+
+[node name="AttackGroup" type="Control" parent="StaminaUI" unique_id=1078325605]
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 362.0
+offset_right = 61.0
+offset_bottom = 402.0
+
+[node name="AttackStamLabel" type="Label" parent="StaminaUI/AttackGroup" unique_id=87994987]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 23.0
+text = "Attack Stamina: 0"
+
+[node name="A - charge - 1" type="ColorRect" parent="StaminaUI/AttackGroup" unique_id=2026347740]
+layout_mode = 0
+offset_left = 147.0
+offset_right = 167.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="A - charge -2" type="ColorRect" parent="StaminaUI/AttackGroup" unique_id=106257949]
+layout_mode = 0
+offset_left = 183.0
+offset_right = 203.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="A - charge - 3" type="ColorRect" parent="StaminaUI/AttackGroup" unique_id=215754235]
+layout_mode = 0
+offset_left = 219.0
+offset_right = 239.0
+offset_bottom = 45.0
+color = Color(0.6558671, 0.7058894, 0.86911577, 1)
+
+[node name="MovementGroup" type="Control" parent="StaminaUI" unique_id=613737428]
+anchors_preset = 0
+offset_left = 21.0
+offset_top = 385.0
+offset_right = 61.0
+offset_bottom = 425.0
+
+[node name="MoveStamLabel" type="Label" parent="StaminaUI/MovementGroup" unique_id=1451412397]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 169.0
+offset_bottom = 63.0
+text = "Movement Stamina: 0"
+
+[node name="M - charge - 1" type="ColorRect" parent="StaminaUI/MovementGroup" unique_id=244439542]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 40.0
+offset_right = 199.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
+
+[node name="M - charge - 2" type="ColorRect" parent="StaminaUI/MovementGroup" unique_id=42329665]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 40.0
+offset_right = 235.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
+
+[node name="M - charge - 3" type="ColorRect" parent="StaminaUI/MovementGroup" unique_id=213834614]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 40.0
+offset_right = 271.0
+offset_bottom = 85.0
+color = Color(0.5411584, 0.782892, 0.5507824, 1)
+
+[node name="Boot" type="Sprite2D" parent="." unique_id=422409918]
+position = Vector2(89, 834)
+texture = ExtResource("3_b8q8m")
+
+[node name="Sword" type="Sprite2D" parent="." unique_id=445917092]
+position = Vector2(80, 686)
+texture = ExtResource("4_ccqt3")
