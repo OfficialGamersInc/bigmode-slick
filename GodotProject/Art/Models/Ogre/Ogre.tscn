@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://cab4ad2nt21yn" path="res://Objects/Enemies/enemy_behavior.gd" id="2_hj1rv"]
 [ext_resource type="Script" uid="uid://b88d4812atpa2" path="res://Character/Abilities/AbilityHandler.gd" id="4_xdxs7"]
 [ext_resource type="Script" uid="uid://hmip4a5fhm63" path="res://Character/Abilities/Ability_Slash.gd" id="5_7w7q4"]
+[ext_resource type="Script" uid="uid://dmc6hynkj2yxh" path="res://Objects/Test/stamina_refill.gd" id="6_7w7q4"]
+[ext_resource type="Script" uid="uid://bodf7ykpt3nvj" path="res://Character/HealthHandler.gd" id="7_h4c5h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7k0ob"]
 radius = 1.0
@@ -39,6 +41,10 @@ radius = 3.1699219
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7w7q4"]
 height = 1.2363281
 radius = 2.6987305
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h4c5h"]
+height = 5.1083984
+radius = 2.2773438
 
 [node name="Ogre" type="CharacterBody3D" unique_id=2119124743]
 script = ExtResource("1_eon55")
@@ -154,10 +160,12 @@ script = ExtResource("4_xdxs7")
 stamina_regen = 999999999999.0
 metadata/_custom_type_script = "uid://b88d4812atpa2"
 
-[node name="Ability_Slash" type="Node3D" parent="AbilityHandler" unique_id=976496477 node_paths=PackedStringArray("slash_hit_box")]
+[node name="Ability_Slash" type="Node3D" parent="AbilityHandler" unique_id=976496477 node_paths=PackedStringArray("slash_hit_box", "slash_stamina_reward")]
 script = ExtResource("5_7w7q4")
 slash_hit_box = NodePath("Area3D")
-attackCooldown = 3.0
+slash_stamina_reward = NodePath("StaminaRefill")
+attack_delay = 1.5
+attackCooldown = 2.0
 damage = 25.0
 knockback = 25.0
 metadata/_custom_type_script = "uid://hmip4a5fhm63"
@@ -171,6 +179,19 @@ shape = SubResource("CylinderShape3D_xdxs7")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="AbilityHandler/Ability_Slash/Area3D" unique_id=963042097]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.926461, 1.3928466, -1.7274402)
 shape = SubResource("CylinderShape3D_7w7q4")
+
+[node name="StaminaRefill" type="Area3D" parent="AbilityHandler/Ability_Slash" unique_id=2080422344]
+script = ExtResource("6_7w7q4")
+always_active = false
+metadata/_custom_type_script = "uid://dmc6hynkj2yxh"
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="AbilityHandler/Ability_Slash/StaminaRefill" unique_id=161817456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2625284, 5.3776274, -2.8202467)
+shape = SubResource("CylinderShape3D_h4c5h")
+
+[node name="HealthHandler" type="Node" parent="." unique_id=2004269256]
+script = ExtResource("7_h4c5h")
+metadata/_custom_type_script = "uid://bodf7ykpt3nvj"
 
 [connection signal="on_attack_fired" from="AbilityHandler/Ability_Slash" to="AnimationTree" method="set" binds= ["parameters/OneShot/request", 1]]
 

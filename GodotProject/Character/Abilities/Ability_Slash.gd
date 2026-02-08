@@ -6,9 +6,11 @@ class_name Ability_Slash
 @export var cam: Camera3D
 
 @export var slash_hit_box: Area3D
+@export var slash_stamina_reward : StaminaRefill
 var slash_effect := preload("res://Art/Effects/slash_VFX.tscn")
 var slash_effect_instance : GPUParticles3D
 
+@export var attack_delay : float = 0
 @export var attackCooldown : float = 0.5
 var attackTimer : float = 0
 var canAttack : bool
@@ -94,11 +96,16 @@ func try_attack() :
 		if not ability_handler.try_use_stamina_attack() :
 			return
 		
-		attackTimer = 0
 		canAttack = false
-		
 		on_attack_fired.emit()
+		attackTimer = -100
+		
+		await ScaledTime.WaitForSeconds(attack_delay)
+		
+		attackTimer = 0
 		checkHit()
+		if slash_stamina_reward:
+			slash_stamina_reward.test()
 		slash_effects()
 
 
@@ -121,14 +128,17 @@ func checkHit() :
 	else :
 		print(detectedBodies.size())
 		for i in detectedBodies.size() :
-			var health : HealthHandler = detectedBodies[i].get_node_or_null("HealthHandler")
-			var target_pos = detectedBodies[i].global_position;
+			var body : Node = detectedBodies[i]
+			if body.is_ancestor_of(self): continue
+			var health : HealthHandler = body.get_node_or_null("HealthHandler")
+			var target_pos = body.global_position;
 			var to_target_pos = -(target_pos - global_position * Vector3(1,0,1)).normalized()
 			if health != null :
 				health.change_health(-1 * damage, to_target_pos, knockback)
-				print("Detected HealthBehavior in: " + str(detectedBodies[i].name))
+				ability_handler.try_give_stamina_move()
+				print("Detected HealthBehavior in: " + str(body.name))
 				impact_effects() # I think whats hit should handle effects of being hit
 			
-			#if detectedBodies[i].find_child("HealthBehavior") :
-			#	print("Detected HealthBehavior in: " + str(detectedBodies[i].name))
+			#if body.find_child("HealthBehavior") :
+			#	print("Detected HealthBehavior in: " + str(body.name))
 	
