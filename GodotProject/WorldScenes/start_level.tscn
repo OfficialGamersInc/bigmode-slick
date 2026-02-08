@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://mlr6tgcs8o20"]
+[gd_scene format=3 uid="uid://cm5qy20fvbtwd"]
 
 [ext_resource type="Script" uid="uid://bbysdlv0q0ibo" path="res://Manager/game_manager.gd" id="1_da7ex"]
-[ext_resource type="PackedScene" uid="uid://bxfjtumgk0jt0" path="res://UI/main_menu.tscn" id="1_ujhnw"]
+[ext_resource type="PackedScene" uid="uid://vvehwdsuj1fj" path="res://UI/main_menu.tscn" id="1_ujhnw"]
 [ext_resource type="AudioStream" uid="uid://bvogosplflg15" path="res://Audio/Music/SLICK melody (pre beat).wav" id="2_egveg"]
 [ext_resource type="PackedScene" uid="uid://b3a3lb4j6gnki" path="res://WorldScenes/actual_start_level_fuck_you.tscn" id="3_meogy"]
 [ext_resource type="AudioStream" uid="uid://b42u5kowvl478" path="res://Audio/Music/SLICK action section beat.wav" id="4_meogy"]

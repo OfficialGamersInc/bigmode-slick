@@ -1,8 +1,9 @@
-[gd_scene format=3 uid="uid://bxfjtumgk0jt0"]
+[gd_scene format=3 uid="uid://vvehwdsuj1fj"]
 
 [ext_resource type="FontFile" uid="uid://bj2n8w6x4ht4l" path="res://Art/Font/Bellefair-Regular.ttf" id="1_p8ccj"]
-[ext_resource type="Script" uid="uid://bacrnn80hppy5" path="res://UI/main_menu.gd" id="1_tk8dj"]
+[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_tk8dj"]
 [ext_resource type="PackedScene" uid="uid://dexsefc0en2oa" path="res://WorldScenes/art_test.tscn" id="2_d8nwk"]
+[ext_resource type="Texture2D" uid="uid://ci2ym6w83dsyu" path="res://UI/1.PNG" id="4_4cwpn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tk8dj"]
 font = ExtResource("1_p8ccj")
@@ -16,6 +17,17 @@ shadow_color = Color(0, 0, 0, 0.55700004)
 [node name="MainMenu" type="CanvasLayer" unique_id=370728388]
 script = ExtResource("1_tk8dj")
 main_level_to_load = ExtResource("2_d8nwk")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2019099209]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.31951904
+offset_right = 0.31958008
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4cwpn")
+expand_mode = 3
 
 [node name="Control" type="Control" parent="." unique_id=942337477]
 layout_mode = 3
@@ -35,7 +47,7 @@ offset_top = 100.0
 offset_right = 300.0
 offset_bottom = 280.0
 grow_horizontal = 2
-text = "Hooded Guy..."
+text = "Holy shit we're so out of time God please end me"
 label_settings = SubResource("LabelSettings_tk8dj")
 horizontal_alignment = 1
 vertical_alignment = 1
