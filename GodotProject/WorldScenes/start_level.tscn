@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://mlr6tgcs8o20"]
+
+[ext_resource type="PackedScene" uid="uid://bxfjtumgk0jt0" path="res://UI/main_menu.tscn" id="1_ujhnw"]
+[ext_resource type="AudioStream" uid="uid://bvogosplflg15" path="res://Audio/Music/SLICK melody (pre beat).wav" id="2_egveg"]
+
+[node name="StartLevel" type="Node" unique_id=1445381454]
+
+[node name="MainMenu" parent="." unique_id=370728388 instance=ExtResource("1_ujhnw")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1989437382]
+stream = ExtResource("2_egveg")
+autoplay = true

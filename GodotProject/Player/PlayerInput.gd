@@ -7,9 +7,11 @@ class_name PlayerInput
 @onready var char_control : CharacterController = get_parent()
 
 func _process(_delta: float) -> void:
-	ability_handler.set_look_dir(get_mouse_look_vect())
+	#ability_handler.set_look_dir(get_mouse_look_vect())
 	if Input.is_action_just_pressed("attack"):
 		ability_handler.request_attack()
+		ability_handler.set_look_dir(get_mouse_look_vect())
+		ability_handler.start_temp_look()
 
 func get_mouse_look_vect() -> Vector3 :
 	var mouseViewportPos := camera.get_viewport().get_mouse_position()

@@ -23,6 +23,9 @@ var mouseWorldPos : Vector3
 var resetCooldown : float = 0.5
 var resetTimer : float = 0
 
+enum Look_State {Movement, Target}
+@export var current_Look_State : Look_State
+
 
 #func _input(event) -> void:
 	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT :

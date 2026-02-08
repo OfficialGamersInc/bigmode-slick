@@ -18,6 +18,10 @@ signal stamina_updated_attack
 var look_dir : Vector3
 signal attack_requested
 
+@export var look_duration : float
+var _look_timer : float
+var looking : bool
+
 func get_char_control() -> CharacterController:
 	return get_parent()
 
@@ -29,6 +33,14 @@ func get_ability(name : StringName) -> Ability:
 
 func set_look_dir(new_look : Vector3):
 	look_dir = new_look
+	get_char_control().look_vector = look_dir
+	print(look_dir)
+	
+
+func start_temp_look() :
+	looking = true
+	get_char_control().autoRotationMode = CharacterController.AutoRotationType.LOOK
+	_look_timer = look_duration
 
 func request_attack():
 	# I think this should be done in Ability_Slash
@@ -81,7 +93,14 @@ func _process(delta: float) -> void:
 		stamina_move_cur += stamina_regen * delta
 		if floor(stamina_move_cur) != floor(last_stamina_move):
 			stamina_updated_move.emit()
-
+	
+	if looking == true :
+		_look_timer -= delta
+		if _look_timer <= 0 :
+			looking = false
+			get_char_control().autoRotationMode = CharacterController.AutoRotationType.MOVEMENT
+		
+	
 
 
 
