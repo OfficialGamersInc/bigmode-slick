@@ -17,6 +17,7 @@ var canAttack : bool
 @export var knockback : float = 1
 
 signal mousePosSignal(Vector3)
+signal on_attack_fired
 
 var mouseWorldPos : Vector3
 
@@ -25,6 +26,7 @@ var resetTimer : float = 0
 
 enum Look_State {Movement, Target}
 @export var current_Look_State : Look_State
+
 
 
 #func _input(event) -> void:
@@ -95,6 +97,7 @@ func try_attack() :
 		attackTimer = 0
 		canAttack = false
 		
+		on_attack_fired.emit()
 		checkHit()
 		slash_effects()
 

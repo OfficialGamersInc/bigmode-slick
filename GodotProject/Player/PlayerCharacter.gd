@@ -9,7 +9,7 @@ class_name PlayerCharacter
 var active_movement : bool
 @export var animation_tree : AnimationTree
 @export var WalkRunBlend : String = "parameters/BlendTree/MovementBlend/blend_amount"
-#@export var SwingBlend : String = ""
+@export var SwingOneShot : String = "parameters/BlendTree/Attack/request"
 
 ## not sure what else to call this. Rotation component is for the camera,
 ## position is for the player character.
@@ -62,8 +62,21 @@ func _process(_delta: float) -> void:
 	else :
 		animation_tree.set(WalkRunBlend, 0)
 	
+
+
+func _on_ability_slash_on_attack_fired() -> void:
+	animation_tree.set(SwingOneShot, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-	
+
+
+
+
+
+
+
+
+
+
 	
 	
 	

@@ -43,6 +43,13 @@ height = 1.8
 size = Vector3(0.8, 0.25, 0.5)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ix2we"]
+animation = &"Swing"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ix2we"]
+filter_enabled = true
+filters = ["metarig/Skeleton3D:forearm.L", "metarig/Skeleton3D:forearm.R", "metarig/Skeleton3D:hand.L", "metarig/Skeleton3D:hand.R", "metarig/Skeleton3D:shoulder.L", "metarig/Skeleton3D:shoulder.R", "metarig/Skeleton3D:spine", "metarig/Skeleton3D:spine.001", "metarig/Skeleton3D:spine.002", "metarig/Skeleton3D:spine.003", "metarig/Skeleton3D:spine.004", "metarig/Skeleton3D:spine.005", "metarig/Skeleton3D:upper_arm.L", "metarig/Skeleton3D:upper_arm.R"]
+fadein_time = 0.1
+fadeout_time = 0.1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7n8pw"]
 animation = &"Idle"
@@ -52,22 +59,24 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gepu4"]
 animation = &"Run"
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_in3ap"]
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ix2we"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_os3p4"]
-graph_offset = Vector2(-390.98788, -43.09237)
-nodes/output/position = Vector2(448, -16)
+graph_offset = Vector2(-301.38788, 17.70763)
+nodes/output/position = Vector2(576, 0)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_7n8pw")
 nodes/Idle/position = Vector2(-128, 0)
 nodes/Run/node = SubResource("AnimationNodeAnimation_gepu4")
 nodes/Run/position = Vector2(-128, 240)
 nodes/MovementBlend/node = SubResource("AnimationNodeBlend2_xw56l")
 nodes/MovementBlend/position = Vector2(48, 48)
-nodes/SwingBlend/node = SubResource("AnimationNodeBlend2_in3ap")
-nodes/SwingBlend/position = Vector2(304, 192)
+nodes/Attack/node = SubResource("AnimationNodeOneShot_ix2we")
+nodes/Attack/position = Vector2(320, 48)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ix2we")
-nodes/Animation/position = Vector2(96, 320)
-node_connections = [&"output", 0, &"MovementBlend", &"MovementBlend", 0, &"Idle", &"MovementBlend", 1, &"Run", &"SwingBlend", 1, &"Animation"]
+nodes/Animation/position = Vector2(-64, 416)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ix2we")
+nodes/TimeScale/position = Vector2(128, 336)
+node_connections = [&"output", 0, &"Attack", &"MovementBlend", 0, &"Idle", &"MovementBlend", 1, &"Run", &"Attack", 0, &"MovementBlend", &"Attack", 1, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_in3ap"]
 animation = &"Idle"
@@ -89,7 +98,7 @@ states/Idle/position = Vector2(478, 52.79999)
 states/Run/node = SubResource("AnimationNodeAnimation_bipy8")
 states/Run/position = Vector2(522.80005, 138.4)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_gepu4"), "Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_l8frs")]
-graph_offset = Vector2(-122, -81)
+graph_offset = Vector2(-80, -45)
 
 [sub_resource type="Animation" id="Animation_05ndu"]
 length = 0.001
@@ -399,6 +408,7 @@ metadata/_custom_type_script = "uid://bj4limi67x1lj"
 script = ExtResource("4_05ndu")
 cam = NodePath("../../Camera3DOverhead")
 slash_hit_box = NodePath("Slash_Hitbox")
+attackCooldown = 1.0
 metadata/_custom_type_script = "uid://hmip4a5fhm63"
 
 [node name="Slash_Hitbox" type="Area3D" parent="AbilityHandler/Ability_Slash" unique_id=666915756]
@@ -434,62 +444,65 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442267, 0.14918077)
 visible = false
 mesh = SubResource("BoxMesh_jdwmw")
 
-[node name="hoodguy - animations" parent="Visual/Pill" unique_id=1856789715 instance=ExtResource("8_ix2we")]
+[node name="hoodguy - animations" parent="Visual/Pill" unique_id=1873169002 instance=ExtResource("8_ix2we")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
 
-[node name="Skeleton3D" parent="Visual/Pill/hoodguy - animations/metarig" parent_id_path=PackedInt32Array(1856789715, 1544457254) index="0" unique_id=1731768894]
+[node name="Skeleton3D" parent="Visual/Pill/hoodguy - animations/metarig" parent_id_path=PackedInt32Array(1873169002, 2147224495) index="0" unique_id=2059236333]
 bones/0/position = Vector3(-4.215566e-18, 0.99091476, 0.021471085)
-bones/1/rotation = Quaternion(-0.0304682, 1.19174416e-07, -3.3916427e-09, 0.99953574)
-bones/2/rotation = Quaternion(0.025858864, -7.365193e-12, 6.333874e-09, 0.9996656)
-bones/3/rotation = Quaternion(-0.04992948, -2.431833e-11, -1.2163063e-08, 0.99875283)
-bones/4/rotation = Quaternion(0.12294401, -1.6505997e-10, 3.0258022e-08, 0.99241364)
+bones/1/rotation = Quaternion(-0.029455107, 1.19157605e-07, -3.5113221e-09, 0.9995662)
+bones/2/rotation = Quaternion(0.026566759, 1.0616508e-14, 6.334008e-09, 0.9996471)
+bones/3/rotation = Quaternion(-0.051020104, 2.220446e-16, -1.216414e-08, 0.9986977)
+bones/4/rotation = Quaternion(0.12694642, -4.2188475e-15, 3.0266385e-08, 0.9919096)
 bones/5/rotation = Quaternion(0.044921078, -1.1908896e-07, 5.3550138e-09, 0.99899054)
 bones/6/position = Vector3(0.032179683, 0.1435599, 0.063514754)
-bones/6/rotation = Quaternion(-0.56072915, -0.3423535, -0.36981973, 0.6569706)
+bones/6/rotation = Quaternion(-0.56191623, -0.34038275, -0.37209386, 0.655695)
 bones/7/position = Vector3(-0.016836526, 0.20204358, -0.013109411)
-bones/7/rotation = Quaternion(-0.38649333, 0.57184565, -0.51119316, 0.5121496)
-bones/8/rotation = Quaternion(0.05503202, 0.07712044, -0.07842854, 0.9924076)
-bones/9/rotation = Quaternion(0.016677128, 0.06615285, -0.04378331, 0.9967089)
+bones/7/rotation = Quaternion(-0.3869269, 0.57099456, -0.5121003, 0.51186526)
+bones/8/rotation = Quaternion(0.05592877, 0.07690512, -0.076673806, 0.99251133)
+bones/9/rotation = Quaternion(0.017287014, 0.06597895, -0.04637567, 0.9965928)
 bones/10/position = Vector3(-0.032179695, 0.14355989, 0.063514724)
-bones/10/rotation = Quaternion(-0.57811964, 0.39181814, 0.3370912, 0.6313683)
+bones/10/rotation = Quaternion(-0.5788067, 0.39079636, 0.33818296, 0.6307879)
 bones/11/position = Vector3(0.016836513, 0.20204355, -0.013109566)
-bones/11/rotation = Quaternion(-0.23008916, -0.65104866, 0.62214094, 0.36896506)
-bones/12/rotation = Quaternion(0.15134914, -0.054094553, 0.07808176, 0.98390573)
-bones/13/rotation = Quaternion(-0.034350898, -0.075980514, 0.051064778, 0.99520826)
+bones/11/rotation = Quaternion(-0.23168257, -0.65069145, 0.6228604, 0.36738107)
+bones/12/rotation = Quaternion(0.15178782, -0.05374042, 0.07971093, 0.98372686)
+bones/13/rotation = Quaternion(-0.036612373, -0.07649163, 0.05062938, 0.9951107)
 bones/16/position = Vector3(0.030668411, -0.014620642, -0.022824874)
 bones/16/rotation = Quaternion(0.033412166, 0.7738461, 0.4086124, -0.4827854)
 bones/17/position = Vector3(-0.030668411, -0.014620642, -0.022824874)
 bones/17/rotation = Quaternion(-0.033412166, 0.7738461, 0.4086124, 0.4827854)
 bones/18/position = Vector3(0.109356046, 0.002611219, 0.021180496)
-bones/18/rotation = Quaternion(0.98747146, 0.07109254, -0.029334212, 0.13778801)
-bones/19/rotation = Quaternion(0.07589095, 0.028428806, 0.03896294, 0.995949)
+bones/18/rotation = Quaternion(0.9875605, 0.07058322, -0.02933039, 0.1374122)
+bones/19/rotation = Quaternion(0.07513894, 0.028431082, 0.038220182, 0.9960347)
 bones/20/rotation = Quaternion(-0.6616826, -0.018538935, 0.023144715, 0.7491975)
 bones/21/rotation = Quaternion(0.04502264, 0.9985756, -0.028391778, 0.0036917464)
 bones/22/position = Vector3(-0.109356046, 0.002611219, 0.021180496)
-bones/22/rotation = Quaternion(0.9971083, -0.06738883, 0.0103223175, -0.033575103)
-bones/23/rotation = Quaternion(-0.016581831, -0.0144240195, -0.053070564, 0.9983489)
+bones/22/rotation = Quaternion(0.9971672, -0.06672554, 0.010267082, -0.033164714)
+bones/23/rotation = Quaternion(-0.016707905, -0.014126843, -0.051087998, 0.9984545)
 bones/24/rotation = Quaternion(-0.7245796, 0.020536663, -0.020862322, 0.6885691)
 bones/25/rotation = Quaternion(-0.045012772, 0.9987314, -0.022310736, -0.0034425298)
-bones/26/position = Vector3(0.09264982, -0.02879452, -0.03423104)
+bones/26/position = Vector3(0.092649825, -0.028312162, -0.033636995)
 bones/26/rotation = Quaternion(0.75279695, 0.42124128, -0.24928506, -0.44012448)
-bones/27/position = Vector3(-0.09264981, -0.056344047, -0.061645675)
+bones/27/position = Vector3(-0.0926498, -0.055676315, -0.061940487)
 bones/27/rotation = Quaternion(0.5372851, -0.48349822, 0.07626854, -0.6868315)
-bones/28/position = Vector3(0.09630084, -0.015923802, 0.10381622)
+bones/28/position = Vector3(0.09630083, -0.015257505, 0.10463674)
 bones/28/rotation = Quaternion(0.5710832, 0.48490015, 0.10786154, 0.65353024)
-bones/29/position = Vector3(-0.09973593, -0.020675305, 0.054470092)
+bones/29/position = Vector3(-0.099735945, -0.020556068, 0.053686596)
 bones/29/rotation = Quaternion(0.7476287, -0.42585886, -0.24991737, 0.44411367)
 
-[node name="hand_R" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="0" unique_id=495241394]
-transform = Transform3D(-0.86602587, 0.016173217, 0.49973613, 0.095649734, -0.9756586, 0.19733344, 0.49076372, 0.21869555, 0.84339947, -0.31514618, 0.9599776, 0.13003553)
+[node name="hand_R" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="0" unique_id=270273605]
+transform = Transform3D(-0.8666504, 0.02461086, 0.49830726, 0.085021585, -0.97688746, 0.19611584, 0.49161702, 0.21233082, 0.8445282, -0.3091978, 0.9581287, 0.12926786)
 
-[node name="hoodguy-rigged" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="1" unique_id=1164118795]
+[node name="hoodguy-rigged" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="1" unique_id=1970795229]
 material_override = ExtResource("11_bipy8")
 
 [node name="AnimationTree" type="AnimationTree" parent="Visual/Pill/hoodguy - animations" unique_id=1474174721]
 tree_root = SubResource("AnimationNodeStateMachine_xw56l")
 anim_player = NodePath("../AnimationPlayer")
-parameters/BlendTree/MovementBlend/blend_amount = 0.0
-parameters/BlendTree/SwingBlend/blend_amount = 1.0
+parameters/BlendTree/MovementBlend/blend_amount = 1.0
+parameters/BlendTree/Attack/active = false
+parameters/BlendTree/Attack/internal_active = false
+parameters/BlendTree/Attack/request = 0
+parameters/BlendTree/TimeScale/scale = 2.0
 
 [node name="AnimationTree" type="AnimationTree" parent="Visual" unique_id=1041739086]
 libraries/ = SubResource("AnimationLibrary_x7hbx")
@@ -714,6 +727,7 @@ expand_mode = 1
 script = ExtResource("19_8v6cl")
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]
+[connection signal="on_attack_fired" from="AbilityHandler/Ability_Slash" to="." method="_on_ability_slash_on_attack_fired"]
 
 [editable path="Visual/Pill/hoodguy - animations"]
 [editable path="UI"]
