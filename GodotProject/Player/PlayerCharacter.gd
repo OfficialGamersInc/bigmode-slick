@@ -7,6 +7,7 @@ class_name PlayerCharacter
 @onready var AbilityManager = find_child("AbilityManager")
 
 @export var audio_stream_player_3d: AudioStreamPlayer3D
+@export var swordSound: AudioStreamPlayer3D
 
 var active_movement : bool
 @export var animation_tree : AnimationTree
@@ -70,7 +71,7 @@ func _process(_delta: float) -> void:
 
 func _on_ability_slash_on_attack_fired() -> void:
 	animation_tree.set(SwingOneShot, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	
+	swordSound.play()
 
 
 
