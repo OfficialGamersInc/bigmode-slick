@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bigjex8meugio"]
+
+[ext_resource type="Shader" uid="uid://csl6mmdnidv26" path="res://Art/Models/Guy/hoodguy_shader.tres" id="1_mdsta"]
+[ext_resource type="Texture2D" uid="uid://bv08wnoln45jm" path="res://Art/Models/Ogre/Ogre.png" id="2_5p2eq"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mdsta")
+shader_parameter/albedo = ExtResource("2_5p2eq")

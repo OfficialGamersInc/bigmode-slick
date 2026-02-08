@@ -121,9 +121,11 @@ func checkHit() :
 	else :
 		print(detectedBodies.size())
 		for i in detectedBodies.size() :
-			var health = detectedBodies[i].get_node_or_null("HealthHandler")
+			var health : HealthHandler = detectedBodies[i].get_node_or_null("HealthHandler")
+			var target_pos = detectedBodies[i].global_position;
+			var to_target_pos = -(target_pos - global_position * Vector3(1,0,1)).normalized()
 			if health != null :
-				health.change_health(-1 * damage, global_position, knockback)
+				health.change_health(-1 * damage, to_target_pos, knockback)
 				print("Detected HealthBehavior in: " + str(detectedBodies[i].name))
 				impact_effects() # I think whats hit should handle effects of being hit
 			
