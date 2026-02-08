@@ -6,6 +6,11 @@ class_name PlayerCharacter
 
 @onready var AbilityManager = find_child("AbilityManager")
 
+var active_movement : bool
+@export var animation_tree : AnimationTree
+@export var WalkRunBlend : String = "parameters/BlendTree/MovementBlend/blend_amount"
+#@export var SwingBlend : String = ""
+
 ## not sure what else to call this. Rotation component is for the camera,
 ## position is for the player character.
 #func set_friendly_transform(pos : Vector3, lookVect : Vector3):
@@ -27,14 +32,14 @@ func set_control_enabled(control_enabled : bool):
 
 func _process(_delta: float) -> void:
 	if not _control_enabled: return
-
+	
 	#if is_wall_running:
 		#camera_rig.SubjectLeanDirection = get_wall_normal()
 	#else:
 		#camera_rig.SubjectLeanDirection = Vector3.ZERO
 	#
 	#look_vector = camera_rig.Pivot.global_basis * Vector3.FORWARD
-
+	
 	var input = Input.get_vector(\
 		"move_left", "move_right", "move_forward", "move_backward")
 	var input_vector3 = Vector3(input.x, 0, input.y)
@@ -44,5 +49,24 @@ func _process(_delta: float) -> void:
 	)
 	if (camera.global_basis * up_direction).y < 0: input_vector3 *= -1
 	move_vector = cameraFlattenedTransform * input_vector3
-
+	
 	jump_held = Input.is_action_pressed("jump")
+	
+	if input != Vector2.ZERO :
+		active_movement = true
+	else :
+		active_movement = false
+	
+	if active_movement :
+		animation_tree.set(WalkRunBlend, 1)
+	else :
+		animation_tree.set(WalkRunBlend, 0)
+	
+	
+	
+	
+	
+	
+	
+	
+	# rawr :3

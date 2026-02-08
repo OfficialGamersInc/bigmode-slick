@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dcyim6tfeb7sw"
+path="res://.godot/imported/Socapex - new_hits_9.wav-5cc7b79af2a757e5efc07d60abafc29a.sample"
+
+[deps]
+
+source_file="res://Audio/Impact/Socapex - new_hits_9.wav"
+dest_files=["res://.godot/imported/Socapex - new_hits_9.wav-5cc7b79af2a757e5efc07d60abafc29a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
