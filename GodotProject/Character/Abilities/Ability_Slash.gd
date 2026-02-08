@@ -54,7 +54,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not enabled: return
 	
-	if (main_level.enableDebug) : DebugDraw.draw_line_relative_thick(mouseWorldPos, Vector3.UP, 2, Color.WHITE)
+	#if (main_level.enableDebug) : DebugDraw.draw_line_relative_thick(mouseWorldPos, Vector3.UP, 2, Color.WHITE)
 	
 	
 	if canAttack == false and attackTimer > attackCooldown :
