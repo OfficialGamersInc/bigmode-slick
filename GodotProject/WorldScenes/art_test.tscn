@@ -19,6 +19,7 @@
 [ext_resource type="Shader" uid="uid://bacw15brq6jqr" path="res://Art/Shaders/water.gdshader" id="16_plpou"]
 [ext_resource type="PackedScene" uid="uid://bqxs4mw763a8k" path="res://Art/Models/Ogre/Ogre.fbx" id="18_cuk56"]
 [ext_resource type="PackedScene" uid="uid://da3xx3sv84d16" path="res://Art/Models/Ogre/Ogre.tscn" id="19_gycd5"]
+[ext_resource type="PackedScene" uid="uid://kakryoyolwdt" path="res://Objects/Enemies/ogre_spawner.tscn" id="20_uhm2t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_72ur0"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -209,3 +210,5 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.5
 
 [node name="default11" parent="NavigationRegion3D/map" unique_id=257727612 instance=ExtResource("15_cuk56")]
 transform = Transform3D(0.85983443, 0, -0.51057297, 0, 1, 0, 0.51057297, 0, 0.85983443, 1.6402519, 0.49999976, 1.8733201)
+
+[node name="OgreSpawner" parent="." unique_id=316743514 instance=ExtResource("20_uhm2t")]

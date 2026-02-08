@@ -14,13 +14,17 @@
 [ext_resource type="Script" uid="uid://gpt43iqvuyvc" path="res://UI/player_UI.gd" id="10_gjyvj"]
 [ext_resource type="Shader" uid="uid://71dktl3vipck" path="res://UI/HUD/ui_flipbook.gdshader" id="10_x7hbx"]
 [ext_resource type="Texture2D" uid="uid://cgx2ceevxsbft" path="res://UI/HUD/stamina_background.png" id="11_8llf3"]
-[ext_resource type="Material" path="res://Art/Models/Guy/RECOLOR - hoodguy_mat.tres" id="11_bipy8"]
+[ext_resource type="Material" uid="uid://x40eqxuw763m" path="res://Art/Models/Guy/RECOLOR - hoodguy_mat.tres" id="11_bipy8"]
 [ext_resource type="Texture2D" uid="uid://btvqxy6trve2" path="res://Art/Sprites/boot.png" id="11_gjyvj"]
 [ext_resource type="Texture2D" uid="uid://b8u473vnyajit" path="res://UI/HUD/stamina_bar.png" id="12_8llf3"]
 [ext_resource type="Texture2D" uid="uid://c156q3xe2lary" path="res://Art/Sprites/sword.png" id="15_grsr8"]
 [ext_resource type="Shader" uid="uid://fhkklqam3ard" path="res://UI/HUD/ui_progress_linear.gdshader" id="17_0ykgn"]
 [ext_resource type="Texture2D" uid="uid://xno8nsn3k81b" path="res://UI/HUD/attack_cooldown.png" id="18_8v6cl"]
 [ext_resource type="Script" uid="uid://dqtuua2dud3id" path="res://UI/HUD/ui_attack_cooldown.gd" id="19_8v6cl"]
+[ext_resource type="AudioStream" uid="uid://b1ybt4vl2y5ck" path="res://Audio/Movement/boots-leather-step-01.wav" id="22_gepu4"]
+[ext_resource type="AudioStream" uid="uid://gbpahmcvxau7" path="res://Audio/Movement/boots-leather-step-02.wav" id="23_xw56l"]
+[ext_resource type="AudioStream" uid="uid://dfyol7cn3djt1" path="res://Audio/Movement/boots-leather-step-03.wav" id="24_os3p4"]
+[ext_resource type="AudioStream" uid="uid://bmn5higur26ai" path="res://Audio/Movement/boots-leather-step-04.wav" id="25_l8frs"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ix2we"]
 radius = 2.741211
@@ -359,12 +363,22 @@ shader = ExtResource("17_0ykgn")
 shader_parameter/fill_alpha = 0.6170000293075
 shader_parameter/grayed_multiplier = 0.125
 
-[node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("animation_tree", "model", "camera", "anim_tree") groups=["Player"]]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gepu4"]
+random_pitch = 1.0608716
+random_volume_offset_db = 1.09
+streams_count = 4
+stream_0/stream = ExtResource("22_gepu4")
+stream_1/stream = ExtResource("23_xw56l")
+stream_2/stream = ExtResource("24_os3p4")
+stream_3/stream = ExtResource("25_l8frs")
+
+[node name="CharacterController" type="CharacterBody3D" unique_id=764542603 node_paths=PackedStringArray("audio_stream_player_3d", "animation_tree", "model", "camera", "anim_tree") groups=["Player"]]
 wall_min_slide_angle = 0.7853982
 floor_stop_on_slope = false
 floor_max_angle = 1.134464
 script = ExtResource("1_k87gr")
 _control_enabled = true
+audio_stream_player_3d = NodePath("AudioStreamPlayer3D")
 animation_tree = NodePath("Visual/Pill/hoodguy - animations/AnimationTree")
 move_speed = 10.0
 acceleration = 100.0
@@ -453,52 +467,52 @@ mesh = SubResource("BoxMesh_jdwmw")
 [node name="hoodguy - animations" parent="Visual/Pill" unique_id=1873169002 instance=ExtResource("8_ix2we")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
 
-[node name="Skeleton3D" parent="Visual/Pill/hoodguy - animations/metarig" parent_id_path=PackedInt32Array(1873169002, 350512008) index="0" unique_id=825692524]
-bones/0/position = Vector3(-1.0231086e-17, 0.8351145, 0.02866326)
-bones/1/rotation = Quaternion(-0.034365177, 1.1914423e-07, -4.0338857e-09, 0.9994093)
-bones/2/rotation = Quaternion(0.01558766, -2.9002634e-12, 3.7829113e-09, 0.9998785)
-bones/3/rotation = Quaternion(-0.0055750622, 8.758329e-12, -1.2359203e-09, 0.99998456)
-bones/4/rotation = Quaternion(0.09777796, -3.1757045e-11, 2.3494055e-08, 0.9952083)
-bones/5/rotation = Quaternion(0.08935235, -1.1873246e-07, 1.0651636e-08, 0.9960001)
+[node name="Skeleton3D" parent="Visual/Pill/hoodguy - animations/metarig" parent_id_path=PackedInt32Array(1873169002, 2147224495) index="0" unique_id=2059236333]
+bones/0/position = Vector3(-1.7191903e-18, 0.9164868, 0.02004479)
+bones/1/rotation = Quaternion(-0.03797081, 1.1920144e-07, -3.6076042e-09, 0.99927884)
+bones/2/rotation = Quaternion(0.006036793, -1.0239336e-10, 3.779662e-09, 0.9999819)
+bones/3/rotation = Quaternion(-0.01613602, 2.4333835e-10, -1.2552541e-09, 0.9998698)
+bones/4/rotation = Quaternion(0.070334405, -1.1562369e-09, 2.3394671e-08, 0.9975235)
+bones/5/rotation = Quaternion(0.07834104, -1.1884293e-07, 9.338986e-09, 0.9969267)
 bones/6/position = Vector3(0.03217963, 0.14363259, 0.058278643)
-bones/6/rotation = Quaternion(-0.5511587, -0.35579962, -0.3345028, 0.6765639)
-bones/7/position = Vector3(0.00855276, 0.18813884, -0.007117858)
-bones/7/rotation = Quaternion(-0.42698818, 0.7847558, -0.23933591, 0.3802076)
-bones/8/rotation = Quaternion(0.28607082, 0.11524838, -0.057411075, 0.9495185)
-bones/9/rotation = Quaternion(0.20980857, 0.059729077, -0.041646123, 0.9750274)
+bones/6/rotation = Quaternion(-0.55590403, -0.34842935, -0.3444005, 0.6715326)
+bones/7/position = Vector3(0.029041197, 0.1754656, -0.013622798)
+bones/7/rotation = Quaternion(-0.35351834, 0.26117826, -0.68090576, 0.58581406)
+bones/8/rotation = Quaternion(0.22852923, 0.1347014, -0.04270908, 0.9632268)
+bones/9/rotation = Quaternion(0.119563885, 0.079725966, -0.048704967, 0.9884211)
 bones/10/position = Vector3(-0.03217968, 0.14341496, 0.073987074)
-bones/10/rotation = Quaternion(-0.5307339, 0.46136248, 0.34297693, 0.62276244)
-bones/11/position = Vector3(-0.003530547, 0.19078916, -0.03133232)
-bones/11/rotation = Quaternion(-0.15551427, -0.41449997, 0.6881388, 0.5748654)
-bones/12/rotation = Quaternion(0.23735121, -0.0039757886, 0.0823542, 0.96791863)
-bones/13/rotation = Quaternion(0.048417833, 0.015501312, 0.061858185, 0.99678934)
-bones/16/position = Vector3(0.030690093, -0.064324476, 0.050479237)
-bones/16/rotation = Quaternion(0.11348769, 0.83069736, 0.27518612, -0.4704628)
-bones/17/position = Vector3(-0.030724898, -0.05026813, -0.020802174)
-bones/17/rotation = Quaternion(-0.04499033, 0.78312004, 0.3906666, 0.4817452)
-bones/18/position = Vector3(0.109356046, 0.002341429, 0.021681454)
-bones/18/rotation = Quaternion(0.8890849, 0.078413844, -0.042179815, 0.44899923)
-bones/19/rotation = Quaternion(0.22139749, 0.04348615, 0.03440846, 0.97360575)
-bones/20/rotation = Quaternion(-0.5467398, -0.015098779, 0.026352879, 0.8367515)
-bones/21/rotation = Quaternion(0.04502264, 0.9985756, -0.028391773, 0.003691745)
-bones/22/position = Vector3(-0.109356046, 0.0028809966, 0.020679533)
-bones/22/rotation = Quaternion(0.97018343, -0.075627394, 0.009538004, -0.23007335)
-bones/23/rotation = Quaternion(0.38821748, -0.04612631, -0.0431985, 0.9193985)
-bones/24/rotation = Quaternion(-0.55886495, 0.021157904, -0.021932928, 0.82869864)
-bones/25/rotation = Quaternion(-0.049626403, 0.9871424, 0.15191512, 0.0029850986)
-bones/26/position = Vector3(0.0926498, -0.025485065, -0.032080237)
-bones/26/rotation = Quaternion(0.75307345, 0.42147532, -0.24885732, -0.4396693)
-bones/27/position = Vector3(-0.09266084, -0.0384015, -0.07343411)
-bones/27/rotation = Quaternion(0.51580656, -0.48710692, 0.05704835, -0.7024357)
-bones/28/position = Vector3(0.09665598, 0.0045811646, 0.14848484)
-bones/28/rotation = Quaternion(0.58158165, 0.4837439, 0.1125545, 0.6442719)
-bones/29/position = Vector3(-0.09980553, -0.033897817, 0.039731555)
-bones/29/rotation = Quaternion(0.7468435, -0.4266669, -0.24851336, 0.44544518)
+bones/10/rotation = Quaternion(-0.53525627, 0.45621246, 0.34958485, 0.6190004)
+bones/11/position = Vector3(0.02563291, 0.20119543, -0.03356263)
+bones/11/rotation = Quaternion(-0.35455844, -0.8240929, 0.41683364, 0.14631823)
+bones/12/rotation = Quaternion(0.24635947, -0.001765928, 0.07915947, 0.96593887)
+bones/13/rotation = Quaternion(0.13627285, -0.038725797, -0.003412646, 0.9899083)
+bones/16/position = Vector3(0.041666113, -0.028604612, -0.04467255)
+bones/16/rotation = Quaternion(0.0027024157, 0.72947407, 0.4901153, -0.477124)
+bones/17/position = Vector3(-0.032611545, -0.064168364, 0.023563225)
+bones/17/rotation = Quaternion(-0.129785, 0.8399142, 0.24558496, 0.46624905)
+bones/18/position = Vector3(0.109356076, 0.00081059034, 0.024524018)
+bones/18/rotation = Quaternion(0.98347926, 0.088920705, 0.011553172, -0.15725225)
+bones/19/rotation = Quaternion(0.08172232, 0.022736916, 0.034361236, 0.9958031)
+bones/20/rotation = Quaternion(-0.7985547, -0.035597704, 0.0047865426, 0.60084975)
+bones/21/rotation = Quaternion(0.048816297, 0.9928288, -0.10888645, 0.007187731)
+bones/22/position = Vector3(-0.109356076, 0.00441173, 0.017836967)
+bones/22/rotation = Quaternion(0.883727, -0.05842054, 0.052157767, 0.4614036)
+bones/23/rotation = Quaternion(0.3350479, -0.040565014, -0.046209775, 0.94019264)
+bones/24/rotation = Quaternion(-0.657621, 0.023143351, -0.02379798, 0.75261724)
+bones/25/rotation = Quaternion(-0.041192196, 0.99664354, -0.069954984, -0.010547029)
+bones/26/position = Vector3(0.09396836, -0.026272949, -0.08980458)
+bones/26/rotation = Quaternion(0.6009559, 0.48148328, -0.083683245, -0.6324738)
+bones/27/position = Vector3(-0.09266746, -0.08099568, -0.008475915)
+bones/27/rotation = Quaternion(0.84416646, -0.3446184, 0.33737832, -0.23408796)
+bones/28/position = Vector3(0.09479244, -0.033183422, 0.058928896)
+bones/28/rotation = Quaternion(0.7328264, 0.43470237, 0.24069667, 0.46482736)
+bones/29/position = Vector3(-0.100268416, 0.009509236, 0.1795997)
+bones/29/rotation = Quaternion(0.50633043, -0.497885, -0.027341899, 0.70355713)
 
-[node name="hand_R" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="0" unique_id=1306802357]
-transform = Transform3D(-0.9355136, 0.07185352, 0.34590515, 0.28599185, -0.4208072, 0.8608887, 0.20741734, 0.9042995, 0.3731218, -0.37260044, 1.035097, 0.54401493)
+[node name="hand_R" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="0" unique_id=270273605]
+transform = Transform3D(-0.9038481, 0.038200367, 0.42614332, -0.026648298, -0.9990984, 0.033040196, 0.42702144, 0.018507674, 0.9040518, -0.35996073, 0.95233595, -0.24850973)
 
-[node name="hoodguy-rigged" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="1" unique_id=1325278538]
+[node name="hoodguy-rigged" parent="Visual/Pill/hoodguy - animations/metarig/Skeleton3D" index="1" unique_id=1970795229]
 material_override = ExtResource("11_bipy8")
 
 [node name="AnimationTree" type="AnimationTree" parent="Visual/Pill/hoodguy - animations" unique_id=1474174721]
@@ -731,6 +745,9 @@ grow_vertical = 2
 texture = ExtResource("18_8v6cl")
 expand_mode = 1
 script = ExtResource("19_8v6cl")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=142901001]
+stream = SubResource("AudioStreamRandomizer_gepu4")
 
 [connection signal="knockback_requested" from="HealthHandler" to="." method="shove"]
 [connection signal="on_attack_fired" from="AbilityHandler/Ability_Slash" to="." method="_on_ability_slash_on_attack_fired"]

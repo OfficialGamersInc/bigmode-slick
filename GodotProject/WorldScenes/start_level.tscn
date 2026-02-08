@@ -3,15 +3,18 @@
 [ext_resource type="Script" uid="uid://bbysdlv0q0ibo" path="res://Manager/game_manager.gd" id="1_da7ex"]
 [ext_resource type="PackedScene" uid="uid://bxfjtumgk0jt0" path="res://UI/main_menu.tscn" id="1_ujhnw"]
 [ext_resource type="AudioStream" uid="uid://bvogosplflg15" path="res://Audio/Music/SLICK melody (pre beat).wav" id="2_egveg"]
+[ext_resource type="PackedScene" path="res://WorldScenes/actual_start_level_fuck_you.tscn" id="3_meogy"]
 [ext_resource type="AudioStream" uid="uid://b42u5kowvl478" path="res://Audio/Music/SLICK action section beat.wav" id="4_meogy"]
 
 [node name="StartLevel" type="Node" unique_id=1445381454 node_paths=PackedStringArray("ChillMusicPlayer", "CombatMusicPlayer")]
 script = ExtResource("1_da7ex")
+in_combat = true
 ChillMusicPlayer = NodePath("ChillMusic")
 CombatMusicPlayer = NodePath("CombatMusic")
 music_fade_in_speed = 5.0
 
 [node name="MainMenu" parent="." unique_id=370728388 instance=ExtResource("1_ujhnw")]
+main_level_to_load = ExtResource("3_meogy")
 
 [node name="ChillMusic" type="AudioStreamPlayer" parent="." unique_id=1989437382]
 stream = ExtResource("2_egveg")

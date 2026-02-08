@@ -6,11 +6,12 @@ class_name PlayerCharacter
 
 @onready var AbilityManager = find_child("AbilityManager")
 
+@export var audio_stream_player_3d: AudioStreamPlayer3D
+
 var active_movement : bool
 @export var animation_tree : AnimationTree
 @export var WalkRunBlend : String = "parameters/BlendTree/MovementBlend/blend_amount"
 @export var SwingOneShot : String = "parameters/BlendTree/Attack/request"
-
 ## not sure what else to call this. Rotation component is for the camera,
 ## position is for the player character.
 #func set_friendly_transform(pos : Vector3, lookVect : Vector3):
@@ -62,6 +63,9 @@ func _process(_delta: float) -> void:
 	else :
 		animation_tree.set(WalkRunBlend, 0)
 	
+	if active_movement and is_on_floor() :
+		if not audio_stream_player_3d.playing :
+			audio_stream_player_3d.play()
 
 
 func _on_ability_slash_on_attack_fired() -> void:
