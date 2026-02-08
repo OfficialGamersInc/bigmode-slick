@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://kakryoyolwdt"]
+
+[ext_resource type="Script" uid="uid://dmot0b8d3g7q7" path="res://Objects/Enemies/ogre_spawner.gd" id="1_68fx6"]
+[ext_resource type="PackedScene" uid="uid://da3xx3sv84d16" path="res://Art/Models/Ogre/Ogre.tscn" id="2_a05uc"]
+
+[node name="OgreSpawner" type="Node3D" unique_id=316743514]
+script = ExtResource("1_68fx6")
+ogre_packed_scene = ExtResource("2_a05uc")
