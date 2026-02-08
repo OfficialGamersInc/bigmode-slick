@@ -15,8 +15,8 @@ var slash_effect_instance : GPUParticles3D
 var attackTimer : float = 0
 var canAttack : bool
 
-@export var damage : float = 1
-@export var knockback : float = 1
+@export var damage : float = 25
+@export var knockback : float = 15
 
 signal mousePosSignal(Vector3)
 signal on_attack_fired

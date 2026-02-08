@@ -66,6 +66,10 @@ func _physics_process(_delta):
 		_on_velocity_computed(new_velocity)
 	
 func _on_velocity_computed(safe_velocity: Vector3):
+	if ((target.global_position - char_control.global_position) * Vector3(1,0,1)).length() <= target_spacing:
+		char_control.move_vector = Vector3.ZERO;
+		return
+	
 	#velocity = safe_velocity
 	#char_control.jump_held = safe_velocity.y > 0
 	char_control.move_vector = safe_velocity.normalized() #/ movement_speed
